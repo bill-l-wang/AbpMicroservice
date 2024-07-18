@@ -10,29 +10,29 @@ WORKDIR /src
 COPY ["services/identity/NuGet.Config", "services/identity/"]
 COPY ["services/administration/NuGet.Config", "services/administration/"]
 COPY ["services/saas/NuGet.Config", "services/saas/"]
-COPY ["services/identity/host/Tasky.IdentityService.HttpApi.Host/Tasky.IdentityService.HttpApi.Host.csproj", "services/identity/host/Tasky.IdentityService.HttpApi.Host/"]
-COPY ["shared/Tasky.Hosting.Shared/Tasky.Hosting.Shared.csproj", "shared/Tasky.Hosting.Shared/"]
-COPY ["services/administration/src/Tasky.Administration.EntityFrameworkCore/Tasky.Administration.EntityFrameworkCore.csproj", "services/administration/src/Tasky.Administration.EntityFrameworkCore/"]
-COPY ["services/administration/src/Tasky.Administration.Domain/Tasky.Administration.Domain.csproj", "services/administration/src/Tasky.Administration.Domain/"]
-COPY ["services/administration/src/Tasky.Administration.Domain.Shared/Tasky.Administration.Domain.Shared.csproj", "services/administration/src/Tasky.Administration.Domain.Shared/"]
-COPY ["services/saas/src/Tasky.SaaS.EntityFrameworkCore/Tasky.SaaS.EntityFrameworkCore.csproj", "services/saas/src/Tasky.SaaS.EntityFrameworkCore/"]
-COPY ["services/saas/src/Tasky.SaaS.Domain/Tasky.SaaS.Domain.csproj", "services/saas/src/Tasky.SaaS.Domain/"]
-COPY ["services/saas/src/Tasky.SaaS.Domain.Shared/Tasky.SaaS.Domain.Shared.csproj", "services/saas/src/Tasky.SaaS.Domain.Shared/"]
-COPY ["services/identity/src/Tasky.IdentityService.HttpApi/Tasky.IdentityService.HttpApi.csproj", "services/identity/src/Tasky.IdentityService.HttpApi/"]
-COPY ["services/identity/src/Tasky.IdentityService.Application.Contracts/Tasky.IdentityService.Application.Contracts.csproj", "services/identity/src/Tasky.IdentityService.Application.Contracts/"]
-COPY ["services/identity/src/Tasky.IdentityService.Domain.Shared/Tasky.IdentityService.Domain.Shared.csproj", "services/identity/src/Tasky.IdentityService.Domain.Shared/"]
-COPY ["services/identity/src/Tasky.IdentityService.Application/Tasky.IdentityService.Application.csproj", "services/identity/src/Tasky.IdentityService.Application/"]
-COPY ["services/identity/src/Tasky.IdentityService.Domain/Tasky.IdentityService.Domain.csproj", "services/identity/src/Tasky.IdentityService.Domain/"]
-COPY ["services/identity/src/Tasky.IdentityService.EntityFrameworkCore/Tasky.IdentityService.EntityFrameworkCore.csproj", "services/identity/src/Tasky.IdentityService.EntityFrameworkCore/"]
-RUN dotnet restore "services/identity/host/Tasky.IdentityService.HttpApi.Host/Tasky.IdentityService.HttpApi.Host.csproj"
+COPY ["services/identity/host/Macro.IdentityService.HttpApi.Host/Macro.IdentityService.HttpApi.Host.csproj", "services/identity/host/Macro.IdentityService.HttpApi.Host/"]
+COPY ["shared/Macro.Hosting.Shared/Macro.Hosting.Shared.csproj", "shared/Macro.Hosting.Shared/"]
+COPY ["services/administration/src/Macro.Administration.EntityFrameworkCore/Macro.Administration.EntityFrameworkCore.csproj", "services/administration/src/Macro.Administration.EntityFrameworkCore/"]
+COPY ["services/administration/src/Macro.Administration.Domain/Macro.Administration.Domain.csproj", "services/administration/src/Macro.Administration.Domain/"]
+COPY ["services/administration/src/Macro.Administration.Domain.Shared/Macro.Administration.Domain.Shared.csproj", "services/administration/src/Macro.Administration.Domain.Shared/"]
+COPY ["services/saas/src/Macro.SaaS.EntityFrameworkCore/Macro.SaaS.EntityFrameworkCore.csproj", "services/saas/src/Macro.SaaS.EntityFrameworkCore/"]
+COPY ["services/saas/src/Macro.SaaS.Domain/Macro.SaaS.Domain.csproj", "services/saas/src/Macro.SaaS.Domain/"]
+COPY ["services/saas/src/Macro.SaaS.Domain.Shared/Macro.SaaS.Domain.Shared.csproj", "services/saas/src/Macro.SaaS.Domain.Shared/"]
+COPY ["services/identity/src/Macro.IdentityService.HttpApi/Macro.IdentityService.HttpApi.csproj", "services/identity/src/Macro.IdentityService.HttpApi/"]
+COPY ["services/identity/src/Macro.IdentityService.Application.Contracts/Macro.IdentityService.Application.Contracts.csproj", "services/identity/src/Macro.IdentityService.Application.Contracts/"]
+COPY ["services/identity/src/Macro.IdentityService.Domain.Shared/Macro.IdentityService.Domain.Shared.csproj", "services/identity/src/Macro.IdentityService.Domain.Shared/"]
+COPY ["services/identity/src/Macro.IdentityService.Application/Macro.IdentityService.Application.csproj", "services/identity/src/Macro.IdentityService.Application/"]
+COPY ["services/identity/src/Macro.IdentityService.Domain/Macro.IdentityService.Domain.csproj", "services/identity/src/Macro.IdentityService.Domain/"]
+COPY ["services/identity/src/Macro.IdentityService.EntityFrameworkCore/Macro.IdentityService.EntityFrameworkCore.csproj", "services/identity/src/Macro.IdentityService.EntityFrameworkCore/"]
+RUN dotnet restore "services/identity/host/Macro.IdentityService.HttpApi.Host/Macro.IdentityService.HttpApi.Host.csproj"
 COPY . .
-WORKDIR "/src/services/identity/host/Tasky.IdentityService.HttpApi.Host"
-RUN dotnet build "Tasky.IdentityService.HttpApi.Host.csproj" -c Release -o /app/build
+WORKDIR "/src/services/identity/host/Macro.IdentityService.HttpApi.Host"
+RUN dotnet build "Macro.IdentityService.HttpApi.Host.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Tasky.IdentityService.HttpApi.Host.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Macro.IdentityService.HttpApi.Host.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Tasky.IdentityService.HttpApi.Host.dll"]
+ENTRYPOINT ["dotnet", "Macro.IdentityService.HttpApi.Host.dll"]

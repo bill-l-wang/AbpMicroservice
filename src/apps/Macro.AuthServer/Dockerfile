@@ -10,27 +10,27 @@ WORKDIR /src
 COPY ["services/administration/NuGet.Config", "services/administration/"]
 COPY ["services/identity/NuGet.Config", "services/identity/"]
 COPY ["services/saas/NuGet.Config", "services/saas/"]
-COPY ["apps/Tasky.AuthServer/Tasky.AuthServer.csproj", "apps/Tasky.AuthServer/"]
-COPY ["services/administration/src/Tasky.Administration.EntityFrameworkCore/Tasky.Administration.EntityFrameworkCore.csproj", "services/administration/src/Tasky.Administration.EntityFrameworkCore/"]
-COPY ["services/administration/src/Tasky.Administration.Domain/Tasky.Administration.Domain.csproj", "services/administration/src/Tasky.Administration.Domain/"]
-COPY ["services/administration/src/Tasky.Administration.Domain.Shared/Tasky.Administration.Domain.Shared.csproj", "services/administration/src/Tasky.Administration.Domain.Shared/"]
-COPY ["services/identity/src/Tasky.IdentityService.EntityFrameworkCore/Tasky.IdentityService.EntityFrameworkCore.csproj", "services/identity/src/Tasky.IdentityService.EntityFrameworkCore/"]
-COPY ["services/identity/src/Tasky.IdentityService.Domain/Tasky.IdentityService.Domain.csproj", "services/identity/src/Tasky.IdentityService.Domain/"]
-COPY ["services/identity/src/Tasky.IdentityService.Domain.Shared/Tasky.IdentityService.Domain.Shared.csproj", "services/identity/src/Tasky.IdentityService.Domain.Shared/"]
-COPY ["services/saas/src/Tasky.SaaS.EntityFrameworkCore/Tasky.SaaS.EntityFrameworkCore.csproj", "services/saas/src/Tasky.SaaS.EntityFrameworkCore/"]
-COPY ["services/saas/src/Tasky.SaaS.Domain/Tasky.SaaS.Domain.csproj", "services/saas/src/Tasky.SaaS.Domain/"]
-COPY ["services/saas/src/Tasky.SaaS.Domain.Shared/Tasky.SaaS.Domain.Shared.csproj", "services/saas/src/Tasky.SaaS.Domain.Shared/"]
-COPY ["shared/Tasky.Microservice.Shared/Tasky.Microservice.Shared.csproj", "shared/Tasky.Microservice.Shared/"]
-COPY ["shared/Tasky.Hosting.Shared/Tasky.Hosting.Shared.csproj", "shared/Tasky.Hosting.Shared/"]
-RUN dotnet restore "apps/Tasky.AuthServer/Tasky.AuthServer.csproj"
+COPY ["apps/Macro.AuthServer/Macro.AuthServer.csproj", "apps/Macro.AuthServer/"]
+COPY ["services/administration/src/Macro.Administration.EntityFrameworkCore/Macro.Administration.EntityFrameworkCore.csproj", "services/administration/src/Macro.Administration.EntityFrameworkCore/"]
+COPY ["services/administration/src/Macro.Administration.Domain/Macro.Administration.Domain.csproj", "services/administration/src/Macro.Administration.Domain/"]
+COPY ["services/administration/src/Macro.Administration.Domain.Shared/Macro.Administration.Domain.Shared.csproj", "services/administration/src/Macro.Administration.Domain.Shared/"]
+COPY ["services/identity/src/Macro.IdentityService.EntityFrameworkCore/Macro.IdentityService.EntityFrameworkCore.csproj", "services/identity/src/Macro.IdentityService.EntityFrameworkCore/"]
+COPY ["services/identity/src/Macro.IdentityService.Domain/Macro.IdentityService.Domain.csproj", "services/identity/src/Macro.IdentityService.Domain/"]
+COPY ["services/identity/src/Macro.IdentityService.Domain.Shared/Macro.IdentityService.Domain.Shared.csproj", "services/identity/src/Macro.IdentityService.Domain.Shared/"]
+COPY ["services/saas/src/Macro.SaaS.EntityFrameworkCore/Macro.SaaS.EntityFrameworkCore.csproj", "services/saas/src/Macro.SaaS.EntityFrameworkCore/"]
+COPY ["services/saas/src/Macro.SaaS.Domain/Macro.SaaS.Domain.csproj", "services/saas/src/Macro.SaaS.Domain/"]
+COPY ["services/saas/src/Macro.SaaS.Domain.Shared/Macro.SaaS.Domain.Shared.csproj", "services/saas/src/Macro.SaaS.Domain.Shared/"]
+COPY ["shared/Macro.Microservice.Shared/Macro.Microservice.Shared.csproj", "shared/Macro.Microservice.Shared/"]
+COPY ["shared/Macro.Hosting.Shared/Macro.Hosting.Shared.csproj", "shared/Macro.Hosting.Shared/"]
+RUN dotnet restore "apps/Macro.AuthServer/Macro.AuthServer.csproj"
 COPY . .
-WORKDIR "/src/apps/Tasky.AuthServer"
-RUN dotnet build "Tasky.AuthServer.csproj" -c Release -o /app/build
+WORKDIR "/src/apps/Macro.AuthServer"
+RUN dotnet build "Macro.AuthServer.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Tasky.AuthServer.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Macro.AuthServer.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Tasky.AuthServer.dll"]
+ENTRYPOINT ["dotnet", "Macro.AuthServer.dll"]

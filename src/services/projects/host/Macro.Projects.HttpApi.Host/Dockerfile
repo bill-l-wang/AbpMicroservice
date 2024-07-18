@@ -8,22 +8,22 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["services/projects/NuGet.Config", "services/projects/"]
-COPY ["services/projects/host/Tasky.Projects.HttpApi.Host/Tasky.Projects.HttpApi.Host.csproj", "services/projects/host/Tasky.Projects.HttpApi.Host/"]
-COPY ["services/projects/src/Tasky.Projects.HttpApi/Tasky.Projects.HttpApi.csproj", "services/projects/src/Tasky.Projects.HttpApi/"]
-COPY ["services/projects/src/Tasky.Projects.Application.Contracts/Tasky.Projects.Application.Contracts.csproj", "services/projects/src/Tasky.Projects.Application.Contracts/"]
-COPY ["services/projects/src/Tasky.Projects.Domain.Shared/Tasky.Projects.Domain.Shared.csproj", "services/projects/src/Tasky.Projects.Domain.Shared/"]
-COPY ["services/projects/src/Tasky.Projects.Application/Tasky.Projects.Application.csproj", "services/projects/src/Tasky.Projects.Application/"]
-COPY ["services/projects/src/Tasky.Projects.Domain/Tasky.Projects.Domain.csproj", "services/projects/src/Tasky.Projects.Domain/"]
-COPY ["services/projects/src/Tasky.Projects.EntityFrameworkCore/Tasky.Projects.EntityFrameworkCore.csproj", "services/projects/src/Tasky.Projects.EntityFrameworkCore/"]
-RUN dotnet restore "services/projects/host/Tasky.Projects.HttpApi.Host/Tasky.Projects.HttpApi.Host.csproj"
+COPY ["services/projects/host/Macro.Projects.HttpApi.Host/Macro.Projects.HttpApi.Host.csproj", "services/projects/host/Macro.Projects.HttpApi.Host/"]
+COPY ["services/projects/src/Macro.Projects.HttpApi/Macro.Projects.HttpApi.csproj", "services/projects/src/Macro.Projects.HttpApi/"]
+COPY ["services/projects/src/Macro.Projects.Application.Contracts/Macro.Projects.Application.Contracts.csproj", "services/projects/src/Macro.Projects.Application.Contracts/"]
+COPY ["services/projects/src/Macro.Projects.Domain.Shared/Macro.Projects.Domain.Shared.csproj", "services/projects/src/Macro.Projects.Domain.Shared/"]
+COPY ["services/projects/src/Macro.Projects.Application/Macro.Projects.Application.csproj", "services/projects/src/Macro.Projects.Application/"]
+COPY ["services/projects/src/Macro.Projects.Domain/Macro.Projects.Domain.csproj", "services/projects/src/Macro.Projects.Domain/"]
+COPY ["services/projects/src/Macro.Projects.EntityFrameworkCore/Macro.Projects.EntityFrameworkCore.csproj", "services/projects/src/Macro.Projects.EntityFrameworkCore/"]
+RUN dotnet restore "services/projects/host/Macro.Projects.HttpApi.Host/Macro.Projects.HttpApi.Host.csproj"
 COPY . .
-WORKDIR "/src/services/projects/host/Tasky.Projects.HttpApi.Host"
-RUN dotnet build "Tasky.Projects.HttpApi.Host.csproj" -c Release -o /app/build
+WORKDIR "/src/services/projects/host/Macro.Projects.HttpApi.Host"
+RUN dotnet build "Macro.Projects.HttpApi.Host.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Tasky.Projects.HttpApi.Host.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Macro.Projects.HttpApi.Host.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Tasky.Projects.HttpApi.Host.dll"]
+ENTRYPOINT ["dotnet", "Macro.Projects.HttpApi.Host.dll"]

@@ -7,16 +7,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["apps/Tasky.Blazor.Server/Tasky.Blazor.Server.csproj", "apps/Tasky.Blazor.Server/"]
-RUN dotnet restore "apps/Tasky.Blazor.Server/Tasky.Blazor.Server.csproj"
+COPY ["apps/Macro.Blazor.Server/Macro.Blazor.Server.csproj", "apps/Macro.Blazor.Server/"]
+RUN dotnet restore "apps/Macro.Blazor.Server/Macro.Blazor.Server.csproj"
 COPY . .
-WORKDIR "/src/apps/Tasky.Blazor.Server"
-RUN dotnet build "Tasky.Blazor.Server.csproj" -c Release -o /app/build
+WORKDIR "/src/apps/Macro.Blazor.Server"
+RUN dotnet build "Macro.Blazor.Server.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Tasky.Blazor.Server.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Macro.Blazor.Server.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Tasky.Blazor.Server.dll"]
+ENTRYPOINT ["dotnet", "Macro.Blazor.Server.dll"]
