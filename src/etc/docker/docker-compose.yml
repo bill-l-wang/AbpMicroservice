@@ -1,0 +1,256 @@
+version: '3.7'
+
+services:
+  lb:
+    image: nginx:1.21
+    container_name: load-balancer-container
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/certs/macro-web+10.pem:/etc/nginx/certs/app-cert.pem:ro
+      - ./nginx/certs/macro-web+10-key.pem:/etc/nginx/certs/app-cert-key.pem:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+    depends_on:
+      - macro-administration
+      - macro-authserver
+      - macro-identity
+      - macro-projects
+      - macro-saas
+      - macro-web
+      - macro-public-web
+      - macro-gateway-web
+    restart: on-failure
+    networks:
+      - macro-network
+
+  macro-administration:
+    image: macro/service-administration:latest
+    container_name: administration-service-container
+    build:
+      context: ../../
+      dockerfile: services/administration/host/Macro.Administration.HttpApi.Host/Dockerfile
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80
+      - App__SelfUrl=https://macro-administration
+      - App__CorsOrigins=https://gateway-web,gateway-web-public
+      - RemoteServices__AbpIdentity__BaseUrl=macro-identity
+      - RemoteServices__AbpIdentity__UseCurrentAccessToken=false
+      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
+      - AuthServer__Authority=http://macro-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - IdentityClients__Default__Authority=http://macro-identity
+      - Redis__Configuration=redis
+      - RabbitMQ__Connections__Default__HostName=rabbitmq
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres-db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure
+    networks: 
+      - macro-network
+  macro-identity:
+    image: macro/service-identity:latest
+    container_name: identity-service-container
+    build:
+      context: ../../
+      dockerfile: services/identity/host/Macro.IdentityService.HttpApi.Host/Dockerfile
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80
+      - App__SelfUrl=https://macro-identity
+      - App__CorsOrigins=https://gateway-web,gateway-web-public
+      - AuthServer__Authority=http://macro-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - ConnectionStrings__IdentityService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Identity;Pooling=false;
+      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
+      - Redis__Configuration=redis
+      - RabbitMQ__Connections__Default__HostName=rabbitmq
+      - IdentityServerClients__Web__RootUrl=https://macro-web
+      - IdentityServerClients__PublicWeb__RootUrl=https://macro-public-web
+      - IdentityServerClients__WebGateway__RootUrl=https://macro-gateway-web
+      - IdentityServerClients__PublicWebGateway__RootUrl=https://macro-gateway-web-public
+      - IdentityServerClients__IdentityService__RootUrl=https://macro-identity
+      - IdentityServerClients__AdministrationService__RootUrl=https://macro-administration
+      - IdentityServerClients__AccountService__RootUrl=https://macro-authserver
+      - IdentityServerClients__CatalogService__RootUrl=https://macro-catalog
+      - IdentityServerClients__BasketService__RootUrl=https://macro-basket     
+      - IdentityServerClients__OrderingService__RootUrl=https://macro-ordering
+      - IdentityServerClients__CmskitService__RootUrl=https://macro-cmskit
+      - IdentityServerClients__PaymentService__RootUrl=https://macro-payment
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres-db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure
+    networks: 
+      - macro-network
+  macro-projects:
+    image: macro/service-project:latest
+    container_name: project-service-container
+    build:
+      context: ../../
+      dockerfile: services/projects/host/Macro.Projects.HttpApi.Host/Dockerfile
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80;http://+:81;
+      - App__SelfUrl=https://macro-catalog
+      - App__CorsOrigins=https://macro-gateway-web,https://macro-gateway-web-public,https://macro-public-web,https://macro-web
+      - AuthServer__Authority=http://macro-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - Kestrel__EndPoints__Http__Url=http://docker.host.internal:80
+      - Kestrel__EndPoints__gRPC__Url=http://docker.host.internal:81
+      - Kestrel__EndPoints__gRPC__Protocols=Http2
+      - ConnectionStrings__CatalogService=mongodb://mongodb/EShopOnAbp_Catalog
+      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
+      - Redis__Configuration=redis
+      - RabbitMQ__Connections__Default__HostName=rabbitmq
+    depends_on:
+      redis:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure  
+    networks: 
+      - macro-network
+  macro-saas:
+    image: macro/service-saas:latest
+    container_name: saas-service-container
+    build:
+      context: ../../
+      dockerfile: services/saas/host/Macro.SaaS.HttpApi.Host/Dockerfile
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80
+      - App__SelfUrl=https://macro-basket
+      - App__CorsOrigins=https://macro-gateway-web,https://macro-gateway-web-public,https://macro-public-web
+      - RemoteServices__Catalog__BaseUrl=http://macro-catalog:80
+      - RemoteServices__Catalog__GrpcUrl=http://macro-catalog:81
+      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;
+      - AuthServer__Authority=http://macro-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - Redis__Configuration=redis
+      - RabbitMQ__Connections__Default__HostName=rabbitmq    
+    depends_on:
+      redis:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure  
+    networks: 
+      - macro-network
+ 
+  macro-authserver:
+    image: macro/app-authserver:latest
+    container_name: app-authserver-container
+    build:
+      context: ../../
+      dockerfile: apps/Macro.AuthServer/Dockerfile
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80;
+      - App__SelfUrl=https://macro-authserver
+      - App__CorsOrigins=https://macro-web,https://macro-public-web,https://macro-identity,http://macro-administration,https://macro-administration,https://macro-catalog,https://macro-basket,https://macro-ordering,https://macro-cmskit,https://macro-payment
+      - App__RedirectAllowedUrls=http://macro-web
+      - AuthServer__Authority=http://macro-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - ConnectionStrings__IdentityService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Identity;Pooling=false;
+      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=EShopOnAbp_Administration;Pooling=false;   
+      - Redis__Configuration=redis
+      - RabbitMQ__Connections__Default__HostName=rabbitmq
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres-db:
+        condition: service_healthy  
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure  
+    networks: 
+      - macro-network
+  macro-web:
+    image: macro/app-web:latest
+    container_name: app-web-container
+    build:
+      context: ../../
+      dockerfile: apps/angular/Dockerfile
+    volumes:
+      - ./nginx/dynamic-env.json:/usr/share/nginx/html/dynamic-env.json
+    depends_on:
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure
+    networks: 
+      - macro-network
+  macro-public-web:
+    image: macro/app-publicweb:latest
+    container_name: app-publicweb-container
+    build:
+      context: ../../
+      dockerfile: apps/Macro.Blazor.Server/Dockerfile
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=http://+:80;
+      - App__SelfUrl=https://macro-public-web
+      - AuthServer__Authority=http://macro-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - RemoteServices__Default__BaseUrl=http://macro-gateway-web-public/                
+      - Redis__Configuration=redis
+      - RabbitMQ__Connections__Default__HostName=rabbitmq
+      - ReverseProxy__Clusters__cluster1__Destinations__destination1__Address=http://macro-gateway-web-public
+    depends_on:
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure  
+    networks: 
+      - macro-network
+  macro-gateway-web:
+    image: macro/gateway-web:latest
+    container_name: gateway-web-container
+    build:
+      context: ../../
+      dockerfile: gateway/Macro.Gateway/Dockerfile
+    environment:
+      #- ASPNETCORE_ENVIRONMENT=Docker # Yarp can't resolve dns, needs to be overridden
+      - ASPNETCORE_URLS=http://+:80;
+      - App__SelfUrl=https://macro-gateway-web
+      - App__CorsOrigins=https://macro-web
+      - AuthServer__Authority=http://macro-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - Redis__Configuration=redis
+      - ReverseProxy__Clusters__accountCluster__Destinations__destination1__Address=http://macro-authserver
+      - ReverseProxy__Clusters__identityCluster__Destinations__destination1__Address=http://macro-identity
+      - ReverseProxy__Clusters__administrationCluster__Destinations__destination1__Address=http://macro-administration
+      - ReverseProxy__Clusters__catalogCluster__Destinations__destination1__Address=http://macro-catalog
+      - ReverseProxy__Clusters__orderingCluster__Destinations__destination1__Address=http://macro-ordering
+      - ReverseProxy__Clusters__cmskitCluster__Destinations__destination1__Address=http://macro-cmskit
+      - ReverseProxy__Clusters__feature-management-cluster__Destinations__destination1__Address=http://macro-administration
+      - ReverseProxy__Clusters__permission-management-cluster__Destinations__destination1__Address=http://macro-administration
+      - ReverseProxy__Clusters__setting-management-cluster__Destinations__destination1__Address=http://macro-administration
+    depends_on:
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure  
+    networks: 
+      - macro-network
+
+networks:
+  macro-network:
+    external: true
