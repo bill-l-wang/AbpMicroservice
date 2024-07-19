@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsAspireHost>true</IsAspireHost>
+    <UserSecretsId>40d1d3f9-6593-4f5a-9d74-ff6ea82eb14e</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="8.0.0-preview.7.24251.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\apps\Macro.Blazor\Macro.Blazor.csproj" />
+    <ProjectReference Include="..\..\gateway\Macro.Gateway\Macro.Gateway.csproj" />
+    <ProjectReference Include="..\..\services\administration\host\Macro.Administration.HttpApi.Host\Macro.Administration.HttpApi.Host.csproj" />
+    <ProjectReference Include="..\..\services\identity\host\Macro.IdentityService.HttpApi.Host\Macro.IdentityService.HttpApi.Host.csproj" />
+    <ProjectReference Include="..\..\services\projects\host\Macro.Projects.HttpApi.Host\Macro.Projects.HttpApi.Host.csproj" />
+    <ProjectReference Include="..\..\services\saas\host\Macro.SaaS.HttpApi.Host\Macro.SaaS.HttpApi.Host.csproj" />
+  </ItemGroup>
+
+</Project>
