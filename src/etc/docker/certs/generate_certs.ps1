@@ -33,7 +33,7 @@ $authserverCert = New-SelfSignedCertificate -DnsName $authserverCNs -Signer $roo
 
 $password = ConvertTo-SecureString -String "8b6039b6-c67a-448b-977b-0ce6d3fcfd49" -Force -AsPlainText
 
-Export-PfxCertificate -Cert $rootCA -FilePath eShopOnAbp-root-cert.pfx -Password $password | Out-Null
+Export-PfxCertificate -Cert $rootCA -FilePath macro-root-cert.pfx -Password $password | Out-Null
 Export-PfxCertificate -Cert $authserverCert -FilePath app-authserver-cert.pfx -Password $password | Out-Null
 # Export-PfxCertificate -Cert $publicWebCert -FilePath app-public-cert.pfx -Password $password | Out-Null
 # Export-PfxCertificate -Cert $administrationServiceCert -FilePath administration-service-cert.pfx -Password $password | Out-Null
@@ -42,7 +42,7 @@ Export-PfxCertificate -Cert $authserverCert -FilePath app-authserver-cert.pfx -P
 # Export-PfxCertificate -Cert $basketServiceCert -FilePath basket-service-cert.pfx -Password $password | Out-Null
 
 # Export .cer to be converted to .crt to be trusted within the Docker container.
-Export-Certificate -Cert $rootCA -FilePath eShopOnAbp-root-cert.cer -Type CERT | Out-Null
+Export-Certificate -Cert $rootCA -FilePath macro-root-cert.cer -Type CERT | Out-Null
 
 # Trust it on your host machine.
 $store = New-Object System.Security.Cryptography.X509Certificates.X509Store "Root","LocalMachine"

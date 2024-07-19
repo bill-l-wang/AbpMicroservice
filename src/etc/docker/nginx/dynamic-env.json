@@ -1,0 +1,23 @@
+{
+  "production": true,
+  "application": {
+    "baseUrl":"https://macro-st-web",
+    "name": "Macro",
+    "logoUrl": ""
+  },
+  "oAuthConfig": {
+    "issuer": "https://macro-st-authserver",
+    "redirectUri": "https://macro-st-web",
+    "clientId": "Web",
+    "responseType": "code",
+    "scope": "offline_access openid profile email phone AccountService IdentityService AdministrationService CatalogService OrderingService",
+    "strictDiscoveryDocumentValidation": false,
+    "requireHttps": false
+  },
+  "apis": {
+    "default": {
+      "url": "https://macro-st-gateway-web",
+      "rootNamespace": "Macro"
+    }
+  }
+}
