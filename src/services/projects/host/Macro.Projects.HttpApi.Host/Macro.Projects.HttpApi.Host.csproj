@@ -32,6 +32,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\..\..\shared\Macro.Hosting.Shared\Macro.Hosting.Shared.csproj" />
         <ProjectReference Include="..\..\src\Macro.Projects.HttpApi\Macro.Projects.HttpApi.csproj" />
         <ProjectReference Include="..\..\src\Macro.Projects.Application\Macro.Projects.Application.csproj" />
         <ProjectReference Include="..\..\src\Macro.Projects.EntityFrameworkCore\Macro.Projects.EntityFrameworkCore.csproj" />

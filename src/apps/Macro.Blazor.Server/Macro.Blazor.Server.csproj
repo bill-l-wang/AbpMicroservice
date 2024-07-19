@@ -52,6 +52,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\aspire\ServiceDefaults\Macro.ServiceDefaults.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Pages\**\*.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
