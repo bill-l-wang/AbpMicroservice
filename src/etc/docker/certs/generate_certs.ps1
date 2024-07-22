@@ -11,10 +11,6 @@ $identityServiceCNs = "identity-service", "localhost"
 $projectsServiceCNs = "projects-service", "localhost"
 $saasServiceCNs = "saas-service", "localhost"
 
-$orderingServiceCNs = "ordering-service", "localhost"
-$cmskitServiceCNs = "cmskit-service", "localhost"
-$paymentServiceCNs = "payment-service", "localhost"
-
 $alreadyExistingCertsRoot = Get-ChildItem -Path Cert:\LocalMachine\My -Recurse | Where-Object {$_.Subject -eq "CN=$rootCN"}
 
 if ($alreadyExistingCertsRoot.Count -eq 1) {
