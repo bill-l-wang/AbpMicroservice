@@ -17,9 +17,9 @@
         <ProjectReference Include="..\..\..\identity\src\Macro.IdentityService.Application.Contracts\Macro.IdentityService.Application.Contracts.csproj" />
         <ProjectReference Include="..\..\..\identity\src\Macro.IdentityService.EntityFrameworkCore\Macro.IdentityService.EntityFrameworkCore.csproj" />
         <ProjectReference Include="..\..\..\saas\src\Macro.SaaS.Application.Contracts\Macro.SaaS.Application.Contracts.csproj" />
-        <ProjectReference Include="..\..\src\Macro.Administration.HttpApi\Macro.AdministrationService.HttpApi.csproj" />
-        <ProjectReference Include="..\..\src\Macro.Administration.Application\Macro.AdministrationService.Application.csproj" />
-        <ProjectReference Include="..\..\src\Macro.Administration.EntityFrameworkCore\Macro.AdministrationService.EntityFrameworkCore.csproj" />
+        <ProjectReference Include="..\..\src\Macro.AdministrationService.HttpApi\Macro.AdministrationService.HttpApi.csproj" />
+        <ProjectReference Include="..\..\src\Macro.AdministrationService.Application\Macro.AdministrationService.Application.csproj" />
+        <ProjectReference Include="..\..\src\Macro.AdministrationService.EntityFrameworkCore\Macro.AdministrationService.EntityFrameworkCore.csproj" />
     </ItemGroup>
 
     <ItemGroup>

@@ -42,8 +42,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\services\administration\src\Macro.Administration.Application.Contracts\Macro.AdministrationService.Application.Contracts.csproj" />
-        <ProjectReference Include="..\..\services\administration\src\Macro.Administration.EntityFrameworkCore\Macro.AdministrationService.EntityFrameworkCore.csproj" />
+        <ProjectReference Include="..\..\services\administration\src\Macro.AdministrationService.Application.Contracts\Macro.AdministrationService.Application.Contracts.csproj" />
+        <ProjectReference Include="..\..\services\administration\src\Macro.AdministrationService.EntityFrameworkCore\Macro.AdministrationService.EntityFrameworkCore.csproj" />
         <ProjectReference Include="..\..\services\identity\src\Macro.IdentityService.Application.Contracts\Macro.IdentityService.Application.Contracts.csproj" />
         <ProjectReference Include="..\..\services\identity\src\Macro.IdentityService.EntityFrameworkCore\Macro.IdentityService.EntityFrameworkCore.csproj" />
         <ProjectReference Include="..\..\services\saas\src\Macro.SaaS.Application.Contracts\Macro.SaaS.Application.Contracts.csproj" />

@@ -7,7 +7,7 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
     <ItemGroup>
-        <ProjectReference Include="..\..\services\administration\src\Macro.Administration.EntityFrameworkCore\Macro.AdministrationService.EntityFrameworkCore.csproj" />
+        <ProjectReference Include="..\..\services\administration\src\Macro.AdministrationService.EntityFrameworkCore\Macro.AdministrationService.EntityFrameworkCore.csproj" />
         <ProjectReference Include="..\Macro.Hosting.Shared\Macro.Hosting.Shared.csproj" />
     </ItemGroup>
 </Project>

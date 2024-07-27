@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\services\administration\src\Macro.Administration.EntityFrameworkCore\Macro.AdministrationService.EntityFrameworkCore.csproj" />
+        <ProjectReference Include="..\..\services\administration\src\Macro.AdministrationService.EntityFrameworkCore\Macro.AdministrationService.EntityFrameworkCore.csproj" />
         <ProjectReference Include="..\Macro.Shared.Hosting.AspNetCore\Macro.Shared.Hosting.AspNetCore.csproj" />
     </ItemGroup>
 
