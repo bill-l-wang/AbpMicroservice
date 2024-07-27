@@ -21,7 +21,7 @@ public class DbMigratorHostedService : IHostedService
 
     public async Task StartAsync(CancellationToken cancellationToken)
     {
-        using (var application = await AbpApplicationFactory.CreateAsync<TaskyDbMigratorModule>(options =>
+        using (var application = await AbpApplicationFactory.CreateAsync<MacroDbMigratorModule>(options =>
                {
                    options.Services.ReplaceConfiguration(_configuration);
                    options.UseAutofac();
@@ -32,7 +32,7 @@ public class DbMigratorHostedService : IHostedService
 
             await application
                 .ServiceProvider
-                .GetRequiredService<TaskyDbMigrationService>()
+                .GetRequiredService<MacroDbMigrationService>()
                 .MigrateAsync(cancellationToken);
 
             await application.ShutdownAsync();

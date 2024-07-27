@@ -18,7 +18,7 @@ namespace Macro.DbMigrator;
     typeof(SaaSEntityFrameworkCoreModule),
     typeof(SaaSApplicationContractsModule)
 )]
-public class TaskyDbMigratorModule : AbpModule
+public class MacroDbMigratorModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {

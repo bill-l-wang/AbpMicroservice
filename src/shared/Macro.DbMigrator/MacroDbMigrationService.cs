@@ -18,16 +18,16 @@ using Volo.Abp.Uow;
 
 namespace Macro.DbMigrator;
 
-public class TaskyDbMigrationService : ITransientDependency
+public class MacroDbMigrationService : ITransientDependency
 {
     private readonly ICurrentTenant _currentTenant;
     private readonly IDataSeeder _dataSeeder;
-    private readonly ILogger<TaskyDbMigrationService> _logger;
+    private readonly ILogger<MacroDbMigrationService> _logger;
     private readonly ITenantRepository _tenantRepository;
     private readonly IUnitOfWorkManager _unitOfWorkManager;
 
-    public TaskyDbMigrationService(
-        ILogger<TaskyDbMigrationService> logger,
+    public MacroDbMigrationService(
+        ILogger<MacroDbMigrationService> logger,
         ITenantRepository tenantRepository,
         IDataSeeder dataSeeder,
         ICurrentTenant currentTenant,

@@ -109,6 +109,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.AppHost", "aspire\App
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.ServiceDefaults", "aspire\ServiceDefaults\Macro.ServiceDefaults.csproj", "{9C265E0A-41A6-48A5-BA8D-2BF66852BA60}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.Shared.Hosting", "shared\Macro.Shared.Hosting\Macro.Shared.Hosting.csproj", "{E72667A7-B1F1-4A02-B253-5BC2E44BEE38}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.Shared.Hosting.AspNetCore", "shared\Macro.Shared.Hosting.AspNetCore\Macro.Shared.Hosting.AspNetCore.csproj", "{69652DE6-AD19-4386-9010-3434783A0260}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.Shared.Localization", "shared\Macro.Shared.Localization\Macro.Shared.Localization.csproj", "{817E026E-AFB6-4DB7-BCFE-1C9B4DAE0782}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.Shared.Hosting.Microservices", "shared\Macro.Shared.Hosting.Microservices\Macro.Shared.Hosting.Microservices.csproj", "{7613F143-97CC-4053-B372-7CFFC6F891D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -279,6 +287,22 @@ Global
 		{9C265E0A-41A6-48A5-BA8D-2BF66852BA60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C265E0A-41A6-48A5-BA8D-2BF66852BA60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C265E0A-41A6-48A5-BA8D-2BF66852BA60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E72667A7-B1F1-4A02-B253-5BC2E44BEE38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E72667A7-B1F1-4A02-B253-5BC2E44BEE38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E72667A7-B1F1-4A02-B253-5BC2E44BEE38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E72667A7-B1F1-4A02-B253-5BC2E44BEE38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69652DE6-AD19-4386-9010-3434783A0260}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69652DE6-AD19-4386-9010-3434783A0260}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69652DE6-AD19-4386-9010-3434783A0260}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69652DE6-AD19-4386-9010-3434783A0260}.Release|Any CPU.Build.0 = Release|Any CPU
+		{817E026E-AFB6-4DB7-BCFE-1C9B4DAE0782}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{817E026E-AFB6-4DB7-BCFE-1C9B4DAE0782}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{817E026E-AFB6-4DB7-BCFE-1C9B4DAE0782}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{817E026E-AFB6-4DB7-BCFE-1C9B4DAE0782}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7613F143-97CC-4053-B372-7CFFC6F891D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7613F143-97CC-4053-B372-7CFFC6F891D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7613F143-97CC-4053-B372-7CFFC6F891D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7613F143-97CC-4053-B372-7CFFC6F891D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -329,6 +353,10 @@ Global
 		{EB163A6D-3FE6-4C7D-9A7E-7F7044F7130F} = {79065DE8-D7FB-40A5-980B-A0841A208B38}
 		{2E50CAA3-2765-49BD-9851-694DF9DF185B} = {C552157B-3B1B-494F-9231-9FAC20EFC430}
 		{9C265E0A-41A6-48A5-BA8D-2BF66852BA60} = {C552157B-3B1B-494F-9231-9FAC20EFC430}
+		{E72667A7-B1F1-4A02-B253-5BC2E44BEE38} = {140ED621-3D93-4523-8B62-BE6850E04698}
+		{69652DE6-AD19-4386-9010-3434783A0260} = {140ED621-3D93-4523-8B62-BE6850E04698}
+		{817E026E-AFB6-4DB7-BCFE-1C9B4DAE0782} = {140ED621-3D93-4523-8B62-BE6850E04698}
+		{7613F143-97CC-4053-B372-7CFFC6F891D0} = {140ED621-3D93-4523-8B62-BE6850E04698}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ECFA44F4-824C-4405-82F5-F62F2DCBCD5E}
