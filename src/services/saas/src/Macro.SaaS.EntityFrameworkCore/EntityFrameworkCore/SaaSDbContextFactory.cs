@@ -1,11 +1,9 @@
 ﻿using System.IO;
-using Macro.SaaS;
-using Macro.SaaS.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
-namespace Tasky.SaaS.EntityFrameworkCore;
+namespace Macro.SaaS.EntityFrameworkCore;
 
 public class SaaSDbContextFactory : IDesignTimeDbContextFactory<SaaSDbContext>
 {

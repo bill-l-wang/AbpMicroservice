@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Macro.Administration.EntityFrameworkCore;
-using Macro.Hosting.Shared;
+using Macro.SaaS.DbMigrations;
+using Macro.SaaS.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
@@ -12,7 +14,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
-using Tasky.SaaS.EntityFrameworkCore;
 using Volo.Abp;
 using Volo.Abp.Caching;
 using Volo.Abp.Modularity;
@@ -20,7 +21,6 @@ using Volo.Abp.Modularity;
 namespace Macro.SaaS;
 
 [DependsOn(
-    typeof(MacroHostingModule),
     typeof(SaaSApplicationModule),
     typeof(SaaSEntityFrameworkCoreModule),
     typeof(SaaSHttpApiModule),
@@ -122,5 +122,12 @@ public class SaaSHttpApiHostModule : AbpModule
         app.UseAbpSerilogEnrichers();
         app.UseUnitOfWork();
         app.UseConfiguredEndpoints();
+    }
+
+    public override async Task OnPostApplicationInitializationAsync(ApplicationInitializationContext context)
+    {
+        await context.ServiceProvider
+            .GetRequiredService<SaasServiceDatabaseMigrationChecker>()
+            .CheckAndApplyDatabaseMigrationsAsync();
     }
 }

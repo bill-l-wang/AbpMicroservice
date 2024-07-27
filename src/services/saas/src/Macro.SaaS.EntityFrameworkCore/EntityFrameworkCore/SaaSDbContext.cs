@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Tasky.SaaS.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;

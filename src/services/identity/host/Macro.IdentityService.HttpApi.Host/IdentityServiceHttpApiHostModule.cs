@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Macro.Administration.EntityFrameworkCore;
-using Macro.Hosting.Shared;
+using Macro.IdentityService.DbMigrations;
 using Macro.IdentityService.EntityFrameworkCore;
+using Macro.SaaS.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
@@ -14,7 +16,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
-using Tasky.SaaS.EntityFrameworkCore;
 using Volo.Abp;
 using Volo.Abp.Caching;
 using Volo.Abp.Modularity;
@@ -23,7 +24,7 @@ using Volo.Abp.VirtualFileSystem;
 namespace Macro.IdentityService;
 
 [DependsOn(
-    typeof(MacroHostingModule),
+    typeof(IdentityServiceApplicationModule),
     typeof(IdentityServiceApplicationModule),
     typeof(IdentityServiceEntityFrameworkCoreModule),
     typeof(IdentityServiceHttpApiModule),
@@ -43,18 +44,18 @@ public class IdentityServiceHttpApiHostModule : AbpModule
             {
                 options.FileSets.ReplaceEmbeddedByPhysical<IdentityServiceDomainSharedModule>(
                     Path.Combine(hostingEnvironment.ContentRootPath,
-                        string.Format("..{0}..{0}src{0}Tasky.IdentityService.Domain.Shared",
+                        string.Format("..{0}..{0}src{0}Macro.IdentityService.Domain.Shared",
                             Path.DirectorySeparatorChar)));
                 options.FileSets.ReplaceEmbeddedByPhysical<IdentityServiceDomainModule>(
                     Path.Combine(hostingEnvironment.ContentRootPath,
-                        string.Format("..{0}..{0}src{0}Tasky.IdentityService.Domain", Path.DirectorySeparatorChar)));
+                        string.Format("..{0}..{0}src{0}Macro.IdentityService.Domain", Path.DirectorySeparatorChar)));
                 options.FileSets.ReplaceEmbeddedByPhysical<IdentityServiceApplicationContractsModule>(
                     Path.Combine(hostingEnvironment.ContentRootPath,
-                        string.Format("..{0}..{0}src{0}Tasky.IdentityService.Application.Contracts",
+                        string.Format("..{0}..{0}src{0}Macro.IdentityService.Application.Contracts",
                             Path.DirectorySeparatorChar)));
                 options.FileSets.ReplaceEmbeddedByPhysical<IdentityServiceApplicationModule>(
                     Path.Combine(hostingEnvironment.ContentRootPath,
-                        string.Format("..{0}..{0}src{0}Tasky.IdentityService.Application",
+                        string.Format("..{0}..{0}src{0}Macro.IdentityService.Application",
                             Path.DirectorySeparatorChar)));
             });
         }
@@ -151,5 +152,12 @@ public class IdentityServiceHttpApiHostModule : AbpModule
         app.UseAuditing();
         app.UseAbpSerilogEnrichers();
         app.UseConfiguredEndpoints();
+    }
+
+    public override async Task OnPostApplicationInitializationAsync(ApplicationInitializationContext context)
+    {
+        await context.ServiceProvider
+            .GetRequiredService<IdentityServiceDatabaseMigrationChecker>()
+            .CheckAndApplyDatabaseMigrationsAsync();
     }
 }

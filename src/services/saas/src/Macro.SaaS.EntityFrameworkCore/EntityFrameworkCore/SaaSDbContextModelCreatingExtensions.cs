@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Volo.Abp;
 
-namespace Tasky.SaaS.EntityFrameworkCore;
+namespace Macro.SaaS.EntityFrameworkCore;
 
 public static class SaaSDbContextModelCreatingExtensions
 {

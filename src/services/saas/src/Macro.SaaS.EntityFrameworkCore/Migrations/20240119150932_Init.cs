@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Tasky.SaaS.Migrations
+namespace Macro.SaaS.Migrations
 {
     /// <inheritdoc />
     public partial class Init : Migration

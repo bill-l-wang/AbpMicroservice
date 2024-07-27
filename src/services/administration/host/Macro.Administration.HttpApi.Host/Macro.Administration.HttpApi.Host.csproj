@@ -13,6 +13,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\..\..\shared\Macro.Hosting.Shared\Macro.Hosting.Shared.csproj" />
+        <ProjectReference Include="..\..\..\..\shared\Macro.Shared.Hosting.Microservices\Macro.Shared.Hosting.Microservices.csproj" />
         <ProjectReference Include="..\..\..\identity\src\Macro.IdentityService.Application.Contracts\Macro.IdentityService.Application.Contracts.csproj" />
         <ProjectReference Include="..\..\..\identity\src\Macro.IdentityService.EntityFrameworkCore\Macro.IdentityService.EntityFrameworkCore.csproj" />
         <ProjectReference Include="..\..\..\saas\src\Macro.SaaS.Application.Contracts\Macro.SaaS.Application.Contracts.csproj" />

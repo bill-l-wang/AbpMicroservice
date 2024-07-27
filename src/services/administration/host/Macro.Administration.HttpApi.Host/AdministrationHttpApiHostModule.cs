@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Macro.Administration.DbMigrations;
+using System.Threading.Tasks;
 using Macro.Administration.EntityFrameworkCore;
 using Macro.Hosting.Shared;
 using Macro.IdentityService;
@@ -128,5 +130,12 @@ public class AdministrationHttpApiHostModule : AbpModule
         app.UseAuditing();
         app.UseAbpSerilogEnrichers();
         app.UseConfiguredEndpoints();
+    }
+
+    public override async Task OnPostApplicationInitializationAsync(ApplicationInitializationContext context)
+    {
+        await context.ServiceProvider
+            .GetRequiredService<AdministrationServiceDatabaseMigrationChecker>()
+            .CheckAndApplyDatabaseMigrationsAsync();
     }
 }

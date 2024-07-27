@@ -5,12 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using Tasky.SaaS.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
 
 #nullable disable
 
-namespace Tasky.SaaS.Migrations
+namespace Macro.SaaS.Migrations
 {
     [DbContext(typeof(SaaSDbContext))]
     partial class SaaSDbContextModelSnapshot : ModelSnapshot

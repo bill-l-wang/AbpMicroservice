@@ -13,18 +13,12 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.6" />
-        <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
         <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
         <PackageReference Include="IdentityModel" Version="6.2.0" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.1" />
         <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="8.0.1" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.1" />
-        <PackageReference Include="Volo.Abp.Autofac" Version="8.0.2" />
-        <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="8.0.2" />
-        <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy" Version="8.0.2" />
         <PackageReference Include="Volo.Abp.EntityFrameworkCore.PostgreSql" Version="8.0.2" />
-        <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="8.0.2" />
-        <PackageReference Include="Volo.Abp.Swashbuckle" Version="8.0.2" />
         <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="8.0.2" />
         <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" Version="8.0.2" />
         <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="8.0.2" />
@@ -32,7 +26,9 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\..\..\aspire\ServiceDefaults\Macro.ServiceDefaults.csproj" />
         <ProjectReference Include="..\..\..\..\shared\Macro.Hosting.Shared\Macro.Hosting.Shared.csproj" />
+        <ProjectReference Include="..\..\..\..\shared\Macro.Shared.Hosting.Microservices\Macro.Shared.Hosting.Microservices.csproj" />
         <ProjectReference Include="..\..\src\Macro.Projects.HttpApi\Macro.Projects.HttpApi.csproj" />
         <ProjectReference Include="..\..\src\Macro.Projects.Application\Macro.Projects.Application.csproj" />
         <ProjectReference Include="..\..\src\Macro.Projects.EntityFrameworkCore\Macro.Projects.EntityFrameworkCore.csproj" />

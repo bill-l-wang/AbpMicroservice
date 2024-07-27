@@ -17,7 +17,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\..\shared\Macro.Hosting.Shared\Macro.Hosting.Shared.csproj" />
+        <ProjectReference Include="..\..\..\..\aspire\ServiceDefaults\Macro.ServiceDefaults.csproj" />
+        <ProjectReference Include="..\..\..\..\shared\Macro.Shared.Hosting.Microservices\Macro.Shared.Hosting.Microservices.csproj" />
         <ProjectReference Include="..\..\..\administration\src\Macro.Administration.EntityFrameworkCore\Macro.Administration.EntityFrameworkCore.csproj" />
         <ProjectReference Include="..\..\src\Macro.SaaS.HttpApi\Macro.SaaS.HttpApi.csproj" />
         <ProjectReference Include="..\..\src\Macro.SaaS.Application\Macro.SaaS.Application.csproj" />

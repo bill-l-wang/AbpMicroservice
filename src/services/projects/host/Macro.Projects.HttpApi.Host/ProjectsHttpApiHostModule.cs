@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
+using Macro.Projects.DbMigrations;
 using Macro.Projects.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -69,17 +71,17 @@ public class ProjectsHttpApiHostModule : AbpModule
             {
                 options.FileSets.ReplaceEmbeddedByPhysical<ProjectsDomainSharedModule>(
                     Path.Combine(hostingEnvironment.ContentRootPath,
-                        string.Format("..{0}..{0}src{0}Tasky.Projects.Domain.Shared", Path.DirectorySeparatorChar)));
+                        string.Format("..{0}..{0}src{0}Macro.Projects.Domain.Shared", Path.DirectorySeparatorChar)));
                 options.FileSets.ReplaceEmbeddedByPhysical<ProjectsDomainModule>(
                     Path.Combine(hostingEnvironment.ContentRootPath,
-                        string.Format("..{0}..{0}src{0}Tasky.Projects.Domain", Path.DirectorySeparatorChar)));
+                        string.Format("..{0}..{0}src{0}Macro.Projects.Domain", Path.DirectorySeparatorChar)));
                 options.FileSets.ReplaceEmbeddedByPhysical<ProjectsApplicationContractsModule>(
                     Path.Combine(hostingEnvironment.ContentRootPath,
-                        string.Format("..{0}..{0}src{0}Tasky.Projects.Application.Contracts",
+                        string.Format("..{0}..{0}src{0}Macro.Projects.Application.Contracts",
                             Path.DirectorySeparatorChar)));
                 options.FileSets.ReplaceEmbeddedByPhysical<ProjectsApplicationModule>(
                     Path.Combine(hostingEnvironment.ContentRootPath,
-                        string.Format("..{0}..{0}src{0}Tasky.Projects.Application", Path.DirectorySeparatorChar)));
+                        string.Format("..{0}..{0}src{0}Macro.Projects.Application", Path.DirectorySeparatorChar)));
             });
         }
 
@@ -196,5 +198,12 @@ public class ProjectsHttpApiHostModule : AbpModule
         app.UseAuditing();
         app.UseAbpSerilogEnrichers();
         app.UseConfiguredEndpoints();
+    }
+
+    public override async Task OnPostApplicationInitializationAsync(ApplicationInitializationContext context)
+    {
+        await context.ServiceProvider
+            .GetRequiredService<ProjectsServiceDatabaseMigrationChecker>()
+            .CheckAndApplyDatabaseMigrationsAsync();
     }
 }
