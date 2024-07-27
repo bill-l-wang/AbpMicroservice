@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Macro.Administration.EntityFrameworkCore;
+using Macro.AdministrationService.EntityFrameworkCore;
 using Macro.SaaS.DbMigrations;
 using Macro.SaaS.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -24,7 +24,7 @@ namespace Macro.SaaS;
     typeof(SaaSApplicationModule),
     typeof(SaaSEntityFrameworkCoreModule),
     typeof(SaaSHttpApiModule),
-    typeof(AdministrationEntityFrameworkCoreModule)
+    typeof(AdministrationServiceEntityFrameworkCoreModule)
 )]
 public class SaaSHttpApiHostModule : AbpModule
 {

@@ -1,4 +1,4 @@
-﻿using Macro.Administration.EntityFrameworkCore;
+﻿using Macro.AdministrationService.EntityFrameworkCore;
 using Macro.Hosting.Shared;
 using Volo.Abp.Modularity;
 
@@ -6,7 +6,7 @@ namespace Macro.Microservice.Shared;
 
 [DependsOn(
     typeof(MacroHostingModule),
-    typeof(AdministrationEntityFrameworkCoreModule)
+    typeof(AdministrationServiceEntityFrameworkCoreModule)
 )]
 public class MacroMicroserviceModule : AbpModule
 {

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Macro.Administration.EntityFrameworkCore;
+using Macro.Administration;
+using Macro.AdministrationService.EntityFrameworkCore;
 using Macro.Shared.Hosting.Microservices.DbMigrations.EfCore;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.DistributedLocking;
@@ -10,10 +11,10 @@ using Volo.Abp.MultiTenancy;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.Uow;
 
-namespace Macro.Administration.DbMigrations;
+namespace Macro.AdministrationService.DbMigrations;
 
 public class AdministrationServiceDatabaseMigrationChecker
-    : PendingEfCoreMigrationsChecker<AdministrationDbContext>
+    : PendingEfCoreMigrationsChecker<AdministrationServiceDbContext>
 {
     private readonly IPermissionDefinitionManager _permissionDefinitionManager;
     private readonly IPermissionDataSeeder _permissionDataSeeder;
@@ -32,7 +33,7 @@ public class AdministrationServiceDatabaseMigrationChecker
             currentTenant,
             distributedEventBus,
             abpDistributedLock,
-            AdministrationDbProperties.ConnectionStringName)
+            AdministrationServiceDbProperties.ConnectionStringName)
     {
         _permissionDefinitionManager = permissionDefinitionManager;
         _permissionDataSeeder = permissionDataSeeder;

@@ -9,7 +9,7 @@ using Volo.Abp.MultiTenancy;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.Uow;
 
-namespace Macro.Administration.EventHandler;
+namespace Macro.AdministrationService.EventHandler;
 
 public class TenantCreatedEventHandler : IDistributedEventHandler<TenantCreatedEto>, ITransientDependency
 {

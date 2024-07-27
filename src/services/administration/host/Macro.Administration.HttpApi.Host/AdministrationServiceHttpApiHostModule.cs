@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Macro.Administration;
+using Macro.AdministrationService.DbMigrations;
 using Macro.AdministrationService.EntityFrameworkCore;
-using Macro.IdentityService.DbMigrations;
+using Macro.Hosting.Shared;
+using Macro.IdentityService;
 using Macro.IdentityService.EntityFrameworkCore;
-using Macro.SaaS.EntityFrameworkCore;
+using Macro.SaaS;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
@@ -18,56 +20,36 @@ using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
 using Volo.Abp;
 using Volo.Abp.Caching;
+using Volo.Abp.Identity;
 using Volo.Abp.Modularity;
-using Volo.Abp.VirtualFileSystem;
 
-namespace Macro.IdentityService;
+namespace Macro.AdministrationService;
 
 [DependsOn(
-    typeof(IdentityServiceApplicationModule),
-    typeof(IdentityServiceApplicationModule),
-    typeof(IdentityServiceEntityFrameworkCoreModule),
-    typeof(IdentityServiceHttpApiModule),
+    typeof(MacroHostingModule),
+    typeof(AdministrationServiceApplicationModule),
     typeof(AdministrationServiceEntityFrameworkCoreModule),
-    typeof(SaaSEntityFrameworkCoreModule)
+    typeof(AdministrationServiceHttpApiModule),
+    typeof(IdentityServiceApplicationContractsModule),
+    typeof(IdentityServiceEntityFrameworkCoreModule),
+    typeof(AbpIdentityDomainModule),
+    typeof(SaaSApplicationContractsModule)
 )]
-public class IdentityServiceHttpApiHostModule : AbpModule
+public class AdministrationServiceHttpApiHostModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         var hostingEnvironment = context.Services.GetHostingEnvironment();
         var configuration = context.Services.GetConfiguration();
 
-        if (hostingEnvironment.IsDevelopment())
-        {
-            Configure<AbpVirtualFileSystemOptions>(options =>
-            {
-                options.FileSets.ReplaceEmbeddedByPhysical<IdentityServiceDomainSharedModule>(
-                    Path.Combine(hostingEnvironment.ContentRootPath,
-                        string.Format("..{0}..{0}src{0}Macro.IdentityService.Domain.Shared",
-                            Path.DirectorySeparatorChar)));
-                options.FileSets.ReplaceEmbeddedByPhysical<IdentityServiceDomainModule>(
-                    Path.Combine(hostingEnvironment.ContentRootPath,
-                        string.Format("..{0}..{0}src{0}Macro.IdentityService.Domain", Path.DirectorySeparatorChar)));
-                options.FileSets.ReplaceEmbeddedByPhysical<IdentityServiceApplicationContractsModule>(
-                    Path.Combine(hostingEnvironment.ContentRootPath,
-                        string.Format("..{0}..{0}src{0}Macro.IdentityService.Application.Contracts",
-                            Path.DirectorySeparatorChar)));
-                options.FileSets.ReplaceEmbeddedByPhysical<IdentityServiceApplicationModule>(
-                    Path.Combine(hostingEnvironment.ContentRootPath,
-                        string.Format("..{0}..{0}src{0}Macro.IdentityService.Application",
-                            Path.DirectorySeparatorChar)));
-            });
-        }
-
         context.Services.AddAbpSwaggerGenWithOAuth(
             configuration["AuthServer:Authority"],
             new Dictionary<string, string> {
-                {"IdentityService", "IdentityService API"}
+                {"AdministrationService", "AdministrationService API"}
             },
             options =>
             {
-                options.SwaggerDoc("v1", new OpenApiInfo {Title = "IdentityService API", Version = "v1"});
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Administration API", Version = "v1" });
                 options.DocInclusionPredicate((docName, description) => true);
                 options.CustomSchemaIds(type => type.FullName);
             });
@@ -78,19 +60,19 @@ public class IdentityServiceHttpApiHostModule : AbpModule
             {
                 options.Authority = configuration["AuthServer:Authority"];
                 options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
-                options.Audience = "IdentityService";
+                options.Audience = "AdministrationService";
             });
 
         Configure<AbpDistributedCacheOptions>(options =>
         {
-            options.KeyPrefix = "IdentityService:";
+            options.KeyPrefix = "Administration:";
         });
 
-        var dataProtectionBuilder = context.Services.AddDataProtection().SetApplicationName("IdentityService");
+        var dataProtectionBuilder = context.Services.AddDataProtection().SetApplicationName("Administration");
         if (!hostingEnvironment.IsDevelopment())
         {
             var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
-            dataProtectionBuilder.PersistKeysToStackExchangeRedis(redis, "IdentityService-Protection-Keys");
+            dataProtectionBuilder.PersistKeysToStackExchangeRedis(redis, "Administration-Protection-Keys");
         }
 
         context.Services.AddCors(options =>
@@ -134,7 +116,6 @@ public class IdentityServiceHttpApiHostModule : AbpModule
         app.UseRouting();
         app.UseCors();
         app.UseAuthentication();
-
         app.UseMultiTenancy();
 
         app.UseAbpRequestLocalization();
@@ -143,11 +124,9 @@ public class IdentityServiceHttpApiHostModule : AbpModule
         app.UseAbpSwaggerUI(options =>
         {
             options.SwaggerEndpoint("/swagger/v1/swagger.json", "Support APP API");
-
             var configuration = context.GetConfiguration();
             options.OAuthClientId(configuration["AuthServer:SwaggerClientId"]);
             options.OAuthClientSecret(configuration["AuthServer:SwaggerClientSecret"]);
-            options.OAuthScopes("IdentityService");
         });
         app.UseAuditing();
         app.UseAbpSerilogEnrichers();
@@ -157,7 +136,7 @@ public class IdentityServiceHttpApiHostModule : AbpModule
     public override async Task OnPostApplicationInitializationAsync(ApplicationInitializationContext context)
     {
         await context.ServiceProvider
-            .GetRequiredService<IdentityServiceDatabaseMigrationChecker>()
+            .GetRequiredService<AdministrationServiceDatabaseMigrationChecker>()
             .CheckAndApplyDatabaseMigrationsAsync();
     }
 }

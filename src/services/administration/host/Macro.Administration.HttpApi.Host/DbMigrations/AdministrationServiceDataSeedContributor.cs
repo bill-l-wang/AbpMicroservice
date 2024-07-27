@@ -4,7 +4,7 @@ using Volo.Abp.DependencyInjection;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.Uow;
 
-namespace Macro.Administration.DbMigrations;
+namespace Macro.AdministrationService.DbMigrations;
 
 public class AdministrationServiceDataSeedContributor : IDataSeedContributor, ITransientDependency
 {

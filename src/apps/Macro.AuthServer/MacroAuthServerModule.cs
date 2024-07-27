@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using Macro.Administration.EntityFrameworkCore;
+using Macro.AdministrationService.EntityFrameworkCore;
 using Macro.IdentityService.EntityFrameworkCore;
 using Macro.Microservice.Shared;
 using Macro.SaaS.EntityFrameworkCore;
@@ -42,7 +42,7 @@ namespace Macro;
     typeof(AbpAccountHttpApiModule),
     typeof(AbpAspNetCoreMvcUiLeptonXLiteThemeModule),
     typeof(AbpEntityFrameworkCorePostgreSqlModule),
-    typeof(AdministrationEntityFrameworkCoreModule),
+    typeof(AdministrationServiceEntityFrameworkCoreModule),
     typeof(SaaSEntityFrameworkCoreModule),
     typeof(IdentityServiceEntityFrameworkCoreModule),
     typeof(MacroMicroserviceModule),

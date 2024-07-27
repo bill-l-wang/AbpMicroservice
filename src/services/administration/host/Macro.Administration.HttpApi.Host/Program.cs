@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
 
-namespace Macro.Administration;
+namespace Macro.AdministrationService;
 
 public class Program
 {
@@ -35,7 +35,7 @@ public class Program
             builder.Host.AddAppSettingsSecretsJson()
                 .UseAutofac()
                 .UseSerilog();
-            await builder.AddApplicationAsync<AdministrationHttpApiHostModule>();
+            await builder.AddApplicationAsync<AdministrationServiceHttpApiHostModule>();
             var app = builder.Build();
             await app.InitializeApplicationAsync();
             await app.RunAsync();

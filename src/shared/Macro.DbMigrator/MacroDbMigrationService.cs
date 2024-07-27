@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Macro.Administration.EntityFrameworkCore;
+using Macro.AdministrationService.EntityFrameworkCore;
 using Macro.IdentityService.EntityFrameworkCore;
 using Macro.SaaS.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -94,7 +94,7 @@ public class MacroDbMigrationService : ITransientDependency
                 await MigrateDatabaseAsync<SaaSDbContext>(cancellationToken);
             }
 
-            await MigrateDatabaseAsync<AdministrationDbContext>(cancellationToken);
+            await MigrateDatabaseAsync<AdministrationServiceDbContext>(cancellationToken);
             await MigrateDatabaseAsync<IdentityServiceDbContext>(cancellationToken);
 
             await uow.CompleteAsync(cancellationToken);

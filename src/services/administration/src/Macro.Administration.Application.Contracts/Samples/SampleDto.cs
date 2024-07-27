@@ -1,4 +1,4 @@
-﻿namespace Macro.Administration.Samples;
+﻿namespace Macro.AdministrationService.Samples;
 
 public class SampleDto
 {

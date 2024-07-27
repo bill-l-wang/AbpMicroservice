@@ -22,7 +22,7 @@
     <ItemGroup>
         <ProjectReference Include="..\..\..\..\aspire\ServiceDefaults\Macro.ServiceDefaults.csproj" />
         <ProjectReference Include="..\..\..\..\shared\Macro.Shared.Hosting.Microservices\Macro.Shared.Hosting.Microservices.csproj" />
-        <ProjectReference Include="..\..\..\administration\src\Macro.Administration.EntityFrameworkCore\Macro.Administration.EntityFrameworkCore.csproj" />
+        <ProjectReference Include="..\..\..\administration\src\Macro.Administration.EntityFrameworkCore\Macro.AdministrationService.EntityFrameworkCore.csproj" />
         <ProjectReference Include="..\..\..\saas\src\Macro.SaaS.EntityFrameworkCore\Macro.SaaS.EntityFrameworkCore.csproj" />
         <ProjectReference Include="..\..\src\Macro.IdentityService.HttpApi\Macro.IdentityService.HttpApi.csproj" />
         <ProjectReference Include="..\..\src\Macro.IdentityService.Application\Macro.IdentityService.Application.csproj" />

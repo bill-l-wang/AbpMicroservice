@@ -1,5 +1,6 @@
 ﻿using Macro.Administration;
-using Macro.Administration.EntityFrameworkCore;
+using Macro.AdministrationService;
+using Macro.AdministrationService.EntityFrameworkCore;
 using Macro.IdentityService;
 using Macro.IdentityService.EntityFrameworkCore;
 using Macro.SaaS;
@@ -11,8 +12,8 @@ namespace Macro.DbMigrator;
 
 [DependsOn(
     typeof(AbpAutofacModule),
-    typeof(AdministrationEntityFrameworkCoreModule),
-    typeof(AdministrationApplicationContractsModule),
+    typeof(AdministrationServiceEntityFrameworkCoreModule),
+    typeof(AdministrationServiceApplicationContractsModule),
     typeof(IdentityServiceEntityFrameworkCoreModule),
     typeof(IdentityServiceApplicationContractsModule),
     typeof(SaaSEntityFrameworkCoreModule),

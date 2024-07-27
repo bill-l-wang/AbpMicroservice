@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "services", "services", "{ED0A7918-04FA-4040-B641-4CA249074083}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.Administration.HttpApi.Host", "services\administration\host\Macro.Administration.HttpApi.Host\Macro.Administration.HttpApi.Host.csproj", "{CADB7619-5AB5-46D1-84C4-7EEDFD18509F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.AdministrationService.HttpApi.Host", "services\administration\host\Macro.Administration.HttpApi.Host\Macro.AdministrationService.HttpApi.Host.csproj", "{CADB7619-5AB5-46D1-84C4-7EEDFD18509F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.IdentityService.HttpApi.Host", "services\identity\host\Macro.IdentityService.HttpApi.Host\Macro.IdentityService.HttpApi.Host.csproj", "{1D43BBF7-CB00-4D5B-9846-8BE2FA479F47}"
 EndProject
@@ -55,19 +55,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.IdentityService.HttpA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.Projects.HttpApi.Client", "services\projects\src\Macro.Projects.HttpApi.Client\Macro.Projects.HttpApi.Client.csproj", "{53C2DB69-20D0-4B82-BA64-7A2EB4373AAA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.Administration.Application", "services\administration\src\Macro.Administration.Application\Macro.Administration.Application.csproj", "{E25C2888-E196-4717-8C47-DAB80C301FFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.AdministrationService.Application", "services\administration\src\Macro.Administration.Application\Macro.AdministrationService.Application.csproj", "{E25C2888-E196-4717-8C47-DAB80C301FFB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.Administration.Application.Contracts", "services\administration\src\Macro.Administration.Application.Contracts\Macro.Administration.Application.Contracts.csproj", "{38027549-A311-47B2-9387-D3AE1E7E6A3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.AdministrationService.Application.Contracts", "services\administration\src\Macro.Administration.Application.Contracts\Macro.AdministrationService.Application.Contracts.csproj", "{38027549-A311-47B2-9387-D3AE1E7E6A3A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.Administration.Domain", "services\administration\src\Macro.Administration.Domain\Macro.Administration.Domain.csproj", "{10AACD25-59EF-4AA2-9571-8B8DF7268A50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.AdministrationService.Domain", "services\administration\src\Macro.Administration.Domain\Macro.AdministrationService.Domain.csproj", "{10AACD25-59EF-4AA2-9571-8B8DF7268A50}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.Administration.Domain.Shared", "services\administration\src\Macro.Administration.Domain.Shared\Macro.Administration.Domain.Shared.csproj", "{C6236ACA-B48B-40CD-9302-BDE1CFFAE865}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.AdministrationService.Domain.Shared", "services\administration\src\Macro.Administration.Domain.Shared\Macro.AdministrationService.Domain.Shared.csproj", "{C6236ACA-B48B-40CD-9302-BDE1CFFAE865}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.Administration.EntityFrameworkCore", "services\administration\src\Macro.Administration.EntityFrameworkCore\Macro.Administration.EntityFrameworkCore.csproj", "{260CE1B8-9FC4-4D83-B6C1-6206EC2FAF27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.AdministrationService.EntityFrameworkCore", "services\administration\src\Macro.Administration.EntityFrameworkCore\Macro.AdministrationService.EntityFrameworkCore.csproj", "{260CE1B8-9FC4-4D83-B6C1-6206EC2FAF27}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.Administration.HttpApi", "services\administration\src\Macro.Administration.HttpApi\Macro.Administration.HttpApi.csproj", "{FDBBA5C6-57D2-4ABB-AA88-5080D25487B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.AdministrationService.HttpApi", "services\administration\src\Macro.Administration.HttpApi\Macro.AdministrationService.HttpApi.csproj", "{FDBBA5C6-57D2-4ABB-AA88-5080D25487B4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.Administration.HttpApi.Client", "services\administration\src\Macro.Administration.HttpApi.Client\Macro.Administration.HttpApi.Client.csproj", "{5861F4A6-A634-4DE7-A076-55D242E9033C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.AdministrationService.HttpApi.Client", "services\administration\src\Macro.Administration.HttpApi.Client\Macro.AdministrationService.HttpApi.Client.csproj", "{5861F4A6-A634-4DE7-A076-55D242E9033C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.SaaS.Application", "services\saas\src\Macro.SaaS.Application\Macro.SaaS.Application.csproj", "{D93A7237-5AD5-4E38-B3E4-D59778FD7AB9}"
 EndProject

@@ -8,7 +8,7 @@ const string profile = "http";
 
 // Microservices
 var administrationService =
-    builder.AddProject<Projects.Macro_Administration_HttpApi_Host>("administrationService", profile);
+    builder.AddProject<Projects.Macro_AdministrationService_HttpApi_Host>("administrationService", profile);
 var identityService = builder.AddProject<Projects.Macro_IdentityService_HttpApi_Host>("identityService", profile);
 
 var saasService = builder.AddProject<Projects.Macro_SaaS_HttpApi_Host>("saasService", profile);

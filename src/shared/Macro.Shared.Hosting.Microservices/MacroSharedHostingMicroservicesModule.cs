@@ -1,4 +1,4 @@
-﻿using Macro.Administration.EntityFrameworkCore;
+﻿using Macro.AdministrationService.EntityFrameworkCore;
 using Macro.Shared.Hosting.AspNetCore;
 using Medallion.Threading;
 using Medallion.Threading.Redis;
@@ -21,7 +21,7 @@ namespace Macro.Shared.Hosting.Microservices;
     typeof(AbpAspNetCoreAuthenticationJwtBearerModule),
     typeof(AbpEventBusRabbitMqModule),
     typeof(AbpCachingStackExchangeRedisModule),
-    typeof(AdministrationEntityFrameworkCoreModule),
+    typeof(AdministrationServiceEntityFrameworkCoreModule),
     typeof(AbpDistributedLockingModule)
 )]
 public class MacroSharedHostingMicroservicesModule : AbpModule

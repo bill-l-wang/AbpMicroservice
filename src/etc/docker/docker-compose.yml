@@ -37,9 +37,9 @@ services:
       - App__CorsOrigins=https://gateway-st-web,gateway-st-web-public
       - RemoteServices__AbpIdentity__BaseUrl=macro-st-identity
       - RemoteServices__AbpIdentity__UseCurrentAccessToken=false
-      - ConnectionStrings__Administration=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=AdministrationService;Pooling=false;
+      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=AdministrationService;Pooling=false;
       - ConnectionStrings__IdentityService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=IdentityService;Pooling=false;
-      - ConnectionStrings__SaaS=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=SaasService;Pooling=false;
+      - ConnectionStrings__SaasService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=SaasService;Pooling=false;
       - AuthServer__Authority=http://macro-st-authserver
       - AuthServer__RequireHttpsMetadata=false
       - IdentityClients__Default__Authority=http://macro-st-identity
@@ -68,9 +68,9 @@ services:
       - App__CorsOrigins=https://gateway-st-web,gateway-st-web-public
       - AuthServer__Authority=http://macro-st-authserver
       - AuthServer__RequireHttpsMetadata=false
-      - ConnectionStrings__Administration=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=AdministrationService;Pooling=false;
+      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=AdministrationService;Pooling=false;
       - ConnectionStrings__IdentityService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=IdentityService;Pooling=false;
-      - ConnectionStrings__SaaS=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=SaasService;Pooling=false;
+      - ConnectionStrings__SaasService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=SaasService;Pooling=false;
       - Redis__Configuration=redis
       - RabbitMQ__Connections__Default__HostName=rabbitmq
       - IdentityServerClients__Web__RootUrl=https://macro-st-web
@@ -106,9 +106,9 @@ services:
       - Kestrel__EndPoints__Http__Url=http://docker.host.internal:80
       - Kestrel__EndPoints__gRPC__Url=http://docker.host.internal:81
       - Kestrel__EndPoints__gRPC__Protocols=Http2
-      - ConnectionStrings__Administration=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=AdministrationService;Pooling=false;
+      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=AdministrationService;Pooling=false;
       - ConnectionStrings__IdentityService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=IdentityService;Pooling=false;
-      - ConnectionStrings__SaaS=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=SaasService;Pooling=false;
+      - ConnectionStrings__SaasService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=SaasService;Pooling=false;
       - Redis__Configuration=redis
       - RabbitMQ__Connections__Default__HostName=rabbitmq
     depends_on:
@@ -132,9 +132,9 @@ services:
       - ASPNETCORE_URLS=http://+:80
       - App__SelfUrl=https://macro-st-saas
       - App__CorsOrigins=https://macro-st-gateway-web,https://macro-st-gateway-web,https://macro-st-public-web
-      - ConnectionStrings__Administration=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=AdministrationService;Pooling=false;
+      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=AdministrationService;Pooling=false;
       - ConnectionStrings__IdentityService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=IdentityService;Pooling=false;
-      - ConnectionStrings__SaaS=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=SaasService;Pooling=false;
+      - ConnectionStrings__SaasService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=SaasService;Pooling=false;
       - AuthServer__Authority=http://macro-st-authserver
       - AuthServer__RequireHttpsMetadata=false
       - Redis__Configuration=redis
@@ -164,9 +164,9 @@ services:
       - App__RedirectAllowedUrls=http://macro-st-web
       - AuthServer__Authority=http://macro-st-authserver
       - AuthServer__RequireHttpsMetadata=false
-      - ConnectionStrings__Administration=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=AdministrationService;Pooling=false;
+      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=AdministrationService;Pooling=false;
       - ConnectionStrings__IdentityService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=IdentityService;Pooling=false;
-      - ConnectionStrings__SaaS=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=SaasService;Pooling=false;
+      - ConnectionStrings__SaasService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=SaasService;Pooling=false;
       - Redis__Configuration=redis
       - RabbitMQ__Connections__Default__HostName=rabbitmq
     depends_on:
