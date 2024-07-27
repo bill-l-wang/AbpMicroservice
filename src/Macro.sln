@@ -117,6 +117,24 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.Shared.Localization",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.Shared.Hosting.Microservices", "shared\Macro.Shared.Hosting.Microservices\Macro.Shared.Hosting.Microservices.csproj", "{7613F143-97CC-4053-B372-7CFFC6F891D0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{37C9C24B-72C0-4517-81DA-392603F149CD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.DocService.Application", "services\doc\src\Macro.DocService.Application\Macro.DocService.Application.csproj", "{A3E05201-53CB-4D37-8D1F-F79AEDE52B6E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.DocService.Application.Contracts", "services\doc\src\Macro.DocService.Application.Contracts\Macro.DocService.Application.Contracts.csproj", "{360AE454-2067-4AE0-941A-534D3EC9FE69}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.DocService.Domain", "services\doc\src\Macro.DocService.Domain\Macro.DocService.Domain.csproj", "{C8FFD399-CF25-4F9B-885A-8B1F10B7DDB2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.DocService.Domain.Shared", "services\doc\src\Macro.DocService.Domain.Shared\Macro.DocService.Domain.Shared.csproj", "{5A28A6AD-3605-40BB-A040-BB42533F47AB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.DocService.EntityFrameworkCore", "services\doc\src\Macro.DocService.EntityFrameworkCore\Macro.DocService.EntityFrameworkCore.csproj", "{729AF8D3-FA3F-4BB1-8539-85C9DA16F500}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.DocService.HttpApi", "services\doc\src\Macro.DocService.HttpApi\Macro.DocService.HttpApi.csproj", "{71038F0E-B64A-490E-84EB-3DA364FE4826}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.DocService.HttpApi.Client", "services\doc\src\Macro.DocService.HttpApi.Client\Macro.DocService.HttpApi.Client.csproj", "{E25A0432-7A61-4272-B2DB-27238089440C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.DocService.HttpApi.Host", "services\doc\src\Macro.DocService.HttpApi.Host\Macro.DocService.HttpApi.Host.csproj", "{33C78447-32E8-4F5A-B5FF-EA7EBA1CC366}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -303,6 +321,38 @@ Global
 		{7613F143-97CC-4053-B372-7CFFC6F891D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7613F143-97CC-4053-B372-7CFFC6F891D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7613F143-97CC-4053-B372-7CFFC6F891D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3E05201-53CB-4D37-8D1F-F79AEDE52B6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3E05201-53CB-4D37-8D1F-F79AEDE52B6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3E05201-53CB-4D37-8D1F-F79AEDE52B6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3E05201-53CB-4D37-8D1F-F79AEDE52B6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{360AE454-2067-4AE0-941A-534D3EC9FE69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{360AE454-2067-4AE0-941A-534D3EC9FE69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{360AE454-2067-4AE0-941A-534D3EC9FE69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{360AE454-2067-4AE0-941A-534D3EC9FE69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8FFD399-CF25-4F9B-885A-8B1F10B7DDB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8FFD399-CF25-4F9B-885A-8B1F10B7DDB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8FFD399-CF25-4F9B-885A-8B1F10B7DDB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8FFD399-CF25-4F9B-885A-8B1F10B7DDB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A28A6AD-3605-40BB-A040-BB42533F47AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A28A6AD-3605-40BB-A040-BB42533F47AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A28A6AD-3605-40BB-A040-BB42533F47AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A28A6AD-3605-40BB-A040-BB42533F47AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{729AF8D3-FA3F-4BB1-8539-85C9DA16F500}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{729AF8D3-FA3F-4BB1-8539-85C9DA16F500}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{729AF8D3-FA3F-4BB1-8539-85C9DA16F500}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{729AF8D3-FA3F-4BB1-8539-85C9DA16F500}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71038F0E-B64A-490E-84EB-3DA364FE4826}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71038F0E-B64A-490E-84EB-3DA364FE4826}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71038F0E-B64A-490E-84EB-3DA364FE4826}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71038F0E-B64A-490E-84EB-3DA364FE4826}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E25A0432-7A61-4272-B2DB-27238089440C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E25A0432-7A61-4272-B2DB-27238089440C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E25A0432-7A61-4272-B2DB-27238089440C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E25A0432-7A61-4272-B2DB-27238089440C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33C78447-32E8-4F5A-B5FF-EA7EBA1CC366}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33C78447-32E8-4F5A-B5FF-EA7EBA1CC366}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33C78447-32E8-4F5A-B5FF-EA7EBA1CC366}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33C78447-32E8-4F5A-B5FF-EA7EBA1CC366}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -357,6 +407,15 @@ Global
 		{69652DE6-AD19-4386-9010-3434783A0260} = {140ED621-3D93-4523-8B62-BE6850E04698}
 		{817E026E-AFB6-4DB7-BCFE-1C9B4DAE0782} = {140ED621-3D93-4523-8B62-BE6850E04698}
 		{7613F143-97CC-4053-B372-7CFFC6F891D0} = {140ED621-3D93-4523-8B62-BE6850E04698}
+		{37C9C24B-72C0-4517-81DA-392603F149CD} = {ED0A7918-04FA-4040-B641-4CA249074083}
+		{A3E05201-53CB-4D37-8D1F-F79AEDE52B6E} = {37C9C24B-72C0-4517-81DA-392603F149CD}
+		{360AE454-2067-4AE0-941A-534D3EC9FE69} = {37C9C24B-72C0-4517-81DA-392603F149CD}
+		{C8FFD399-CF25-4F9B-885A-8B1F10B7DDB2} = {37C9C24B-72C0-4517-81DA-392603F149CD}
+		{5A28A6AD-3605-40BB-A040-BB42533F47AB} = {37C9C24B-72C0-4517-81DA-392603F149CD}
+		{729AF8D3-FA3F-4BB1-8539-85C9DA16F500} = {37C9C24B-72C0-4517-81DA-392603F149CD}
+		{71038F0E-B64A-490E-84EB-3DA364FE4826} = {37C9C24B-72C0-4517-81DA-392603F149CD}
+		{E25A0432-7A61-4272-B2DB-27238089440C} = {37C9C24B-72C0-4517-81DA-392603F149CD}
+		{33C78447-32E8-4F5A-B5FF-EA7EBA1CC366} = {37C9C24B-72C0-4517-81DA-392603F149CD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ECFA44F4-824C-4405-82F5-F62F2DCBCD5E}

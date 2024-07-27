@@ -8,11 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="8.0.2" />
-        <PackageReference Include="Volo.Abp.Authorization" Version="8.0.2" />
-        <PackageReference Include="Volo.Abp.FeatureManagement.Application.Contracts" Version="8.0.2" />
-        <PackageReference Include="Volo.Abp.PermissionManagement.Application.Contracts" Version="8.0.2" />
-        <PackageReference Include="Volo.Abp.SettingManagement.Application.Contracts" Version="8.0.2" />
+        <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="8.2.0" />
+        <PackageReference Include="Volo.Abp.Authorization" Version="8.2.0" />
+        <PackageReference Include="Volo.Abp.FeatureManagement.Application.Contracts" Version="8.2.0" />
+        <PackageReference Include="Volo.Abp.PermissionManagement.Application.Contracts" Version="8.2.0" />
+        <PackageReference Include="Volo.Abp.SettingManagement.Application.Contracts" Version="8.2.0" />
         <ProjectReference Include="..\Macro.AdministrationService.Domain.Shared\Macro.AdministrationService.Domain.Shared.csproj" />
     </ItemGroup>
 

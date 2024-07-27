@@ -45,13 +45,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Autofac" Version="8.0.2" />
-    <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="8.0.2" />
-    <PackageReference Include="Volo.Abp.DistributedLocking" Version="8.0.2" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="8.0.2" />
-    <PackageReference Include="Volo.Abp.Account.Web.OpenIddict" Version="8.0.2" />
-    <PackageReference Include="Volo.Abp.Account.Application" Version="8.0.2" />
-    <PackageReference Include="Volo.Abp.Account.HttpApi" Version="8.0.2" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="8.2.0" />
+    <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="8.2.0" />
+    <PackageReference Include="Volo.Abp.DistributedLocking" Version="8.2.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="8.2.0" />
+    <PackageReference Include="Volo.Abp.Account.Web.OpenIddict" Version="8.2.0" />
+    <PackageReference Include="Volo.Abp.Account.Application" Version="8.2.0" />
+    <PackageReference Include="Volo.Abp.Account.HttpApi" Version="8.2.0" />
     <ProjectReference Include="..\..\services\administration\src\Macro.AdministrationService.EntityFrameworkCore\Macro.AdministrationService.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\services\identity\src\Macro.IdentityService.EntityFrameworkCore\Macro.IdentityService.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\services\saas\src\Macro.SaaS.EntityFrameworkCore\Macro.SaaS.EntityFrameworkCore.csproj" />

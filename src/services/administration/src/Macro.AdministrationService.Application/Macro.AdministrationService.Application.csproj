@@ -8,11 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Volo.Abp.AutoMapper" Version="8.0.2" />
-        <PackageReference Include="Volo.Abp.Ddd.Application" Version="8.0.2" />
-        <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="8.0.2" />
-        <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="8.0.2" />
-        <PackageReference Include="Volo.Abp.SettingManagement.Application" Version="8.0.2" />
+        <PackageReference Include="Volo.Abp.AutoMapper" Version="8.2.0" />
+        <PackageReference Include="Volo.Abp.Ddd.Application" Version="8.2.0" />
+        <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="8.2.0" />
+        <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="8.2.0" />
+        <PackageReference Include="Volo.Abp.SettingManagement.Application" Version="8.2.0" />
         <ProjectReference Include="..\Macro.AdministrationService.Application.Contracts\Macro.AdministrationService.Application.Contracts.csproj" />
         <ProjectReference Include="..\Macro.AdministrationService.Domain\Macro.AdministrationService.Domain.csproj" />
     </ItemGroup>
