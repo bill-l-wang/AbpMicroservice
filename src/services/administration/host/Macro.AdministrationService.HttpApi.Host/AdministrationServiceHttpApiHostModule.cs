@@ -9,6 +9,7 @@ using Macro.Hosting.Shared;
 using Macro.IdentityService;
 using Macro.IdentityService.EntityFrameworkCore;
 using Macro.SaaS;
+using Macro.Shared.Hosting.Microservices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
@@ -33,7 +34,8 @@ namespace Macro.AdministrationService;
     typeof(IdentityServiceApplicationContractsModule),
     typeof(IdentityServiceEntityFrameworkCoreModule),
     typeof(AbpIdentityDomainModule),
-    typeof(SaaSApplicationContractsModule)
+    typeof(SaaSApplicationContractsModule),
+    typeof(MacroSharedHostingMicroservicesModule)
 )]
 public class AdministrationServiceHttpApiHostModule : AbpModule
 {

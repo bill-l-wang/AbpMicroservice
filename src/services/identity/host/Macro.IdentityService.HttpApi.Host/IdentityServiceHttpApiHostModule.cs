@@ -7,6 +7,7 @@ using Macro.AdministrationService.EntityFrameworkCore;
 using Macro.IdentityService.DbMigrations;
 using Macro.IdentityService.EntityFrameworkCore;
 using Macro.SaaS.EntityFrameworkCore;
+using Macro.Shared.Hosting.Microservices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
@@ -29,7 +30,8 @@ namespace Macro.IdentityService;
     typeof(IdentityServiceEntityFrameworkCoreModule),
     typeof(IdentityServiceHttpApiModule),
     typeof(AdministrationServiceEntityFrameworkCoreModule),
-    typeof(SaaSEntityFrameworkCoreModule)
+    typeof(SaaSEntityFrameworkCoreModule),
+    typeof(MacroSharedHostingMicroservicesModule)
 )]
 public class IdentityServiceHttpApiHostModule : AbpModule
 {

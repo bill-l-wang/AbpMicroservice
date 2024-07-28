@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Macro.AdministrationService.EntityFrameworkCore;
 using Macro.SaaS.DbMigrations;
 using Macro.SaaS.EntityFrameworkCore;
+using Macro.Shared.Hosting.Microservices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
@@ -24,7 +25,8 @@ namespace Macro.SaaS;
     typeof(SaaSApplicationModule),
     typeof(SaaSEntityFrameworkCoreModule),
     typeof(SaaSHttpApiModule),
-    typeof(AdministrationServiceEntityFrameworkCoreModule)
+    typeof(AdministrationServiceEntityFrameworkCoreModule),
+    typeof(MacroSharedHostingMicroservicesModule)
 )]
 public class SaaSHttpApiHostModule : AbpModule
 {

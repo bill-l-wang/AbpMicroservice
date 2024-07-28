@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Macro.Projects.DbMigrations;
 using Macro.Projects.EntityFrameworkCore;
+using Macro.Shared.Hosting.Microservices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
@@ -46,7 +47,8 @@ namespace Macro.Projects;
     typeof(AbpSettingManagementEntityFrameworkCoreModule),
     typeof(AbpTenantManagementEntityFrameworkCoreModule),
     typeof(AbpAspNetCoreSerilogModule),
-    typeof(AbpSwashbuckleModule)
+    typeof(AbpSwashbuckleModule),
+    typeof(MacroSharedHostingMicroservicesModule)
 )]
 public class ProjectsHttpApiHostModule : AbpModule
 {
