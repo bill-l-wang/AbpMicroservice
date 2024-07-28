@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Macro.AdministrationService.EntityFrameworkCore;
 using Macro.IdentityService.DbMigrations;
 using Macro.IdentityService.EntityFrameworkCore;
-using Macro.SaaS.EntityFrameworkCore;
 using Macro.Shared.Hosting.Microservices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -29,8 +27,6 @@ namespace Macro.IdentityService;
     typeof(IdentityServiceApplicationModule),
     typeof(IdentityServiceEntityFrameworkCoreModule),
     typeof(IdentityServiceHttpApiModule),
-    typeof(AdministrationServiceEntityFrameworkCoreModule),
-    typeof(SaaSEntityFrameworkCoreModule),
     typeof(MacroSharedHostingMicroservicesModule)
 )]
 public class IdentityServiceHttpApiHostModule : AbpModule

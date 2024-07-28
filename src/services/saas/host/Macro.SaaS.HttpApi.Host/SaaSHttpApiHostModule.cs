@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Macro.AdministrationService.EntityFrameworkCore;
 using Macro.SaaS.DbMigrations;
 using Macro.SaaS.EntityFrameworkCore;
 using Macro.Shared.Hosting.Microservices;
@@ -25,7 +24,6 @@ namespace Macro.SaaS;
     typeof(SaaSApplicationModule),
     typeof(SaaSEntityFrameworkCoreModule),
     typeof(SaaSHttpApiModule),
-    typeof(AdministrationServiceEntityFrameworkCoreModule),
     typeof(MacroSharedHostingMicroservicesModule)
 )]
 public class SaaSHttpApiHostModule : AbpModule
