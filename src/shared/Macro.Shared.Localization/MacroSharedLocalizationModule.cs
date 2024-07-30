@@ -25,7 +25,7 @@ public class MacroSharedLocalizationModule : AbpModule
                 .Add<MacroResource>("en")
                 .AddBaseTypes(
                     typeof(AbpValidationResource)
-                ).AddVirtualJson("/Localization/EShopOnAbp");
+                ).AddVirtualJson("/Localization/Macro");
 
             options.DefaultResourceType = typeof(MacroResource);
         });

@@ -4,7 +4,6 @@ using Volo.Abp.FeatureManagement;
 using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.PermissionManagement.Identity;
-using Volo.Abp.PermissionManagement.OpenIddict;
 using Volo.Abp.SettingManagement;
 
 namespace Macro.AdministrationService;
@@ -13,7 +12,6 @@ namespace Macro.AdministrationService;
     typeof(AbpDddDomainModule),
     typeof(AdministrationServiceDomainSharedModule),
     typeof(AbpPermissionManagementDomainIdentityModule),
-    typeof(AbpPermissionManagementDomainOpenIddictModule),
     typeof(AbpPermissionManagementDomainModule),
     typeof(AbpSettingManagementDomainModule),
     typeof(AbpAuditLoggingDomainModule),

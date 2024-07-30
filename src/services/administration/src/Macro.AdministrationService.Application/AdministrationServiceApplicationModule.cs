@@ -12,11 +12,10 @@ namespace Macro.AdministrationService;
     typeof(AdministrationServiceDomainModule),
     typeof(AdministrationServiceApplicationContractsModule),
     typeof(AbpDddApplicationModule),
-    typeof(AbpAutoMapperModule)
-)]
-[DependsOn(typeof(AbpPermissionManagementApplicationModule))]
-[DependsOn(typeof(AbpSettingManagementApplicationModule))]
-[DependsOn(typeof(AbpFeatureManagementApplicationModule))]
+    typeof(AbpAutoMapperModule),
+    typeof(AbpPermissionManagementApplicationModule),
+    typeof(AbpSettingManagementApplicationModule),
+    typeof(AbpFeatureManagementApplicationModule))]
 public class AdministrationServiceApplicationModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

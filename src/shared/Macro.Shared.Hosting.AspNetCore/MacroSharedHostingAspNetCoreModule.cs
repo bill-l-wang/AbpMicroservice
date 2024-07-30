@@ -17,7 +17,7 @@ public class MacroSharedHostingAspNetCoreModule : AbpModule
     {
         Configure<AbpVirtualFileSystemOptions>(options =>
         {
-            options.FileSets.AddEmbedded<MacroSharedHostingAspNetCoreModule>("EShopOnAbp.Shared.Hosting.AspNetCore");
+            options.FileSets.AddEmbedded<MacroSharedHostingAspNetCoreModule>("Macro.Shared.Hosting.AspNetCore");
         });
     }
 }

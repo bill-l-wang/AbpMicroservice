@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Macro.AdministrationService.DbMigrations;
 using Macro.AdministrationService.EntityFrameworkCore;
-using Macro.Hosting.Shared;
 using Macro.Shared.Hosting.Microservices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -17,16 +16,17 @@ using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
 using Volo.Abp;
 using Volo.Abp.Caching;
+using Volo.Abp.Identity;
 using Volo.Abp.Modularity;
 
 namespace Macro.AdministrationService;
 
 [DependsOn(
-    typeof(MacroHostingModule),
     typeof(AdministrationServiceApplicationModule),
     typeof(AdministrationServiceEntityFrameworkCoreModule),
     typeof(AdministrationServiceHttpApiModule),
-    typeof(MacroSharedHostingMicroservicesModule)
+    typeof(MacroSharedHostingMicroservicesModule),
+    typeof(AbpIdentityHttpApiClientModule)
 )]
 public class AdministrationServiceHttpApiHostModule : AbpModule
 {
@@ -109,7 +109,6 @@ public class AdministrationServiceHttpApiHostModule : AbpModule
         app.UseRouting();
         app.UseCors();
         app.UseAuthentication();
-        app.UseMultiTenancy();
 
         app.UseAbpRequestLocalization();
         app.UseAuthorization();

@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Tasky.Administration.Host": {
+    "Macro.Administration.Host": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
