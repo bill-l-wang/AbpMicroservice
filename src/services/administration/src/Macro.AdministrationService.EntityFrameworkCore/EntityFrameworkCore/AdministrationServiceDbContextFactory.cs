@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using Macro.Administration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
@@ -35,7 +34,7 @@ namespace Macro.AdministrationService.EntityFrameworkCore
                 .SetBasePath(
                     Path.Combine(
                         Directory.GetCurrentDirectory(),
-                        $"..{Path.DirectorySeparatorChar}EShopOnAbp.AdministrationService.HttpApi.Host"
+                        $"..{Path.DirectorySeparatorChar}Macro.AdministrationService.HttpApi.Host"
                     )
                 )
                 .AddJsonFile("appsettings.json", optional: false);

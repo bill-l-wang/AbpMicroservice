@@ -39,15 +39,11 @@ namespace Macro.Projects;
     typeof(ProjectsEntityFrameworkCoreModule),
     typeof(ProjectsHttpApiModule),
     typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
-    typeof(AbpAutofacModule),
-    typeof(AbpCachingStackExchangeRedisModule),
     typeof(AbpEntityFrameworkCorePostgreSqlModule),
     typeof(AbpAuditLoggingEntityFrameworkCoreModule),
     typeof(AbpPermissionManagementEntityFrameworkCoreModule),
     typeof(AbpSettingManagementEntityFrameworkCoreModule),
     typeof(AbpTenantManagementEntityFrameworkCoreModule),
-    typeof(AbpAspNetCoreSerilogModule),
-    typeof(AbpSwashbuckleModule),
     typeof(MacroSharedHostingMicroservicesModule)
 )]
 public class ProjectsHttpApiHostModule : AbpModule

@@ -12,38 +12,29 @@ using Volo.Abp.Uow;
 
 namespace Macro.Shared.Hosting.Microservices.DbMigrations.EfCore;
 
-public abstract class PendingEfCoreMigrationsChecker<TDbContext> : PendingMigrationsCheckerBase
+public abstract class PendingEfCoreMigrationsChecker<TDbContext>(
+    IUnitOfWorkManager unitOfWorkManager,
+    IServiceProvider serviceProvider,
+    ICurrentTenant currentTenant,
+    IDistributedEventBus distributedEventBus,
+    IAbpDistributedLock abpDistributedLock,
+    string databaseName)
+    : PendingMigrationsCheckerBase
     where TDbContext : DbContext
 {
-    protected IUnitOfWorkManager UnitOfWorkManager { get; }
-    protected IServiceProvider ServiceProvider { get; }
-    protected ICurrentTenant CurrentTenant { get; }
-    protected IDistributedEventBus DistributedEventBus { get; }
-    protected IAbpDistributedLock DistributedLockProvider { get; }
-    protected string DatabaseName { get; }
+    protected IUnitOfWorkManager UnitOfWorkManager { get; } = unitOfWorkManager;
+    protected IServiceProvider ServiceProvider { get; } = serviceProvider;
+    protected ICurrentTenant CurrentTenant { get; } = currentTenant;
+    protected IDistributedEventBus DistributedEventBus { get; } = distributedEventBus;
+    protected IAbpDistributedLock DistributedLockProvider { get; } = abpDistributedLock;
+    protected string DatabaseName { get; } = databaseName;
 
-    protected PendingEfCoreMigrationsChecker(
-        IUnitOfWorkManager unitOfWorkManager,
-        IServiceProvider serviceProvider,
-        ICurrentTenant currentTenant,
-        IDistributedEventBus distributedEventBus,
-        IAbpDistributedLock abpDistributedLock,
-        string databaseName)
-    {
-        UnitOfWorkManager = unitOfWorkManager;
-        ServiceProvider = serviceProvider;
-        CurrentTenant = currentTenant;
-        DistributedEventBus = distributedEventBus;
-        DistributedLockProvider = abpDistributedLock;
-        DatabaseName = databaseName;
-    }
-
-    public virtual async Task CheckAndApplyDatabaseMigrationsAsync()
+    public async virtual Task CheckAndApplyDatabaseMigrationsAsync()
     {
         await TryAsync(LockAndApplyDatabaseMigrationsAsync);
     }
 
-    protected virtual async Task LockAndApplyDatabaseMigrationsAsync()
+    protected async virtual Task LockAndApplyDatabaseMigrationsAsync()
     {
         await using (var handle = await DistributedLockProvider.TryAcquireAsync("Migration_" + DatabaseName))
         {

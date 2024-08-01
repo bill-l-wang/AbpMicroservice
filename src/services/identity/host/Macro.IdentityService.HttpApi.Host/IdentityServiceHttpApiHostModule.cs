@@ -133,8 +133,6 @@ public class IdentityServiceHttpApiHostModule : AbpModule
         app.UseCors();
         app.UseAuthentication();
 
-        app.UseMultiTenancy();
-
         app.UseAbpRequestLocalization();
         app.UseAuthorization();
         app.UseSwagger();

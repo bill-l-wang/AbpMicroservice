@@ -4,6 +4,7 @@ using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.PostgreSql;
+using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
@@ -16,7 +17,8 @@ namespace Macro.AdministrationService.EntityFrameworkCore
         typeof(AbpPermissionManagementEntityFrameworkCoreModule),
         typeof(AbpSettingManagementEntityFrameworkCoreModule),
         typeof(AbpAuditLoggingEntityFrameworkCoreModule),
-        typeof(BlobStoringDatabaseEntityFrameworkCoreModule)
+        typeof(BlobStoringDatabaseEntityFrameworkCoreModule),
+        typeof(AbpFeatureManagementEntityFrameworkCoreModule)
         )]
     public class AdministrationServiceEntityFrameworkCoreModule : AbpModule
     {
@@ -28,6 +30,7 @@ namespace Macro.AdministrationService.EntityFrameworkCore
                 options.ReplaceDbContext<ISettingManagementDbContext>();
                 options.ReplaceDbContext<IAuditLoggingDbContext>();
                 options.ReplaceDbContext<IBlobStoringDbContext>();
+                options.ReplaceDbContext<IFeatureManagementDbContext>();
 
                 options.AddDefaultRepositories(includeAllEntities: true);
             });

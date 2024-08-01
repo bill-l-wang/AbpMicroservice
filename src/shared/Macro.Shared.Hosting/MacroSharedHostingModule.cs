@@ -24,6 +24,7 @@ namespace Macro.Shared.Hosting
                     database.MappedConnections.Add("AbpPermissionManagement");
                     database.MappedConnections.Add("AbpSettingManagement");
                     database.MappedConnections.Add("AbpBlobStoring");
+                    database.MappedConnections.Add("AbpFeatureManagement");
                 });
                 
                 options.Databases.Configure("IdentityService", database =>

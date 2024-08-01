@@ -299,10 +299,6 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
             var accountServiceRootUrl = _configuration[$"Clients:AccountService:RootUrl"].TrimEnd('/');
             var identityServiceRootUrl = _configuration[$"Clients:IdentityService:RootUrl"].TrimEnd('/');
             var administrationServiceRootUrl = _configuration[$"Clients:AdministrationService:RootUrl"].TrimEnd('/');
-            var catalogServiceRootUrl = _configuration[$"Clients:CatalogService:RootUrl"].TrimEnd('/');
-            var basketServiceRootUrl = _configuration[$"Clients:BasketService:RootUrl"].TrimEnd('/');
-            var orderingServiceRootUrl = _configuration[$"Clients:OrderingService:RootUrl"].TrimEnd('/');
-            var paymentServiceRootUrl = _configuration[$"Clients:PaymentService:RootUrl"].TrimEnd('/');
             var cmskitServiceRootUrl = _configuration[$"Clients:CmskitService:RootUrl"].TrimEnd('/');
 
             swaggerClient = new Client
@@ -318,10 +314,6 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
                     $"{accountServiceRootUrl}/swagger/oauth2-redirect.html", // AccountService redirect uri
                     $"{identityServiceRootUrl}/swagger/oauth2-redirect.html", // IdentityService redirect uri
                     $"{administrationServiceRootUrl}/swagger/oauth2-redirect.html", // AdministrationService redirect uri
-                    $"{catalogServiceRootUrl}/swagger/oauth2-redirect.html", // CatalogService redirect uri
-                    $"{basketServiceRootUrl}/swagger/oauth2-redirect.html", // BasketService redirect uri
-                    $"{orderingServiceRootUrl}/swagger/oauth2-redirect.html", // OrderingService redirect uri
-                    $"{paymentServiceRootUrl}/swagger/oauth2-redirect.html", // PaymentService redirect uri
                     $"{cmskitServiceRootUrl}/swagger/oauth2-redirect.html" // CmskitService redirect uri
                 },
                 FrontChannelLogout = true,
