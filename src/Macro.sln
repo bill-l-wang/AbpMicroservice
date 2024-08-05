@@ -135,6 +135,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.DocService.HttpApi.Cl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.DocService.HttpApi.Host", "services\doc\src\Macro.DocService.HttpApi.Host\Macro.DocService.HttpApi.Host.csproj", "{33C78447-32E8-4F5A-B5FF-EA7EBA1CC366}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.Keycloak.DbMigrator", "shared\Macro.Keycloak.DbMigrator\Macro.Keycloak.DbMigrator.csproj", "{0181DB6A-6B92-4EFF-B1F8-1103CA815169}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -353,6 +355,10 @@ Global
 		{33C78447-32E8-4F5A-B5FF-EA7EBA1CC366}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33C78447-32E8-4F5A-B5FF-EA7EBA1CC366}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33C78447-32E8-4F5A-B5FF-EA7EBA1CC366}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0181DB6A-6B92-4EFF-B1F8-1103CA815169}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0181DB6A-6B92-4EFF-B1F8-1103CA815169}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0181DB6A-6B92-4EFF-B1F8-1103CA815169}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0181DB6A-6B92-4EFF-B1F8-1103CA815169}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -416,6 +422,7 @@ Global
 		{71038F0E-B64A-490E-84EB-3DA364FE4826} = {37C9C24B-72C0-4517-81DA-392603F149CD}
 		{E25A0432-7A61-4272-B2DB-27238089440C} = {37C9C24B-72C0-4517-81DA-392603F149CD}
 		{33C78447-32E8-4F5A-B5FF-EA7EBA1CC366} = {37C9C24B-72C0-4517-81DA-392603F149CD}
+		{0181DB6A-6B92-4EFF-B1F8-1103CA815169} = {140ED621-3D93-4523-8B62-BE6850E04698}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ECFA44F4-824C-4405-82F5-F62F2DCBCD5E}

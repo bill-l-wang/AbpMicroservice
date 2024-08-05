@@ -1,7 +1,7 @@
 name: Macro
 services:
 - name: Macro-administration-httpapi-host
-  project: services/administration/host/Macro.Administration.HttpApi.Host/Macro.Administration.HttpApi.Host.csproj
+  project: services/administration/host/Macro.AdministrationService.HttpApi.Host/Macro.AdministrationService.HttpApi.Host.csproj
   bindings:
     - protocol: https
       port: 7001

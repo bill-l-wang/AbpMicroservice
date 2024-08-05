@@ -7,7 +7,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Tasky.AuthServer": {
+    "Macro.AuthServer": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
