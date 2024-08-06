@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "Tasky.Gateway": {
+    "Macro.Gateway": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

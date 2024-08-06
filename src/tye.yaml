@@ -1,30 +1,46 @@
 name: Macro
 services:
-- name: Macro-administration-httpapi-host
-  project: services/administration/host/Macro.AdministrationService.HttpApi.Host/Macro.AdministrationService.HttpApi.Host.csproj
-  bindings:
-    - protocol: https
-      port: 7001
-- name: Macro-identityservice-httpapi-host
+- name: identity-service
   project: services/identity/host/Macro.IdentityService.HttpApi.Host/Macro.IdentityService.HttpApi.Host.csproj
   bindings:
     - protocol: https
       port: 7002
-- name: Macro-saas-httpapi-host
+  env:
+    - Kestrel__Certificates__Default__Path=../../../../etc/dev-cert/localhost.pfx
+    - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49
+
+- name: administration-service
+  project: services/administration/host/Macro.AdministrationService.HttpApi.Host/Macro.AdministrationService.HttpApi.Host.csproj
+  bindings:
+    - protocol: https
+      port: 7001
+  env:
+    - Kestrel__Certificates__Default__Path=../../../../etc/dev-cert/localhost.pfx
+    - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49
+
+- name: saas-service
   project: services/saas/host/Macro.SaaS.HttpApi.Host/Macro.SaaS.HttpApi.Host.csproj
   bindings:
     - protocol: https
       port: 7003
-- name: Macro-auth-server
-  project: apps/Macro.AuthServer/Macro.AuthServer.csproj
-  bindings:
-    - protocol: https
-      port: 7600
+  env:
+    - Kestrel__Certificates__Default__Path=../../../../etc/dev-cert/localhost.pfx
+    - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49
+
+# - name: Macro-auth-server
+#   project: apps/Macro.AuthServer/Macro.AuthServer.csproj
+#   bindings:
+#     - protocol: https
+#       port: 7600
+
 - name: Macro-gateway
   project: gateway/Macro.Gateway/Macro.Gateway.csproj
   bindings:
     - protocol: https
       port: 7500
+  env:
+    - Kestrel__Certificates__Default__Path=../../../../etc/dev-cert/localhost.pfx
+    - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49  
 # - name: Macro-blazor
 #   project: apps/Macro.Blazor/Macro.Blazor.csproj
 #   bindings:

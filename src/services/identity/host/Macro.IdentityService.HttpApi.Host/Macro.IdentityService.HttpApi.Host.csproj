@@ -21,6 +21,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\..\..\aspire\ServiceDefaults\Macro.ServiceDefaults.csproj" />
+        <ProjectReference Include="..\..\..\..\shared\Macro.Shared.Hosting.Gateways\Macro.Shared.Hosting.Gateways.csproj" />
         <ProjectReference Include="..\..\..\..\shared\Macro.Shared.Hosting.Microservices\Macro.Shared.Hosting.Microservices.csproj" />
         <ProjectReference Include="..\..\src\Macro.IdentityService.HttpApi\Macro.IdentityService.HttpApi.csproj" />
         <ProjectReference Include="..\..\src\Macro.IdentityService.Application\Macro.IdentityService.Application.csproj" />

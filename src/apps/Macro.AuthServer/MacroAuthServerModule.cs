@@ -56,7 +56,7 @@ public class MacroAuthServerModule : AbpModule
         {
             builder.AddValidation(options =>
             {
-                options.AddAudiences("Tasky");
+                options.AddAudiences("Macro");
                 options.UseLocalServer();
                 options.UseAspNetCore();
             });
