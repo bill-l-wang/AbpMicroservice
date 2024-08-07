@@ -11,7 +11,7 @@ using Volo.Abp.EntityFrameworkCore;
 
 namespace Macro.SaaS.Migrations
 {
-    [DbContext(typeof(SaaSDbContext))]
+    [DbContext(typeof(SaasDbContext))]
     partial class SaaSDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

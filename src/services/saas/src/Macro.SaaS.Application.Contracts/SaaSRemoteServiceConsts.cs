@@ -1,8 +1,8 @@
 ﻿namespace Macro.SaaS;
 
-public class SaaSRemoteServiceConsts
+public class SaasRemoteServiceConsts
 {
-    public const string RemoteServiceName = "SaaS";
+    public const string RemoteServiceName = "Saas";
 
-    public const string ModuleName = "saaS";
+    public const string ModuleName = "saas";
 }

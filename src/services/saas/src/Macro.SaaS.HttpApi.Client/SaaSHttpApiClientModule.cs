@@ -7,7 +7,7 @@ using Volo.Abp.VirtualFileSystem;
 namespace Macro.SaaS;
 
 [DependsOn(
-    typeof(SaaSApplicationContractsModule),
+    typeof(SaasApplicationContractsModule),
     typeof(AbpHttpClientModule))]
 [DependsOn(typeof(AbpTenantManagementHttpApiClientModule))]
 public class SaaSHttpApiClientModule : AbpModule
@@ -15,8 +15,8 @@ public class SaaSHttpApiClientModule : AbpModule
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         context.Services.AddHttpClientProxies(
-            typeof(SaaSApplicationContractsModule).Assembly,
-            SaaSRemoteServiceConsts.RemoteServiceName
+            typeof(SaasApplicationContractsModule).Assembly,
+            SaasRemoteServiceConsts.RemoteServiceName
         );
 
         Configure<AbpVirtualFileSystemOptions>(options =>

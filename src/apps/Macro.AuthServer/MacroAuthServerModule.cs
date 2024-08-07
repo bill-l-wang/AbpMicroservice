@@ -43,7 +43,7 @@ namespace Macro;
     typeof(AbpAspNetCoreMvcUiLeptonXLiteThemeModule),
     typeof(AbpEntityFrameworkCorePostgreSqlModule),
     typeof(AdministrationServiceEntityFrameworkCoreModule),
-    typeof(SaaSEntityFrameworkCoreModule),
+    typeof(SaasEntityFrameworkCoreModule),
     typeof(IdentityServiceEntityFrameworkCoreModule),
     typeof(MacroMicroserviceModule),
     typeof(AbpAspNetCoreSerilogModule)

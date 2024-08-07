@@ -6,9 +6,9 @@ namespace Macro.SaaS;
 
 [DependsOn(
     typeof(AbpDddDomainModule),
-    typeof(SaaSDomainSharedModule)
+    typeof(SaasDomainSharedModule)
 )]
 [DependsOn(typeof(AbpTenantManagementDomainModule))]
-public class SaaSDomainModule : AbpModule
+public class SaasDomainModule : AbpModule
 {
 }

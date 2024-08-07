@@ -9,16 +9,16 @@ using Volo.Abp.TenantManagement;
 namespace Macro.SaaS;
 
 [DependsOn(
-    typeof(SaaSApplicationContractsModule),
+    typeof(SaasApplicationContractsModule),
     typeof(AbpAspNetCoreMvcModule))]
 [DependsOn(typeof(AbpTenantManagementHttpApiModule))]
-public class SaaSHttpApiModule : AbpModule
+public class SaasHttpApiModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
         PreConfigure<IMvcBuilder>(mvcBuilder =>
         {
-            mvcBuilder.AddApplicationPartIfNotExists(typeof(SaaSHttpApiModule).Assembly);
+            mvcBuilder.AddApplicationPartIfNotExists(typeof(SaasHttpApiModule).Assembly);
         });
     }
 

@@ -13,13 +13,13 @@ namespace Macro.SaaS;
     typeof(AbpValidationModule)
 )]
 [DependsOn(typeof(AbpTenantManagementDomainSharedModule))]
-public class SaaSDomainSharedModule : AbpModule
+public class SaasDomainSharedModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         Configure<AbpVirtualFileSystemOptions>(options =>
         {
-            options.FileSets.AddEmbedded<SaaSDomainSharedModule>();
+            options.FileSets.AddEmbedded<SaasDomainSharedModule>();
         });
 
         Configure<AbpLocalizationOptions>(options =>

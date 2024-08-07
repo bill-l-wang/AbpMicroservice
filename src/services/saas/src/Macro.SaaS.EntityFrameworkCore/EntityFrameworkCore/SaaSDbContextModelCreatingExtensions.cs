@@ -15,7 +15,7 @@ public static class SaaSDbContextModelCreatingExtensions
         builder.Entity<Question>(b =>
         {
             //Configure table & schema name
-            b.ToTable(SaaSDbProperties.DbTablePrefix + "Questions", SaaSDbProperties.DbSchema);
+            b.ToTable(SaasDbProperties.DbTablePrefix + "Questions", SaasDbProperties.DbSchema);
 
             b.ConfigureByConvention();
 

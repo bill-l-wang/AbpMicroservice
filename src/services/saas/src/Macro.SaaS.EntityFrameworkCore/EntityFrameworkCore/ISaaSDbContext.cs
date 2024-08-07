@@ -3,8 +3,8 @@ using Volo.Abp.EntityFrameworkCore;
 
 namespace Macro.SaaS.EntityFrameworkCore;
 
-[ConnectionStringName(SaaSDbProperties.ConnectionStringName)]
-public interface ISaaSDbContext : IEfCoreDbContext
+[ConnectionStringName(SaasDbProperties.ConnectionStringName)]
+public interface ISaasDbContext : IEfCoreDbContext
 {
     /* Add DbSet for each Aggregate Root here. Example:
      * DbSet<Question> Questions { get; }

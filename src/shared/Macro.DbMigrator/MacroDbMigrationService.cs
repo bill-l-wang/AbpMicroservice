@@ -91,7 +91,7 @@ public class MacroDbMigrationService : ITransientDependency
             if (tenantId == null)
             {
                 /* SaaS schema should only be available in the host side */
-                await MigrateDatabaseAsync<SaaSDbContext>(cancellationToken);
+                await MigrateDatabaseAsync<SaasDbContext>(cancellationToken);
             }
 
             await MigrateDatabaseAsync<AdministrationServiceDbContext>(cancellationToken);

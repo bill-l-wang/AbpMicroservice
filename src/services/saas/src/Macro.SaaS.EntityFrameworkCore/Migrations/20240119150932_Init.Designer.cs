@@ -12,7 +12,7 @@ using Volo.Abp.EntityFrameworkCore;
 
 namespace Macro.SaaS.Migrations
 {
-    [DbContext(typeof(SaaSDbContext))]
+    [DbContext(typeof(SaasDbContext))]
     [Migration("20240119150932_Init")]
     partial class Init
     {

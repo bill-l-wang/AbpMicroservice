@@ -1,6 +1,6 @@
 ﻿namespace Macro.SaaS;
 
-public static class SaaSErrorCodes
+public static class SaasErrorCodes
 {
     //Add your business exception error codes here...
 }

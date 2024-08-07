@@ -5,22 +5,22 @@ using Microsoft.Extensions.Configuration;
 
 namespace Macro.SaaS.EntityFrameworkCore;
 
-public class SaaSDbContextFactory : IDesignTimeDbContextFactory<SaaSDbContext>
+public class SaaSDbContextFactory : IDesignTimeDbContextFactory<SaasDbContext>
 {
-    public SaaSDbContext CreateDbContext(string[] args)
+    public SaasDbContext CreateDbContext(string[] args)
     {
         var configuration = BuildConfiguration();
 
-        var builder = new DbContextOptionsBuilder<SaaSDbContext>()
+        var builder = new DbContextOptionsBuilder<SaasDbContext>()
             .UseNpgsql(GetConnectionStringFromConfiguration());
 
-        return new SaaSDbContext(builder.Options);
+        return new SaasDbContext(builder.Options);
     }
 
     private static string GetConnectionStringFromConfiguration()
     {
         return BuildConfiguration()
-            .GetConnectionString(SaaSDbProperties.ConnectionStringName);
+            .GetConnectionString(SaasDbProperties.ConnectionStringName);
     }
 
     private static IConfigurationRoot BuildConfiguration()

@@ -6,14 +6,14 @@ using Volo.Abp.TenantManagement.EntityFrameworkCore;
 
 namespace Macro.SaaS.EntityFrameworkCore;
 
-[ConnectionStringName(SaaSDbProperties.ConnectionStringName)]
-public class SaaSDbContext : AbpDbContext<SaaSDbContext>, ITenantManagementDbContext, ISaaSDbContext
+[ConnectionStringName(SaasDbProperties.ConnectionStringName)]
+public class SaasDbContext : AbpDbContext<SaasDbContext>, ITenantManagementDbContext, ISaasDbContext
 {
     /* Add DbSet for each Aggregate Root here. Example:
      * public DbSet<Question> Questions { get; set; }
      */
 
-    public SaaSDbContext(DbContextOptions<SaaSDbContext> options)
+    public SaasDbContext(DbContextOptions<SaasDbContext> options)
         : base(options)
     {
     }

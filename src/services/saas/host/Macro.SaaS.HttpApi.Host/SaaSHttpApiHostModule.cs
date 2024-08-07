@@ -21,12 +21,12 @@ using Volo.Abp.Modularity;
 namespace Macro.SaaS;
 
 [DependsOn(
-    typeof(SaaSApplicationModule),
-    typeof(SaaSEntityFrameworkCoreModule),
-    typeof(SaaSHttpApiModule),
+    typeof(SaasApplicationModule),
+    typeof(SaasEntityFrameworkCoreModule),
+    typeof(SaasHttpApiModule),
     typeof(MacroSharedHostingMicroservicesModule)
 )]
-public class SaaSHttpApiHostModule : AbpModule
+public class SaasHttpApiHostModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
@@ -107,7 +107,7 @@ public class SaaSHttpApiHostModule : AbpModule
         app.UseCors();
         app.UseAuthentication();
 
-        app.UseMultiTenancy();
+        //app.UseMultiTenancy();
         app.UseAbpRequestLocalization();
         app.UseAuthorization();
         app.UseSwagger();

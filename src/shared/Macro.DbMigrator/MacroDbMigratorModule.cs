@@ -16,8 +16,8 @@ namespace Macro.DbMigrator;
     typeof(AdministrationServiceApplicationContractsModule),
     typeof(IdentityServiceEntityFrameworkCoreModule),
     typeof(IdentityServiceApplicationContractsModule),
-    typeof(SaaSEntityFrameworkCoreModule),
-    typeof(SaaSApplicationContractsModule)
+    typeof(SaasEntityFrameworkCoreModule),
+    typeof(SaasApplicationContractsModule)
 )]
 public class MacroDbMigratorModule : AbpModule
 {

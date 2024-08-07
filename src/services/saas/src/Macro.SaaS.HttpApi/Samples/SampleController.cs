@@ -5,8 +5,8 @@ using Volo.Abp;
 
 namespace Macro.SaaS.Samples;
 
-[Area(SaaSRemoteServiceConsts.ModuleName)]
-[RemoteService(Name = SaaSRemoteServiceConsts.RemoteServiceName)]
+[Area(SaasRemoteServiceConsts.ModuleName)]
+[RemoteService(Name = SaasRemoteServiceConsts.RemoteServiceName)]
 [Route("api/SaaS/sample")]
 public class SampleController : SaaSController, ISampleAppService
 {

@@ -7,11 +7,11 @@ using Volo.Abp.TenantManagement.EntityFrameworkCore;
 namespace Macro.SaaS.EntityFrameworkCore;
 
 [DependsOn(
-    typeof(SaaSDomainModule),
+    typeof(SaasDomainModule),
     typeof(AbpTenantManagementEntityFrameworkCoreModule),
     typeof(AbpEntityFrameworkCoreModule)
 )]
-public class SaaSEntityFrameworkCoreModule : AbpModule
+public class SaasEntityFrameworkCoreModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
@@ -22,7 +22,7 @@ public class SaaSEntityFrameworkCoreModule : AbpModule
 
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
-        context.Services.AddAbpDbContext<SaaSDbContext>(options =>
+        context.Services.AddAbpDbContext<SaasDbContext>(options =>
         {
             options.ReplaceDbContext<ITenantManagementDbContext>();
 

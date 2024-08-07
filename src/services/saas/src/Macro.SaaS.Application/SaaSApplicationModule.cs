@@ -7,20 +7,20 @@ using Volo.Abp.TenantManagement;
 namespace Macro.SaaS;
 
 [DependsOn(
-    typeof(SaaSDomainModule),
-    typeof(SaaSApplicationContractsModule),
+    typeof(SaasDomainModule),
+    typeof(SaasApplicationContractsModule),
     typeof(AbpDddApplicationModule),
     typeof(AbpAutoMapperModule)
 )]
 [DependsOn(typeof(AbpTenantManagementApplicationModule))]
-public class SaaSApplicationModule : AbpModule
+public class SaasApplicationModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
-        context.Services.AddAutoMapperObjectMapper<SaaSApplicationModule>();
+        context.Services.AddAutoMapperObjectMapper<SaasApplicationModule>();
         Configure<AbpAutoMapperOptions>(options =>
         {
-            options.AddMaps<SaaSApplicationModule>(true);
+            options.AddMaps<SaasApplicationModule>(true);
         });
     }
 }

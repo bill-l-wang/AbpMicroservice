@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Tasky.SaaS.Host": {
+    "Macro.Saas.Host": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

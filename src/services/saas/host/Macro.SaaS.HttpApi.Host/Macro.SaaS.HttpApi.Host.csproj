@@ -4,7 +4,7 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
-        <RootNamespace>Macro.SaaS</RootNamespace>
+        <RootNamespace>Macro.Saas</RootNamespace>
         <PreserveCompilationReferences>true</PreserveCompilationReferences>
         <UserSecretsId>Macro.SaaS-c2d31439-b723-48e2-b061-5ebd7aeb6010</UserSecretsId>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>

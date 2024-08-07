@@ -6,11 +6,11 @@ using Volo.Abp.TenantManagement;
 namespace Macro.SaaS;
 
 [DependsOn(
-    typeof(SaaSDomainSharedModule),
+    typeof(SaasDomainSharedModule),
     typeof(AbpDddApplicationContractsModule),
     typeof(AbpAuthorizationModule)
 )]
 [DependsOn(typeof(AbpTenantManagementApplicationContractsModule))]
-public class SaaSApplicationContractsModule : AbpModule
+public class SaasApplicationContractsModule : AbpModule
 {
 }

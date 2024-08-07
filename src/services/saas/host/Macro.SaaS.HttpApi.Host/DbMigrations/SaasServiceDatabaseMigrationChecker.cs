@@ -8,7 +8,7 @@ using Volo.Abp.Uow;
 
 namespace Macro.SaaS.DbMigrations;
 
-public class SaasServiceDatabaseMigrationChecker : PendingEfCoreMigrationsChecker<SaaSDbContext>
+public class SaasServiceDatabaseMigrationChecker : PendingEfCoreMigrationsChecker<SaasDbContext>
 {
     public SaasServiceDatabaseMigrationChecker(
         IUnitOfWorkManager unitOfWorkManager,
