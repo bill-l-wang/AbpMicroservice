@@ -1,12 +1,12 @@
 using Localization.Resources.AbpUi;
-using Macro.SaaS.Localization;
+using Macro.Saas.Localization;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.TenantManagement;
 
-namespace Macro.SaaS;
+namespace Macro.Saas;
 
 [DependsOn(
     typeof(SaasApplicationContractsModule),
@@ -27,7 +27,7 @@ public class SaasHttpApiModule : AbpModule
         Configure<AbpLocalizationOptions>(options =>
         {
             options.Resources
-                .Get<SaaSResource>()
+                .Get<SaasResource>()
                 .AddBaseTypes(typeof(AbpUiResource));
         });
     }

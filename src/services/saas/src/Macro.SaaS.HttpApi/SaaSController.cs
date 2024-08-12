@@ -1,12 +1,12 @@
-﻿using Macro.SaaS.Localization;
+﻿using Macro.Saas.Localization;
 using Volo.Abp.AspNetCore.Mvc;
 
-namespace Macro.SaaS;
+namespace Macro.Saas;
 
-public abstract class SaaSController : AbpControllerBase
+public abstract class SaasController : AbpControllerBase
 {
-    protected SaaSController()
+    protected SaasController()
     {
-        LocalizationResource = typeof(SaaSResource);
+        LocalizationResource = typeof(SaasResource);
     }
 }

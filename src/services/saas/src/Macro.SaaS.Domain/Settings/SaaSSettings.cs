@@ -1,8 +1,8 @@
-﻿namespace Macro.SaaS.Settings;
+﻿namespace Macro.Saas.Settings;
 
-public static class SaaSSettings
+public static class SaasSettings
 {
-    public const string GroupName = "SaaS";
+    public const string GroupName = "Saas";
 
     /* Add constants for setting names. Example:
      * public const string MySettingName = GroupName + ".MySettingName";

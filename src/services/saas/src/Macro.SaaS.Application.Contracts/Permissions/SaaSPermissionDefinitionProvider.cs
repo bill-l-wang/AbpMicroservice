@@ -1,18 +1,18 @@
-﻿using Macro.SaaS.Localization;
+﻿using Macro.Saas.Localization;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Localization;
 
-namespace Macro.SaaS.Permissions;
+namespace Macro.Saas.Permissions;
 
-public class SaaSPermissionDefinitionProvider : PermissionDefinitionProvider
+public class SaasPermissionDefinitionProvider : PermissionDefinitionProvider
 {
     public override void Define(IPermissionDefinitionContext context)
     {
-        var myGroup = context.AddGroup(SaaSPermissions.GroupName, L("Permission:SaaS"));
+        var myGroup = context.AddGroup(SaasPermissions.GroupName, L("Permission:SaaS"));
     }
 
     private static LocalizableString L(string name)
     {
-        return LocalizableString.Create<SaaSResource>(name);
+        return LocalizableString.Create<SaasResource>(name);
     }
 }

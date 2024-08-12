@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 
-namespace Macro.SaaS;
+namespace Macro.Saas;
 
-public class SaaSApplicationAutoMapperProfile : Profile
+public class SaasApplicationAutoMapperProfile : Profile
 {
 }

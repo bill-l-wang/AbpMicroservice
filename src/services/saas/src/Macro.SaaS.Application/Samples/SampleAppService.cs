@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Macro.SaaS.Samples;
+namespace Macro.Saas.Samples;
 
-public class SampleAppService : SaaSAppService, ISampleAppService
+public class SampleAppService : SaasAppService, ISampleAppService
 {
     public Task<SampleDto> GetAsync()
     {

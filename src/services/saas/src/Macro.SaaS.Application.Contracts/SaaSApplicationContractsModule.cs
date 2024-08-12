@@ -3,7 +3,7 @@ using Volo.Abp.Authorization;
 using Volo.Abp.Modularity;
 using Volo.Abp.TenantManagement;
 
-namespace Macro.SaaS;
+namespace Macro.Saas;
 
 [DependsOn(
     typeof(SaasDomainSharedModule),

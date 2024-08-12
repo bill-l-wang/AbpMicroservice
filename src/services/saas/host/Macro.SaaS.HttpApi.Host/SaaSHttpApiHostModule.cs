@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Macro.SaaS.DbMigrations;
-using Macro.SaaS.EntityFrameworkCore;
+using Macro.Saas.DbMigrations;
+using Macro.Saas.EntityFrameworkCore;
 using Macro.Shared.Hosting.Microservices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -18,7 +18,7 @@ using Volo.Abp;
 using Volo.Abp.Caching;
 using Volo.Abp.Modularity;
 
-namespace Macro.SaaS;
+namespace Macro.Saas;
 
 [DependsOn(
     typeof(SaasApplicationModule),
@@ -40,7 +40,7 @@ public class SaasHttpApiHostModule : AbpModule
             },
             options =>
             {
-                options.SwaggerDoc("v1", new OpenApiInfo {Title = "SaaS API", Version = "v1"});
+                options.SwaggerDoc("v1", new OpenApiInfo {Title = "Saas API", Version = "v1"});
                 options.DocInclusionPredicate((docName, description) => true);
                 options.CustomSchemaIds(type => type.FullName);
             });
@@ -55,7 +55,7 @@ public class SaasHttpApiHostModule : AbpModule
 
         Configure<AbpDistributedCacheOptions>(options =>
         {
-            options.KeyPrefix = "SaaS:";
+            options.KeyPrefix = "Saas:";
         });
 
         var dataProtectionBuilder = context.Services.AddDataProtection().SetApplicationName("SaaS");

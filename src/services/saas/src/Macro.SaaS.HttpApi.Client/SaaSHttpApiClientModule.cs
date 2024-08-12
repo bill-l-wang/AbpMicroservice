@@ -4,13 +4,13 @@ using Volo.Abp.Modularity;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.VirtualFileSystem;
 
-namespace Macro.SaaS;
+namespace Macro.Saas;
 
 [DependsOn(
     typeof(SaasApplicationContractsModule),
     typeof(AbpHttpClientModule))]
 [DependsOn(typeof(AbpTenantManagementHttpApiClientModule))]
-public class SaaSHttpApiClientModule : AbpModule
+public class SaasHttpApiClientModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
@@ -21,7 +21,7 @@ public class SaaSHttpApiClientModule : AbpModule
 
         Configure<AbpVirtualFileSystemOptions>(options =>
         {
-            options.FileSets.AddEmbedded<SaaSHttpApiClientModule>();
+            options.FileSets.AddEmbedded<SaasHttpApiClientModule>();
         });
     }
 }

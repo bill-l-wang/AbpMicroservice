@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Volo.Abp;
 
-namespace Macro.SaaS.EntityFrameworkCore;
+namespace Macro.Saas.EntityFrameworkCore;
 
-public static class SaaSDbContextModelCreatingExtensions
+public static class SaasDbContextModelCreatingExtensions
 {
     public static void ConfigureSaaS(
         this ModelBuilder builder)

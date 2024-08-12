@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
 
-namespace Macro.SaaS;
+namespace Macro.Saas;
 
 public class Program
 {

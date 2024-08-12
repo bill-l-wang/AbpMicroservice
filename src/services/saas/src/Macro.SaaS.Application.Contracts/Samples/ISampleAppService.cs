@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
 
-namespace Macro.SaaS.Samples;
+namespace Macro.Saas.Samples;
 
 public interface ISampleAppService : IApplicationService
 {

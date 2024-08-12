@@ -1,13 +1,13 @@
-﻿using Macro.SaaS.Localization;
+﻿using Macro.Saas.Localization;
 using Volo.Abp.Application.Services;
 
-namespace Macro.SaaS;
+namespace Macro.Saas;
 
-public abstract class SaaSAppService : ApplicationService
+public abstract class SaasAppService : ApplicationService
 {
-    protected SaaSAppService()
+    protected SaasAppService()
     {
-        LocalizationResource = typeof(SaaSResource);
+        LocalizationResource = typeof(SaasResource);
         ObjectMapperContext = typeof(SaasApplicationModule);
     }
 }

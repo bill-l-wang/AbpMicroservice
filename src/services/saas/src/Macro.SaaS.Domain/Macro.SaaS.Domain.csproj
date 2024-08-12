@@ -10,7 +10,7 @@
     <ItemGroup>
         <PackageReference Include="Volo.Abp.Ddd.Domain" Version="8.2.0" />
         <PackageReference Include="Volo.Abp.TenantManagement.Domain" Version="8.2.0" />
-        <ProjectReference Include="..\Macro.SaaS.Domain.Shared\Macro.SaaS.Domain.Shared.csproj" />
+        <ProjectReference Include="..\Macro.SaaS.Domain.Shared\Macro.Saas.Domain.Shared.csproj" />
     </ItemGroup>
 
 </Project>

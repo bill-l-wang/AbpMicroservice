@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
-namespace Macro.SaaS.EntityFrameworkCore;
+namespace Macro.Saas.EntityFrameworkCore;
 
-public class SaaSDbContextFactory : IDesignTimeDbContextFactory<SaasDbContext>
+public class SaasDbContextFactory : IDesignTimeDbContextFactory<SaasDbContext>
 {
     public SaasDbContext CreateDbContext(string[] args)
     {
@@ -29,7 +29,7 @@ public class SaaSDbContextFactory : IDesignTimeDbContextFactory<SaasDbContext>
             .SetBasePath(
                 Path.Combine(
                     Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,
-                    $"host{Path.DirectorySeparatorChar}Tasky.SaaS.HttpApi.Host"
+                    $"host{Path.DirectorySeparatorChar}Macro.SaaS.HttpApi.Host"
                 )
             )
             .AddJsonFile("appsettings.json", false);

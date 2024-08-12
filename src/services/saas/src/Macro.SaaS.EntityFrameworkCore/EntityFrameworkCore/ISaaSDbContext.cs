@@ -1,7 +1,7 @@
 ﻿using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
 
-namespace Macro.SaaS.EntityFrameworkCore;
+namespace Macro.Saas.EntityFrameworkCore;
 
 [ConnectionStringName(SaasDbProperties.ConnectionStringName)]
 public interface ISaasDbContext : IEfCoreDbContext

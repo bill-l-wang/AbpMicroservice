@@ -1,13 +1,13 @@
 ﻿using Volo.Abp.Settings;
 
-namespace Macro.SaaS.Settings;
+namespace Macro.Saas.Settings;
 
-public class SaaSSettingDefinitionProvider : SettingDefinitionProvider
+public class SaasSettingDefinitionProvider : SettingDefinitionProvider
 {
     public override void Define(ISettingDefinitionContext context)
     {
         /* Define module settings here.
-         * Use names from SaaSSettings class.
+         * Use names from SaasSettings class.
          */
     }
 }

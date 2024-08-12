@@ -4,7 +4,7 @@ using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 
-namespace Macro.SaaS.EntityFrameworkCore;
+namespace Macro.Saas.EntityFrameworkCore;
 
 [DependsOn(
     typeof(SaasDomainModule),

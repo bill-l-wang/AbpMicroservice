@@ -1,4 +1,4 @@
-using Macro.SaaS.Localization;
+using Macro.Saas.Localization;
 using Volo.Abp.Localization;
 using Volo.Abp.Localization.ExceptionHandling;
 using Volo.Abp.Modularity;
@@ -7,7 +7,7 @@ using Volo.Abp.Validation;
 using Volo.Abp.Validation.Localization;
 using Volo.Abp.VirtualFileSystem;
 
-namespace Macro.SaaS;
+namespace Macro.Saas;
 
 [DependsOn(
     typeof(AbpValidationModule)
@@ -25,14 +25,14 @@ public class SaasDomainSharedModule : AbpModule
         Configure<AbpLocalizationOptions>(options =>
         {
             options.Resources
-                .Add<SaaSResource>("en")
+                .Add<SaasResource>("en")
                 .AddBaseTypes(typeof(AbpValidationResource))
-                .AddVirtualJson("/Localization/SaaS");
+                .AddVirtualJson("/Localization/Saas");
         });
 
         Configure<AbpExceptionLocalizationOptions>(options =>
         {
-            options.MapCodeNamespace("SaaS", typeof(SaaSResource));
+            options.MapCodeNamespace("Saas", typeof(SaasResource));
         });
     }
 }

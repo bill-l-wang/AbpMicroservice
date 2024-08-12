@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Volo.Abp;
 
-namespace Macro.SaaS.Samples;
+namespace Macro.Saas.Samples;
 
 [Area(SaasRemoteServiceConsts.ModuleName)]
 [RemoteService(Name = SaasRemoteServiceConsts.RemoteServiceName)]
-[Route("api/SaaS/sample")]
-public class SampleController : SaaSController, ISampleAppService
+[Route("api/Saas/sample")]
+public class SampleController : SaasController, ISampleAppService
 {
     private readonly ISampleAppService _sampleAppService;
 

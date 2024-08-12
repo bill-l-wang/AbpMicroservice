@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.AdministrationService
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.IdentityService.HttpApi.Host", "services\identity\host\Macro.IdentityService.HttpApi.Host\Macro.IdentityService.HttpApi.Host.csproj", "{1D43BBF7-CB00-4D5B-9846-8BE2FA479F47}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.SaaS.HttpApi.Host", "services\saas\host\Macro.SaaS.HttpApi.Host\Macro.SaaS.HttpApi.Host.csproj", "{C4CCD733-6236-4A1B-8F1A-C9315CD43A16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.Saas.HttpApi.Host", "services\saas\host\Macro.SaaS.HttpApi.Host\Macro.Saas.HttpApi.Host.csproj", "{C4CCD733-6236-4A1B-8F1A-C9315CD43A16}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{140ED621-3D93-4523-8B62-BE6850E04698}"
 EndProject
@@ -69,19 +69,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.AdministrationService
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.AdministrationService.HttpApi.Client", "services\administration\src\Macro.AdministrationService.HttpApi.Client\Macro.AdministrationService.HttpApi.Client.csproj", "{5861F4A6-A634-4DE7-A076-55D242E9033C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.SaaS.Application", "services\saas\src\Macro.SaaS.Application\Macro.SaaS.Application.csproj", "{D93A7237-5AD5-4E38-B3E4-D59778FD7AB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.Saas.Application", "services\saas\src\Macro.SaaS.Application\Macro.Saas.Application.csproj", "{D93A7237-5AD5-4E38-B3E4-D59778FD7AB9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.SaaS.Application.Contracts", "services\saas\src\Macro.SaaS.Application.Contracts\Macro.SaaS.Application.Contracts.csproj", "{BC71BC5B-06EE-4312-A6B1-1377204DCEF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.Saas.Application.Contracts", "services\saas\src\Macro.SaaS.Application.Contracts\Macro.Saas.Application.Contracts.csproj", "{BC71BC5B-06EE-4312-A6B1-1377204DCEF9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.SaaS.Domain", "services\saas\src\Macro.SaaS.Domain\Macro.SaaS.Domain.csproj", "{BB55911F-7CCE-4978-B172-211C28A29001}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.Saas.Domain", "services\saas\src\Macro.SaaS.Domain\Macro.Saas.Domain.csproj", "{BB55911F-7CCE-4978-B172-211C28A29001}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.SaaS.Domain.Shared", "services\saas\src\Macro.SaaS.Domain.Shared\Macro.SaaS.Domain.Shared.csproj", "{BAABFE36-E654-4285-94BB-4F61CE5F17D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.Saas.Domain.Shared", "services\saas\src\Macro.SaaS.Domain.Shared\Macro.Saas.Domain.Shared.csproj", "{BAABFE36-E654-4285-94BB-4F61CE5F17D9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.SaaS.EntityFrameworkCore", "services\saas\src\Macro.SaaS.EntityFrameworkCore\Macro.SaaS.EntityFrameworkCore.csproj", "{388B726E-4F46-47E0-BFD6-55CBBC9ECF91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.Saas.EntityFrameworkCore", "services\saas\src\Macro.SaaS.EntityFrameworkCore\Macro.Saas.EntityFrameworkCore.csproj", "{388B726E-4F46-47E0-BFD6-55CBBC9ECF91}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.SaaS.HttpApi", "services\saas\src\Macro.SaaS.HttpApi\Macro.SaaS.HttpApi.csproj", "{5113A8EA-CED9-4FF9-9797-CBDB3A86AA33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.Saas.HttpApi", "services\saas\src\Macro.SaaS.HttpApi\Macro.Saas.HttpApi.csproj", "{5113A8EA-CED9-4FF9-9797-CBDB3A86AA33}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.SaaS.HttpApi.Client", "services\saas\src\Macro.SaaS.HttpApi.Client\Macro.SaaS.HttpApi.Client.csproj", "{77818554-DE25-4638-933A-C4C3FBFB8DE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.Saas.HttpApi.Client", "services\saas\src\Macro.SaaS.HttpApi.Client\Macro.Saas.HttpApi.Client.csproj", "{77818554-DE25-4638-933A-C4C3FBFB8DE3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.Microservice.Shared", "shared\Macro.Microservice.Shared\Macro.Microservice.Shared.csproj", "{142C264D-AA69-4AF5-B62B-C596282C2645}"
 EndProject

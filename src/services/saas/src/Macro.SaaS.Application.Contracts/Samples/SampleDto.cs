@@ -1,4 +1,4 @@
-﻿namespace Macro.SaaS.Samples;
+﻿namespace Macro.Saas.Samples;
 
 public class SampleDto
 {

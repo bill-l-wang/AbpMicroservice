@@ -4,14 +4,14 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <RootNamespace>Macro.SaaS</RootNamespace>
+    <RootNamespace>Macro.Saas</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.0" />
-    <ProjectReference Include="..\..\src\Macro.SaaS.EntityFrameworkCore\Macro.SaaS.EntityFrameworkCore.csproj" />
-    <ProjectReference Include="..\Macro.SaaS.TestBase\Macro.SaaS.TestBase.csproj" />
+    <ProjectReference Include="..\..\src\Macro.Saas.EntityFrameworkCore\Macro.Saas.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Macro.Saas.TestBase\Macro.Saas.TestBase.csproj" />
     <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="8.0.2" />
   </ItemGroup>
 

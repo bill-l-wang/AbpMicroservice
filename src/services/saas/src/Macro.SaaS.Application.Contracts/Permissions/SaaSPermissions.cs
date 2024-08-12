@@ -1,13 +1,13 @@
 ﻿using Volo.Abp.Reflection;
 
-namespace Macro.SaaS.Permissions;
+namespace Macro.Saas.Permissions;
 
-public class SaaSPermissions
+public class SaasPermissions
 {
-    public const string GroupName = "SaaS";
+    public const string GroupName = "Saas";
 
     public static string[] GetAll()
     {
-        return ReflectionHelper.GetPublicConstantsRecursively(typeof(SaaSPermissions));
+        return ReflectionHelper.GetPublicConstantsRecursively(typeof(SaasPermissions));
     }
 }

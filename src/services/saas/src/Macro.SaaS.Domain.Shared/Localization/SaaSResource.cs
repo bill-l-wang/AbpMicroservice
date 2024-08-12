@@ -1,8 +1,8 @@
 ﻿using Volo.Abp.Localization;
 
-namespace Macro.SaaS.Localization;
+namespace Macro.Saas.Localization;
 
-[LocalizationResourceName("SaaS")]
-public class SaaSResource
+[LocalizationResourceName("Saas")]
+public class SaasResource
 {
 }

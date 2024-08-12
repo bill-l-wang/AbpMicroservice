@@ -4,7 +4,7 @@ using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 
-namespace Macro.SaaS.EntityFrameworkCore;
+namespace Macro.Saas.EntityFrameworkCore;
 
 [ConnectionStringName(SaasDbProperties.ConnectionStringName)]
 public class SaasDbContext : AbpDbContext<SaasDbContext>, ITenantManagementDbContext, ISaasDbContext

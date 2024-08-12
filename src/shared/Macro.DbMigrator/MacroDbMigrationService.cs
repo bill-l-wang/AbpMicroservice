@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Macro.AdministrationService.EntityFrameworkCore;
 using Macro.IdentityService.EntityFrameworkCore;
-using Macro.SaaS.EntityFrameworkCore;
+using Macro.Saas.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;

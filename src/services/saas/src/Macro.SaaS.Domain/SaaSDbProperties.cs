@@ -1,4 +1,4 @@
-﻿namespace Macro.SaaS;
+﻿namespace Macro.Saas;
 
 public static class SaasDbProperties
 {
