@@ -2,8 +2,8 @@ using System;
 using System.Linq;
 using Macro.AdministrationService.EntityFrameworkCore;
 using Macro.IdentityService.EntityFrameworkCore;
-using Macro.Microservice.Shared;
 using Macro.Saas.EntityFrameworkCore;
+using Macro.Shared.Hosting.Microservices;
 using Medallion.Threading;
 using Medallion.Threading.Redis;
 using Microsoft.AspNetCore.Builder;
@@ -45,7 +45,7 @@ namespace Macro;
     typeof(AdministrationServiceEntityFrameworkCoreModule),
     typeof(SaasEntityFrameworkCoreModule),
     typeof(IdentityServiceEntityFrameworkCoreModule),
-    typeof(MacroMicroserviceModule),
+    typeof(MacroSharedHostingMicroservicesModule),
     typeof(AbpAspNetCoreSerilogModule)
     )]
 public class MacroAuthServerModule : AbpModule
@@ -101,14 +101,14 @@ public class MacroAuthServerModule : AbpModule
 
         Configure<AbpDistributedCacheOptions>(options =>
         {
-            options.KeyPrefix = "Tasky:";
+            options.KeyPrefix = "Macro:";
         });
 
-        var dataProtectionBuilder = context.Services.AddDataProtection().SetApplicationName("Tasky");
+        var dataProtectionBuilder = context.Services.AddDataProtection().SetApplicationName("Macro");
         if (!hostingEnvironment.IsDevelopment())
         {
             var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
-            dataProtectionBuilder.PersistKeysToStackExchangeRedis(redis, "Tasky-Protection-Keys");
+            dataProtectionBuilder.PersistKeysToStackExchangeRedis(redis, "Macro-Protection-Keys");
         }
         
         context.Services.AddSingleton<IDistributedLockProvider>(sp =>
@@ -163,7 +163,7 @@ public class MacroAuthServerModule : AbpModule
         app.UseAuthentication();
         app.UseAbpOpenIddictValidation();
 
-        app.UseMultiTenancy();
+        //app.UseMultiTenancy();
 
         app.UseUnitOfWork();
         app.UseAuthorization();
