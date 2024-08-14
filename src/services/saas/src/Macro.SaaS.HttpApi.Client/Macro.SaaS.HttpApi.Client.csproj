@@ -10,7 +10,7 @@
     <ItemGroup>
         <PackageReference Include="Volo.Abp.Http.Client" Version="8.2.0" />
         <PackageReference Include="Volo.Abp.TenantManagement.HttpApi.Client" Version="8.2.0" />
-        <ProjectReference Include="..\Macro.SaaS.Application.Contracts\Macro.Saas.Application.Contracts.csproj" />
+        <ProjectReference Include="..\Macro.Saas.Application.Contracts\Macro.Saas.Application.Contracts.csproj" />
     </ItemGroup>
 
     <ItemGroup>

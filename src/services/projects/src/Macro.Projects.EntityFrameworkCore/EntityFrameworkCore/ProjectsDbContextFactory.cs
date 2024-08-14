@@ -3,24 +3,24 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
-namespace Macro.Saas.EntityFrameworkCore;
+namespace Macro.Projects.EntityFrameworkCore;
 
-public class SaasDbContextFactory : IDesignTimeDbContextFactory<SaasDbContext>
+public class ProjectsDbContextFactory : IDesignTimeDbContextFactory<ProjectsDbContext>
 {
-    public SaasDbContext CreateDbContext(string[] args)
+    public ProjectsDbContext CreateDbContext(string[] args)
     {
         var configuration = BuildConfiguration();
 
-        var builder = new DbContextOptionsBuilder<SaasDbContext>()
+        var builder = new DbContextOptionsBuilder<ProjectsDbContext>()
             .UseNpgsql(GetConnectionStringFromConfiguration());
 
-        return new SaasDbContext(builder.Options);
+        return new ProjectsDbContext(builder.Options);
     }
 
     private static string GetConnectionStringFromConfiguration()
     {
         return BuildConfiguration()
-            .GetConnectionString(SaasDbProperties.ConnectionStringName);
+            .GetConnectionString(ProjectsDbProperties.ConnectionStringName);
     }
 
     private static IConfigurationRoot BuildConfiguration()
@@ -29,7 +29,7 @@ public class SaasDbContextFactory : IDesignTimeDbContextFactory<SaasDbContext>
             .SetBasePath(
                 Path.Combine(
                     Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,
-                    $"host{Path.DirectorySeparatorChar}Macro.Saas.HttpApi.Host"
+                    $"host{Path.DirectorySeparatorChar}Macro.Projects.HttpApi.Host"
                 )
             )
             .AddJsonFile("appsettings.json", false);
