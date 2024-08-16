@@ -225,7 +225,7 @@ services:
     container_name: gateway-web-container
     build:
       context: ../../
-      dockerfile: gateway/Macro.Gateway/Dockerfile
+      dockerfile: gateways/Web/Dockerfile
     environment:
       #- ASPNETCORE_ENVIRONMENT=Docker # Yarp can't resolve dns, needs to be overridden
       - ASPNETCORE_URLS=http://+:80;

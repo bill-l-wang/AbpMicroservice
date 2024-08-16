@@ -7,16 +7,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["gateway/Macro.Gateway/Macro.Gateway.csproj", "gateway/Macro.Gateway/"]
-RUN dotnet restore "gateway/Macro.Gateway/Macro.Gateway.csproj"
+COPY ["gateways/Web/Macro.WebGateway.csproj", "gateways/Web/"]
+RUN dotnet restore "gateways/Web/Macro.WebGateway.csproj"
 COPY . .
-WORKDIR "/src/gateway/Macro.Gateway"
-RUN dotnet build "Macro.Gateway.csproj" -c Release -o /app/build
+WORKDIR "/src/gateways/Web"
+RUN dotnet build "Macro.WebGateway.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Macro.Gateway.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Macro.WebGateway.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Macro.Gateway.dll"]
+ENTRYPOINT ["dotnet", "Macro.WebGateway.dll"]

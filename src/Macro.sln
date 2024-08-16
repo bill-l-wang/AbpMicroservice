@@ -93,9 +93,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		tye.yaml = tye.yaml
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gateway", "gateway", "{0F209705-7D2E-4697-8C1D-37D5AAE94CBB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gateways", "gateways", "{0F209705-7D2E-4697-8C1D-37D5AAE94CBB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.Gateway", "gateway\Macro.Gateway\Macro.Gateway.csproj", "{05D77D8B-31E7-49BA-B683-2FF54F9B1BB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.WebGateway", "gateways\Web\Macro.WebGateway.csproj", "{05D77D8B-31E7-49BA-B683-2FF54F9B1BB6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro.AuthServer", "apps\Macro.AuthServer\Macro.AuthServer.csproj", "{5AC9119B-D456-45F6-80FA-D48B51BAEAED}"
 EndProject

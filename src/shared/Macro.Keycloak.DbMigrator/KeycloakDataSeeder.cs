@@ -85,7 +85,7 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
     {
         await CreateScopeAsync("AdministrationService");
         await CreateScopeAsync("IdentityService");
-        await CreateScopeAsync("CmskitService");
+        await CreateScopeAsync("ProjectsService");
     }
 
     private async Task CreateScopeAsync(string scopeName)
@@ -134,8 +134,8 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
         await CreatePublicWebClientAsync();
         await CreateSwaggerClientAsync();
         await CreateWebClientAsync();
-        // await CreateCmskitClientAsync();
-        // await CreateAdministrationClientAsync();
+        await CreateProjectsClientAsync();
+        await CreateAdministrationClientAsync();
     }
 
     private async Task CreateAdministrationClientAsync()
@@ -178,7 +178,7 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
             );
             
             var insertedClient =
-                (await _keycloakClient.GetClientsAsync(_keycloakOptions.RealmName, clientId: "EShopOnAbp_AdministrationService"))
+                (await _keycloakClient.GetClientsAsync(_keycloakOptions.RealmName, clientId: "Macro_AdministrationService"))
                 .First();
             
             var clientIdProtocolMapper = insertedClient.ProtocolMappers.First(q => q.Name == "Client ID");
@@ -190,18 +190,18 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
         }
     }
 
-    private async Task CreateCmskitClientAsync()
+    private async Task CreateProjectsClientAsync()
     {
         var cmsKitClient =
-            (await _keycloakClient.GetClientsAsync(_keycloakOptions.RealmName, clientId: "EShopOnAbp_CmskitService"))
+            (await _keycloakClient.GetClientsAsync(_keycloakOptions.RealmName, clientId: "Macro_ProjectsService"))
             .FirstOrDefault();
 
         if (cmsKitClient == null)
         {
             cmsKitClient = new Client()
             {
-                ClientId = "Macro_CmskitService",
-                Name = "Cmskit microservice client",
+                ClientId = "Macro_ProjectsService",
+                Name = "Projects microservice client",
                 Protocol = "openid-connect",
                 PublicClient = false,
                 ImplicitFlowEnabled = false,
@@ -221,7 +221,7 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
             await _keycloakClient.CreateClientAsync(_keycloakOptions.RealmName, cmsKitClient);
 
             await AddOptionalClientScopesAsync(
-                "EShopOnAbp_CmskitService",
+                "Macro_ProjectsService",
                 new List<string>
                 {
                     "IdentityService"
@@ -229,7 +229,7 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
             );
             
             var insertedClient =
-                (await _keycloakClient.GetClientsAsync(_keycloakOptions.RealmName, clientId: "EShopOnAbp_CmskitService"))
+                (await _keycloakClient.GetClientsAsync(_keycloakOptions.RealmName, clientId: "Macro_ProjectsService"))
                 .First();
             
             var clientIdProtocolMapper = insertedClient.ProtocolMappers.First(q => q.Name == "Client ID");
@@ -295,7 +295,7 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
             var accountServiceRootUrl = _configuration[$"Clients:AccountService:RootUrl"].TrimEnd('/');
             var identityServiceRootUrl = _configuration[$"Clients:IdentityService:RootUrl"].TrimEnd('/');
             var administrationServiceRootUrl = _configuration[$"Clients:AdministrationService:RootUrl"].TrimEnd('/');
-            var cmskitServiceRootUrl = _configuration[$"Clients:CmskitService:RootUrl"].TrimEnd('/');
+            var projectsServiceRootUrl = _configuration[$"Clients:ProjectsService:RootUrl"].TrimEnd('/');
 
             swaggerClient = new Client
             {
@@ -310,7 +310,7 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
                     $"{accountServiceRootUrl}/swagger/oauth2-redirect.html", // AccountService redirect uri
                     $"{identityServiceRootUrl}/swagger/oauth2-redirect.html", // IdentityService redirect uri
                     $"{administrationServiceRootUrl}/swagger/oauth2-redirect.html", // AdministrationService redirect uri
-                    $"{cmskitServiceRootUrl}/swagger/oauth2-redirect.html" // CmskitService redirect uri
+                    $"{projectsServiceRootUrl}/swagger/oauth2-redirect.html" // ProjectsService redirect uri
                 },
                 FrontChannelLogout = true,
                 PublicClient = true
@@ -324,7 +324,7 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
                 {
                     "AdministrationService",
                     "IdentityService",
-                    "CmskitService"
+                    "ProjectsService"
                 }
             );
         }
@@ -366,7 +366,7 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
                 {
                     "AdministrationService",
                     "IdentityService",
-                    "CmskitService"
+                    "ProjectsService"
                 }
             );
         }

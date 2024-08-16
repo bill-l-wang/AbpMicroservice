@@ -19,10 +19,19 @@ services:
     - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49
 
 - name: saas-service
-  project: services/saas/host/Macro.SaaS.HttpApi.Host/Macro.SaaS.HttpApi.Host.csproj
+  project: services/saas/host/Macro.Saas.HttpApi.Host/Macro.Saas.HttpApi.Host.csproj
   bindings:
     - protocol: https
       port: 7003
+  env:
+    - Kestrel__Certificates__Default__Path=../../../../etc/dev-cert/localhost.pfx
+    - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49
+
+- name: projects-service
+  project: services/projects/host/Macro.Projects.HttpApi.Host/Macro.Projects.HttpApi.Host.csproj
+  bindings:
+    - protocol: https
+      port: 7007
   env:
     - Kestrel__Certificates__Default__Path=../../../../etc/dev-cert/localhost.pfx
     - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49
@@ -34,20 +43,22 @@ services:
       port: 7600
 
 - name: Macro-gateway
-  project: gateway/Macro.Gateway/Macro.Gateway.csproj
+  project: gateways/Web/Macro.WebGateway.csproj
   bindings:
     - protocol: https
       port: 7500
   env:
-    - Kestrel__Certificates__Default__Path=../../../../etc/dev-cert/localhost.pfx
+    - Kestrel__Certificates__Default__Path=../../etc/dev-cert/localhost.pfx
     - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49  
-# - name: Macro-blazor
-#   project: apps/Macro.Blazor/Macro.Blazor.csproj
-#   bindings:
-#     - protocol: https
-#       port: 5000
-# - name: Macro-blazor-server
-#   project: apps/Macro.Blazor.Server/Macro.Blazor.Server.csproj
-#   bindings:
-#     - protocol: https
-#       port: 5001
+
+- name: public-web
+  project: apps/Macro.Blazor.Server/Macro.Blazor.Server.csproj
+  bindings:
+    - protocol: https
+      port: 44335
+  env:
+    - Kestrel__Certificates__Default__Path=../../etc/dev-cert/localhost.pfx
+    - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49
+
+- name: keycloak-seeder
+  project: shared/Macro.Keycloak.DbMigrator/Macro.Keycloak.DbMigrator.csproj 

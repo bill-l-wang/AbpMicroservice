@@ -16,6 +16,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\aspire\ServiceDefaults\Macro.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\..\shared\Macro.Shared.Hosting.Gateways\Macro.Shared.Hosting.Gateways.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+	  <Compile Remove="Logs\**" />
+	  <Content Remove="Logs\**" />
+	  <EmbeddedResource Remove="Logs\**" />
+	  <None Remove="Logs\**" />
+  </ItemGroup>
 </Project>

@@ -101,7 +101,7 @@ public class MacroServerBlazorModule : AbpModule
     {
         Configure<AbpDistributedCacheOptions>(options =>
         {
-            options.KeyPrefix = "Tasky:";
+            options.KeyPrefix = "Macro:";
         });
     }
 
@@ -125,7 +125,7 @@ public class MacroServerBlazorModule : AbpModule
                 {
                     bundle.AddFiles("/blazor-global-styles.css");
                     //You can remove the following line if you don't use Blazor CSS isolation for components
-                    bundle.AddFiles("/Tasky.Blazor.Server.styles.css");
+                    bundle.AddFiles("/Macro.Blazor.Server.styles.css");
                 }
             );
         });

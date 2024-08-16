@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\apps\Macro.Blazor\Macro.Blazor.csproj" />
-    <ProjectReference Include="..\..\gateway\Macro.Gateway\Macro.Gateway.csproj" />
+    <ProjectReference Include="..\..\gateways\Web\Macro.WebGateway.csproj" />
     <ProjectReference Include="..\..\services\administration\host\Macro.AdministrationService.HttpApi.Host\Macro.AdministrationService.HttpApi.Host.csproj" />
     <ProjectReference Include="..\..\services\identity\host\Macro.IdentityService.HttpApi.Host\Macro.IdentityService.HttpApi.Host.csproj" />
     <ProjectReference Include="..\..\services\projects\host\Macro.Projects.HttpApi.Host\Macro.Projects.HttpApi.Host.csproj" />

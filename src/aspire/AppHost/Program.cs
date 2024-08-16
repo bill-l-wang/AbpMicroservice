@@ -15,7 +15,7 @@ var saasService = builder.AddProject<Projects.Macro_Saas_HttpApi_Host>("saasServ
 var projectService = builder.AddProject<Projects.Macro_Projects_HttpApi_Host>("cmsKitService", profile);
 
 // Gateways
-var webPublicGateway = builder.AddProject<Projects.Macro_Gateway>("webPublicGateway")
+var webPublicGateway = builder.AddProject<Projects.Macro_WebGateway>("webPublicGateway")
     .WithReference(administrationService)
     .WithReference(identityService)
     .WithReference(saasService)

@@ -7,7 +7,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Tasky.Blazor.Server": {
+    "Macro.Blazor.Server": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

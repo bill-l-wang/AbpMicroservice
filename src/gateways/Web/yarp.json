@@ -1,0 +1,113 @@
+﻿{
+  "ReverseProxy": {
+    "Routes": {
+      "AbpApi": {
+        "ClusterId": "Administration",
+        "Match": {
+          "Path": "/api/abp/{**catch-all}"
+        }
+      },
+      "MacroLocalization": {
+        "ClusterId": "Administration",
+        "Match": {
+          "Path": "/api/abp/application-localization"
+        }
+      },
+      "MacroApplicationConfiguration": {
+        "ClusterId": "Administration",
+        "Match": {
+          "Path": "/api/abp/application-configuration"
+        }
+      },
+      "Identity Service": {
+        "ClusterId": "Identity",
+        "Match": {
+          "Path": "/api/identity/{**everything}"
+        }
+      },
+      "Identity Service Swagger": {
+        "ClusterId": "Identity",
+        "Match": {
+          "Path": "/swagger-json/Identity/swagger/v1/swagger.json"
+        },
+        "Transforms": [
+          { "PathRemovePrefix": "/swagger-json/Identity" }
+        ]
+      },
+      "FeatureManagement": {
+        "ClusterId": "feature-management-cluster",
+        "Match": {
+          "Path": "/api/feature-management/{**everything}"
+        }
+      },
+      "PermissionManagement": {
+        "ClusterId": "permission-management-cluster",
+        "Match": {
+          "Path": "/api/permission-management/{**everything}"
+        }
+      },
+      "SettingManagement": {
+        "ClusterId": "setting-management-cluster",
+        "Match": {
+          "Path": "/api/setting-management/{**everything}"
+        }
+      },
+      "Administration Service Swagger": {
+        "ClusterId": "Administration",
+        "Match": {
+          "Path": "/swagger-json/Administration/swagger/v1/swagger.json"
+        },
+        "Transforms": [
+          { "PathRemovePrefix": "/swagger-json/Administration" }
+        ]
+      },
+      "Projects Service": {
+        "ClusterId": "Projects",
+        "Match": {
+          "Path": "/api/projects/{**everything}"
+        }
+      },
+      "Projects Service Swagger": {
+        "ClusterId": "Projects",
+        "Match": {
+          "Path": "/swagger-json/projects/swagger/v1/swagger.json"
+        },
+        "Transforms": [
+          { "PathRemovePrefix": "/swagger-json/Projects" }
+        ]
+      }
+    },
+    "Clusters": {
+      "Identity": {
+        "Destinations": {
+          "destination1": {
+            "Address": "https://localhost:7002",
+            "MetaData": {
+              "PublicAddress": "https://identity.macro.dev"
+            }
+          }
+        }
+      },
+      "Administration": {
+        "Destinations": {
+          "destination1": {
+            "Address": "https://localhost:7001",
+            "MetaData": {
+              "PublicAddress": "https://administration.macro.dev"
+            }
+          }
+        }
+      },
+      "Projects": {
+        "Destinations": {
+          "destination1": {
+            "Address": "https://localhost:7007",
+            "MetaData": {
+              "PublicAddress": "https://projects.macro.dev"
+            }
+          }
+        }
+      }
+    }
+  }
+}
