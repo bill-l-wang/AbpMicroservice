@@ -8,6 +8,5 @@
     </PropertyGroup>
     <ItemGroup>
         <ProjectReference Include="..\..\services\administration\src\Macro.AdministrationService.EntityFrameworkCore\Macro.AdministrationService.EntityFrameworkCore.csproj" />
-        <ProjectReference Include="..\Macro.Hosting.Shared\Macro.Hosting.Shared.csproj" />
     </ItemGroup>
 </Project>

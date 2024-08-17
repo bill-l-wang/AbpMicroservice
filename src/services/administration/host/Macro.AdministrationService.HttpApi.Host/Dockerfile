@@ -14,8 +14,6 @@ COPY ["services/identity/src/Macro.IdentityService.Application.Contracts/Macro.I
 COPY ["services/identity/src/Macro.IdentityService.Domain.Shared/Macro.IdentityService.Domain.Shared.csproj", "services/identity/src/Macro.IdentityService.Domain.Shared/"]
 COPY ["services/identity/src/Macro.IdentityService.EntityFrameworkCore/Macro.IdentityService.EntityFrameworkCore.csproj", "services/identity/src/Macro.IdentityService.EntityFrameworkCore/"]
 COPY ["services/identity/src/Macro.IdentityService.Domain/Macro.IdentityService.Domain.csproj", "services/identity/src/Macro.IdentityService.Domain/"]
-COPY ["services/saas/src/Macro.SaaS.Application.Contracts/Macro.SaaS.Application.Contracts.csproj", "services/saas/src/Macro.SaaS.Application.Contracts/"]
-COPY ["services/saas/src/Macro.SaaS.Domain.Shared/Macro.SaaS.Domain.Shared.csproj", "services/saas/src/Macro.SaaS.Domain.Shared/"]
 COPY ["services/administration/src/Macro.AdministrationService.HttpApi/Macro.AdministrationService.HttpApi.csproj", "services/administration/src/Macro.AdministrationService.HttpApi/"]
 COPY ["services/administration/src/Macro.AdministrationService.Application.Contracts/Macro.AdministrationService.Application.Contracts.csproj", "services/administration/src/Macro.AdministrationService.Application.Contracts/"]
 COPY ["services/administration/src/Macro.AdministrationService.Domain.Shared/Macro.AdministrationService.Domain.Shared.csproj", "services/administration/src/Macro.AdministrationService.Domain.Shared/"]

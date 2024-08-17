@@ -54,7 +54,6 @@
     <PackageReference Include="Volo.Abp.Account.HttpApi" Version="8.2.0" />
     <ProjectReference Include="..\..\services\administration\src\Macro.AdministrationService.EntityFrameworkCore\Macro.AdministrationService.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\services\identity\src\Macro.IdentityService.EntityFrameworkCore\Macro.IdentityService.EntityFrameworkCore.csproj" />
-    <ProjectReference Include="..\..\services\saas\src\Macro.Saas.EntityFrameworkCore\Macro.Saas.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\shared\Macro.Shared.Hosting.Microservices\Macro.Shared.Hosting.Microservices.csproj" />
   </ItemGroup>
 

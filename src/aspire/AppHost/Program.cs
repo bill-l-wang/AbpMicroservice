@@ -11,14 +11,12 @@ var administrationService =
     builder.AddProject<Projects.Macro_AdministrationService_HttpApi_Host>("administrationService", profile);
 var identityService = builder.AddProject<Projects.Macro_IdentityService_HttpApi_Host>("identityService", profile);
 
-var saasService = builder.AddProject<Projects.Macro_Saas_HttpApi_Host>("saasService", profile);
 var projectService = builder.AddProject<Projects.Macro_Projects_HttpApi_Host>("cmsKitService", profile);
 
 // Gateways
-var webPublicGateway = builder.AddProject<Projects.Macro_WebGateway>("webPublicGateway")
+var webPublicGateway = builder.AddProject<Projects.Macro_WebGateway>("webGateway")
     .WithReference(administrationService)
     .WithReference(identityService)
-    .WithReference(saasService)
     .WithReference(projectService);
 
 // Apps

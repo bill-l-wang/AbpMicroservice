@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using Macro.AdministrationService.EntityFrameworkCore;
 using Macro.IdentityService.EntityFrameworkCore;
-using Macro.Saas.EntityFrameworkCore;
 using Macro.Shared.Hosting.Microservices;
 using Medallion.Threading;
 using Medallion.Threading.Redis;
@@ -43,7 +42,6 @@ namespace Macro;
     typeof(AbpAspNetCoreMvcUiLeptonXLiteThemeModule),
     typeof(AbpEntityFrameworkCorePostgreSqlModule),
     typeof(AdministrationServiceEntityFrameworkCoreModule),
-    typeof(SaasEntityFrameworkCoreModule),
     typeof(IdentityServiceEntityFrameworkCoreModule),
     typeof(MacroSharedHostingMicroservicesModule),
     typeof(AbpAspNetCoreSerilogModule)

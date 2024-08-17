@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc;
 
-namespace Tasky.Blazor.Server.Components.Toolbar.LoginLink;
+namespace Macro.Blazor.Server.Components.Toolbar.LoginLink;
 
 public class LoginLinkViewComponent : AbpViewComponent
 {

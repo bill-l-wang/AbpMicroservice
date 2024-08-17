@@ -18,14 +18,14 @@ services:
     - Kestrel__Certificates__Default__Path=../../../../etc/dev-cert/localhost.pfx
     - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49
 
-- name: saas-service
-  project: services/saas/host/Macro.Saas.HttpApi.Host/Macro.Saas.HttpApi.Host.csproj
-  bindings:
-    - protocol: https
-      port: 7003
-  env:
-    - Kestrel__Certificates__Default__Path=../../../../etc/dev-cert/localhost.pfx
-    - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49
+# - name: saas-service
+#   project: services/saas/host/Macro.Saas.HttpApi.Host/Macro.Saas.HttpApi.Host.csproj
+#   bindings:
+#     - protocol: https
+#       port: 7003
+#   env:
+#     - Kestrel__Certificates__Default__Path=../../../../etc/dev-cert/localhost.pfx
+#     - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49
 
 - name: projects-service
   project: services/projects/host/Macro.Projects.HttpApi.Host/Macro.Projects.HttpApi.Host.csproj
@@ -42,7 +42,7 @@ services:
     - protocol: https
       port: 7600
 
-- name: Macro-gateway
+- name: Web-gateway
   project: gateways/Web/Macro.WebGateway.csproj
   bindings:
     - protocol: https
@@ -55,7 +55,7 @@ services:
   project: apps/Macro.Blazor.Server/Macro.Blazor.Server.csproj
   bindings:
     - protocol: https
-      port: 44335
+      port: 5001
   env:
     - Kestrel__Certificates__Default__Path=../../etc/dev-cert/localhost.pfx
     - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49

@@ -272,12 +272,12 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
 
             await AddOptionalClientScopesAsync(
                 "Web",
-                new List<string>
-                {
+                [
                     "AdministrationService",
                     "IdentityService",
+                    "ProjectsService",
                     "CmskitService"
-                }
+                ]
             );
         }
     }

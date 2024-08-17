@@ -16,7 +16,6 @@ services:
       - macro-st-authserver
       - macro-st-identity
       - macro-st-projects
-      - macro-st-saas
       - macro-st-web
       - macro-st-public-web
       - macro-st-gateway-web
@@ -112,34 +111,6 @@ services:
       - ConnectionStrings__ProjectsService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=ProjectsService;Pooling=false;
       - Redis__Configuration=redis
       - RabbitMQ__Connections__Default__HostName=rabbitmq
-    depends_on:
-      redis:
-        condition: service_healthy
-      mongodb:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
-    restart: on-failure  
-    networks: 
-      - macro-network
-  macro-st-saas:
-    image: macro/service-saas:latest
-    container_name: saas-service-container
-    build:
-      context: ../../
-      dockerfile: services/saas/host/Macro.SaaS.HttpApi.Host/Dockerfile
-    environment:
-      # - ASPNETCORE_ENVIRONMENT=Docker
-      - ASPNETCORE_URLS=http://+:80
-      - App__SelfUrl=https://macro-st-saas
-      - App__CorsOrigins=https://macro-st-gateway-web,https://macro-st-gateway-web,https://macro-st-public-web
-      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=AdministrationService;Pooling=false;
-      - ConnectionStrings__IdentityService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=IdentityService;Pooling=false;
-      - ConnectionStrings__SaasService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=SaasService;Pooling=false;
-      - AuthServer__Authority=http://macro-st-authserver
-      - AuthServer__RequireHttpsMetadata=false
-      - Redis__Configuration=redis
-      - RabbitMQ__Connections__Default__HostName=rabbitmq    
     depends_on:
       redis:
         condition: service_healthy
