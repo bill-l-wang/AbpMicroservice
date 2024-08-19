@@ -353,9 +353,11 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
                 PublicClient = true,
                 ImplicitFlowEnabled = true // for hybrid flow
             };
-            publicWebClient.Attributes = new Dictionary<string, object>
-            {
-                { "post.logout.redirect.uris", $"{publicWebRootUrl.TrimEnd('/')}/signout-callback-oidc" }
+            publicWebClient.Attributes = new Dictionary<string, object> {
+                {
+                    "post.logout.redirect.uris",
+                    $"{publicWebRootUrl.TrimEnd('/')}/signout-callback-oidc"
+                }
             };
 
             await _keycloakClient.CreateClientAsync(_keycloakOptions.RealmName, publicWebClient);

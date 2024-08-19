@@ -2,13 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EShopOnAbp.Shared.Hosting.Microservices;
 using Macro.AdministrationService.DbMigrations;
 using Macro.AdministrationService.EntityFrameworkCore;
+using Macro.Shared.Hosting.AspNetCore;
 using Macro.Shared.Hosting.Microservices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Logging;
@@ -16,8 +19,11 @@ using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
 using Volo.Abp;
 using Volo.Abp.Caching;
+using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
 using Volo.Abp.Modularity;
+using Volo.Abp.PermissionManagement;
+using Volo.Abp.SettingManagement;
 
 namespace Macro.AdministrationService;
 
@@ -32,41 +38,17 @@ public class AdministrationServiceHttpApiHostModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
-        var hostingEnvironment = context.Services.GetHostingEnvironment();
         var configuration = context.Services.GetConfiguration();
 
-        context.Services.AddAbpSwaggerGenWithOAuth(
-            configuration["AuthServer:Authority"],
-            new Dictionary<string, string> {
-                {"AdministrationService", "AdministrationService API"}
-            },
-            options =>
-            {
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Administration API", Version = "v1" });
-                options.DocInclusionPredicate((docName, description) => true);
-                options.CustomSchemaIds(type => type.FullName);
-            });
+        JwtBearerConfigurationHelper.Configure(context, "AdministrationService");
 
-
-        context.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options =>
-            {
-                options.Authority = configuration["AuthServer:Authority"];
-                options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
-                options.Audience = "AdministrationService";
-            });
-
-        Configure<AbpDistributedCacheOptions>(options =>
-        {
-            options.KeyPrefix = "Administration:";
-        });
-
-        var dataProtectionBuilder = context.Services.AddDataProtection().SetApplicationName("Administration");
-        if (!hostingEnvironment.IsDevelopment())
-        {
-            var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
-            dataProtectionBuilder.PersistKeysToStackExchangeRedis(redis, "Administration-Protection-Keys");
-        }
+        SwaggerConfigurationHelper.ConfigureWithOidc(
+            context: context,
+            authority: configuration["AuthServer:Authority"]!,
+            scopes: ["AdministrationService"],
+            discoveryEndpoint: configuration["AuthServer:MetadataAddress"],
+            apiTitle: "Administration Service API"
+        );
 
         context.Services.AddCors(options =>
         {
@@ -74,9 +56,9 @@ public class AdministrationServiceHttpApiHostModule : AbpModule
             {
                 builder
                     .WithOrigins(
-                        configuration["App:CorsOrigins"]
+                        configuration["App:CorsOrigins"]!
                             .Split(",", StringSplitOptions.RemoveEmptyEntries)
-                            .Select(o => o.RemovePostFix("/"))
+                            .Select(o => o.Trim().RemovePostFix("/"))
                             .ToArray()
                     )
                     .WithAbpExposedHeaders()
@@ -86,11 +68,22 @@ public class AdministrationServiceHttpApiHostModule : AbpModule
                     .AllowCredentials();
             });
         });
+
+        Configure<PermissionManagementOptions>(options => { options.IsDynamicPermissionStoreEnabled = true; });
+        Configure<FeatureManagementOptions>(options => { options.IsDynamicFeatureStoreEnabled = true; });
+        Configure<SettingManagementOptions>(options => { options.IsDynamicSettingStoreEnabled = true; });
+
+        // Configure<AbpPermissionOptions>(options =>
+        // {
+        //     options.ValueProviders.Clear();
+        //     options.ValueProviders.Add<UserPermissionValueProvider>();
+        //     options.ValueProviders.Add<RolePermissionValueProvider>();
+        //     options.ValueProviders.Add<ClientPermissionValueProvider>();
+        // });
     }
 
     public override void OnApplicationInitialization(ApplicationInitializationContext context)
     {
-        IdentityModelEventSource.ShowPII = true;
         var app = context.GetApplicationBuilder();
         var env = context.GetEnvironment();
 
@@ -98,30 +91,25 @@ public class AdministrationServiceHttpApiHostModule : AbpModule
         {
             app.UseDeveloperExceptionPage();
         }
-        else
-        {
-            app.UseHsts();
-        }
 
-        app.UseHttpsRedirection();
         app.UseCorrelationId();
+        app.UseCors();
+        app.UseAbpRequestLocalization();
         app.UseStaticFiles();
         app.UseRouting();
-        app.UseCors();
         app.UseAuthentication();
-
-        app.UseAbpRequestLocalization();
+        app.UseAbpClaimsMap();
+        app.UseUnitOfWork();
         app.UseAuthorization();
         app.UseSwagger();
-        app.UseAbpSwaggerUI(options =>
+        app.UseAbpSwaggerWithCustomScriptUI(options =>
         {
-            options.SwaggerEndpoint("/swagger/v1/swagger.json", "Support APP API");
-            var configuration = context.GetConfiguration();
+            var configuration = context.ServiceProvider.GetRequiredService<IConfiguration>();
+            options.SwaggerEndpoint("/swagger/v1/swagger.json", "Administration Service API");
             options.OAuthClientId(configuration["AuthServer:SwaggerClientId"]);
-            options.OAuthClientSecret(configuration["AuthServer:SwaggerClientSecret"]);
         });
-        app.UseAuditing();
         app.UseAbpSerilogEnrichers();
+        app.UseAuditing();
         app.UseConfiguredEndpoints();
     }
 

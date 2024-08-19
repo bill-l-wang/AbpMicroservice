@@ -51,6 +51,15 @@ services:
     - Kestrel__Certificates__Default__Path=../../etc/dev-cert/localhost.pfx
     - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49  
 
+- name: web-public-gateway
+  project: gateways/web-public/src/Macro.WebPublicGateway/Macro.WebPublicGateway.csproj
+  bindings:
+    - protocol: https
+      port: 7400
+  env:
+    - Kestrel__Certificates__Default__Path=../../../../etc/dev-cert/localhost.pfx
+    - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49  
+
 - name: public-web
   project: apps/Macro.Blazor.Server/Macro.Blazor.Server.csproj
   bindings:

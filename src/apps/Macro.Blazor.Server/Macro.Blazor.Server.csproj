@@ -16,14 +16,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Blazorise.Bootstrap5" Version="1.6.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="8.0.5" />
+	  <PackageReference Include="DistributedLock.Redis" Version="1.0.2" />
+	  <PackageReference Include="Blazorise.Bootstrap5" Version="1.6.0" />
     <PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.6.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.6" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="8.0.1" />
-    <PackageReference Include="DistributedLock.Redis" Version="1.0.2" />
     <PackageReference Include="Yarp.ReverseProxy" Version="2.1.0" />
     <PackageReference Include="Microsoft.Extensions.ServiceDiscovery.Yarp" Version="8.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="8.0.5" />
     <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="8.0.0" />
   </ItemGroup>
 
@@ -33,12 +33,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="8.2.0" />
-    <PackageReference Include="Volo.Abp.DistributedLocking" Version="8.2.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.Client" Version="8.2.0" />
+	  <PackageReference Include="Volo.Abp.DistributedLocking" Version="8.2.0" />
+	  <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="8.2.0" />
+	  <PackageReference Include="Volo.Abp.EventBus.RabbitMQ" Version="8.2.0" />
+	  <PackageReference Include="Volo.Abp.AspNetCore.Mvc.Client" Version="8.2.0" />
     <PackageReference Include="Volo.Abp.AspNetCore.Authentication.OpenIdConnect" Version="8.2.0" />
     <PackageReference Include="Volo.Abp.Http.Client.IdentityModel.Web" Version="8.2.0" />
+    <PackageReference Include="Volo.Abp.Account.HttpApi.Client" Version="8.2.0" />
     <PackageReference Include="Volo.Abp.Identity.Blazor.Server" Version="8.2.0" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Blazor.Server" Version="8.2.0" />
     <PackageReference Include="Volo.Abp.TenantManagement.Blazor.Server" Version="8.2.0" />
     <PackageReference Include="Volo.Abp.SettingManagement.Blazor.Server" Version="8.2.0" />
   </ItemGroup>

@@ -105,7 +105,7 @@ public class MacroServerBlazorModule : AbpModule
     {
         var hostingEnvironment = context.Services.GetHostingEnvironment();
         var configuration = context.Services.GetConfiguration();
-
+        Microsoft.IdentityModel.Logging.IdentityModelEventSource.ShowPII = true;
         ConfigureUrls(configuration);
         ConfigureCache();
         ConfigureBundles();
@@ -175,15 +175,11 @@ public class MacroServerBlazorModule : AbpModule
     private void ConfigureAuthentication(ServiceConfigurationContext context, IConfiguration configuration)
     {
         context.Services.AddAuthentication(options =>
-            {
-                options.DefaultScheme = "Cookies";
-                options.DefaultChallengeScheme = "oidc";
-            })
-            .AddCookie("Cookies", options =>
-            {
-                options.ExpireTimeSpan = TimeSpan.FromDays(365);
-                options.IntrospectAccessToken();
-            })
+        {
+            options.DefaultScheme = "Cookies";
+            options.DefaultChallengeScheme = "oidc";
+        })
+            .AddCookie("Cookies")
             .AddAbpOpenIdConnect("oidc", options =>
             {
                 options.Authority = configuration["AuthServer:Authority"];
@@ -192,15 +188,6 @@ public class MacroServerBlazorModule : AbpModule
                 options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
                 options.ResponseType = OpenIdConnectResponseType.CodeIdToken;
                 options.GetClaimsFromUserInfoEndpoint = true;
-
-                options.SaveTokens = true;
-
-                options.Scope.Add("openid");
-                options.Scope.Add("profile");
-                options.Scope.Add("roles");
-                options.Scope.Add("email");
-                options.Scope.Add("phone");
-
                 options.Scope.Add("openid");
                 options.Scope.Add("profile");
                 options.Scope.Add("email");
@@ -208,8 +195,11 @@ public class MacroServerBlazorModule : AbpModule
                 options.Scope.Add("roles");
                 options.Scope.Add("offline_access");
 
-                options.Scope.Add("IdentityService");
                 options.Scope.Add("AdministrationService");
+                options.Scope.Add("IdentityService");
+                options.Scope.Add("ProjectsService");
+
+                options.SaveTokens = true;
 
                 //SameSite is needed for Chrome/Firefox, as they will give http error 500 back, if not set to unspecified.
                 // options.NonceCookie.SameSite = SameSiteMode.Unspecified;
@@ -359,6 +349,7 @@ public class MacroServerBlazorModule : AbpModule
         ServiceConfigurationContext context,
         IConfiguration configuration)
     {
+        context.Services.AddHttpForwarderWithServiceDiscovery();
         context.Services
             .AddReverseProxy()
             .LoadFromConfig(configuration.GetSection("ReverseProxy"))

@@ -191,6 +191,7 @@ services:
     restart: on-failure  
     networks: 
       - macro-network
+
   macro-st-gateway-web:
     image: macro/gateway-web:latest
     container_name: gateway-web-container
@@ -211,6 +212,31 @@ services:
       - ReverseProxy__Clusters__feature-management-cluster__Destinations__destination1__Address=http://macro-st-administration
       - ReverseProxy__Clusters__permission-management-cluster__Destinations__destination1__Address=http://macro-st-administration
       - ReverseProxy__Clusters__setting-management-cluster__Destinations__destination1__Address=http://macro-st-administration
+    depends_on:
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure  
+    networks: 
+      - macro-network
+  
+  macro-st-gateway-web-public:
+    image: macro/gateway-web-public:latest
+    container_name: gateway-web-public-container
+    build:
+      context: ../../
+      dockerfile: gateways/web-public/src/Macro.WebPublicGateway/Dockerfile
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Docker # Yarp can't resolve dns, needs to be overridden
+      - ASPNETCORE_URLS=http://+:80;
+      - App__SelfUrl=https://macro-st-gateway-web-public
+      - AuthServer__Authority=http://macro-st-authserver
+      - AuthServer__RequireHttpsMetadata=false
+      - Redis__Configuration=redis
+      - ReverseProxy__Clusters__accountCluster__Destinations__destination1__Address=http://macro-st-authserver
+      - ReverseProxy__Clusters__administrationCluster__Destinations__destination1__Address=http://macro-st-administration
+      - ReverseProxy__Clusters__catalogCluster__Destinations__destination1__Address=http://macro-st-projects
     depends_on:
       redis:
         condition: service_healthy

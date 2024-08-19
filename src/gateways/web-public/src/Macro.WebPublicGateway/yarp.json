@@ -1,0 +1,132 @@
+﻿{
+  "ReverseProxy": {
+    "Routes": {
+      "AbpApi": {
+        "ClusterId": "Administration",
+        "Match": {
+          "Path": "/api/abp/{**catch-all}"
+        }
+      },
+      "Identity Service": {
+        "ClusterId": "Identity",
+        "Match": {
+          "Path": "/api/identity/{**everything}"
+        }
+      },
+      "Identity Service Swagger": {
+        "ClusterId": "Identity",
+        "Match": {
+          "Path": "/swagger-json/Identity/swagger/v1/swagger.json"
+        },
+        "Transforms": [
+          { "PathRemovePrefix": "/swagger-json/Identity" }
+        ]
+      },
+      "FeatureManagement": {
+        "ClusterId": "Administration",
+        "Match": {
+          "Path": "/api/feature-management/{**everything}"
+        }
+      },
+      "PermissionManagement": {
+        "ClusterId": "Administration",
+        "Match": {
+          "Path": "/api/permission-management/{**everything}"
+        }
+      },
+      "SettingManagement": {
+        "ClusterId": "Administration",
+        "Match": {
+          "Path": "/api/setting-management/{**everything}"
+        }
+      },
+      "Administration Service Swagger": {
+        "ClusterId": "Administration",
+        "Match": {
+          "Path": "/swagger-json/Administration/swagger/v1/swagger.json"
+        },
+        "Transforms": [
+          { "PathRemovePrefix": "/swagger-json/Administration" }
+        ]
+      },
+      "Projects Service": {
+        "ClusterId": "projectsCluster",
+        "Match": {
+          "Path": "/api/projects/{**everything}"
+        }
+      },
+      "Projects Service Swagger": {
+        "ClusterId": "projectsCluster",
+        "Match": {
+          "Path": "/swagger-json/projects/swagger/v1/swagger.json"
+        },
+        "Transforms": [
+          { "PathRemovePrefix": "/swagger-json/Projects" }
+        ]
+      },
+      "Cmskit Public Service": {
+        "ClusterId": "CmsKit",
+        "Match": {
+          "Path": "/api/cms-kit-public/{**everything}"
+        }
+      },
+      "Cmskit Admin Service": {
+        "ClusterId": "CmsKit",
+        "Match": {
+          "Path": "/api/cms-kit-admin/{**everything}"
+        }
+      },
+      "Cmskit Service Swagger": {
+        "ClusterId": "CmsKit",
+        "Match": {
+          "Path": "/swagger-json/Cmskit/swagger/v1/swagger.json"
+        },
+        "Transforms": [
+          { "PathRemovePrefix": "/swagger-json/Cmskit" }
+        ]
+      }
+    },
+    "Clusters": {
+      "Identity": {
+        "Destinations": {
+          "destination1": {
+            "Address": "https://localhost:7002",
+            "MetaData": {
+              "PublicAddress": "https://identity.macro.dev"
+            }
+          }
+        }
+      },
+      "Administration": {
+        "Destinations": {
+          "destination1": {
+            "Address": "https://localhost:7001",
+            "MetaData": {
+              "PublicAddress": "https://admininstration.macro.dev"
+            }
+          }          
+        }
+      },
+      "projectsCluster": {
+        "Destinations": {
+          "destination1": {
+            "Address": "https://localhost:7007",
+            "MetaData": {
+              "PublicAddress": "https://projects.macro.dev"
+            }
+          }
+        }
+      },
+      "CmsKit": {
+        "Destinations": {
+          "destination1": {
+            "Address": "http://cmsKitService",
+            "MetaData": {
+              "PublicAddress": "https://cmskit.macro.dev"
+            }
+          }
+        }
+      }
+    }
+  }
+}

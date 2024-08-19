@@ -1,14 +1,17 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Macro.Shared.Hosting.AspNetCore;
+using Macro.Shared.Hosting.Gateways;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 
-namespace Macro.AdministrationService;
+namespace Macro.WebPublicGateway;
 
 public class Program
 {
-    public async static Task<int> Main(string[] args)
+    public static async Task<int> Main(string[] args)
     {
         var assemblyName = typeof(Program).Assembly.GetName().Name;
 
@@ -17,11 +20,20 @@ public class Program
         try
         {
             Log.Information($"Starting {assemblyName}.");
-            var app = await ApplicationBuilderHelper
-                .BuildApplicationAsync<AdministrationServiceHttpApiHostModule>(args);
+            
+            var builder = WebApplication.CreateBuilder(args);
+            builder.Host
+                .AddYarpJson()
+                .UseAutofac()
+                .UseSerilog();
+            
+            builder.AddServiceDefaults();
+
+            await builder.AddApplicationAsync<MacroWebPublicGatewayModule>();
+            var app = builder.Build();
             await app.InitializeApplicationAsync();
             await app.RunAsync();
-
+            
             return 0;
         }
         catch (Exception ex)
