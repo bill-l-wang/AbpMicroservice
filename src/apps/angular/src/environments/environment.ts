@@ -1,4 +1,4 @@
-import { Environment } from '@abp/ng.core';
+import { MyEnvironment } from './my-environment';
 
 const baseUrl = 'http://localhost:4200';
 
@@ -6,21 +6,31 @@ export const environment = {
   production: false,
   application: {
     baseUrl,
-    name: 'Tasky',
-    logoUrl: '',
+    name: 'Macro',
   },
   oAuthConfig: {
-    issuer: 'https://localhost:7600/',
+    issuer: 'http://localhost:8080/realms/master',
     redirectUri: baseUrl,
-    clientId: 'Tasky_App',
+    clientId: 'Web',
     responseType: 'code',
-    scope: 'IdentityService AdministrationService SaasService',
+    scope: 'offline_access openid profile email phone roles AdministrationService IdentityService', 
     requireHttps: false,
   },
   apis: {
     default: {
-      url: 'https://localhost:7500',
-      rootNamespace: 'Tasky',
+      url: 'https://localhost:7400',
+      rootNamespace: 'Macro',
     },
+    // Catalog: {
+    //   url: 'https://localhost:44354',
+    //   rootNamespace: 'EShopOnAbp.CatalogService',
+    // },
+    // Ordering: {
+    //   url: "https://localhost:44356",
+    //   rootNamespace: 'EShopOnAbp.OrderingService',
+    // }
   },
-} as Environment;
+  mediaServerUrl:'https://localhost:44373'
+} as MyEnvironment;
+
+

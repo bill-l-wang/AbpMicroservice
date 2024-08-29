@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Localization.Resources.AbpUi;
+using Macro.Localization;
 using Microsoft.Extensions.Configuration;
+using Volo.Abp.Account.Localization;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Identity.Blazor;
 using Volo.Abp.SettingManagement.Blazor.Menus;
@@ -45,10 +48,7 @@ public class MacroMenuContributor : IMenuContributor
             )
         );
 
-
         administration.SetSubItemOrder(TenantManagementMenuNames.GroupName, 1);
-
-
         administration.SetSubItemOrder(IdentityMenuNames.GroupName, 2);
         administration.SetSubItemOrder(SettingManagementMenus.GroupName, 3);
 
@@ -57,11 +57,13 @@ public class MacroMenuContributor : IMenuContributor
 
     private Task ConfigureUserMenuAsync(MenuConfigurationContext context)
     {
-        var authServerUrl = _configuration["AuthServer:Authority"] ?? "";
+        var identityServerUrl = _configuration["AuthServer:Authority"] ?? "~";
+        var uiResource = context.GetLocalizer<AbpUiResource>();
+        var accountResource = context.GetLocalizer<AccountResource>();
+        var macroResource = context.GetLocalizer<MacroResource>();
 
-        context.Menu.AddItem(new ApplicationMenuItem("Account.Manage", "My Account",
-                $"{authServerUrl.EnsureEndsWith('/')}Account/Manage?returnUrl={_configuration["App:SelfUrl"]}", icon: "fa fa-cog", order: 1000, null, "_blank").RequireAuthenticated());
-        context.Menu.AddItem(new ApplicationMenuItem("Account.Logout", "Logout", url: "~/Account/Logout", icon: "fa fa-power-off", order: int.MaxValue - 1000).RequireAuthenticated());
+        context.Menu.AddItem(new ApplicationMenuItem("Account.Manage", accountResource["MyAccount"], $"{identityServerUrl.EnsureEndsWith('/')}account", icon: "fa fa-cog", order: 1000, null, "_blank").RequireAuthenticated());
+        context.Menu.AddItem(new ApplicationMenuItem("Account.Logout", uiResource["Logout"], url: "~/Account/Logout", icon: "fa fa-power-off", order: int.MaxValue - 1000).RequireAuthenticated());
 
         return Task.CompletedTask;
     }

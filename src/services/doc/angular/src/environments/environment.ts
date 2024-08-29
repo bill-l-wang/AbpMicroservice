@@ -3,12 +3,12 @@
 const baseUrl = 'http://localhost:4200';
 
 const oAuthConfig = {
-  issuer: 'https://localhost:44304/',
+  issuer: 'http://localhost:8080/realms/master',
   redirectUri: baseUrl,
-  clientId: 'DocService_App',
+  clientId: 'Web',
   responseType: 'code',
-  scope: 'offline_access DocService',
-  requireHttps: true,
+  scope: 'IdentityService AdministrationService',
+  requireHttps: false,
 };
 
 export const environment = {
@@ -20,8 +20,8 @@ export const environment = {
   oAuthConfig,
   apis: {
     default: {
-      url: 'https://localhost:44304',
-      rootNamespace: 'DocService',
+      url: 'https://localhost:7400',
+      rootNamespace: 'Macro',
     },
     AbpAccountPublic: {
       url: oAuthConfig.issuer,

@@ -11,7 +11,7 @@ var administrationService =
     builder.AddProject<Projects.Macro_AdministrationService_HttpApi_Host>("administrationService", profile);
 var identityService = builder.AddProject<Projects.Macro_IdentityService_HttpApi_Host>("identityService", profile);
 
-var projectService = builder.AddProject<Projects.Macro_Projects_HttpApi_Host>("cmsKitService", profile);
+var projectService = builder.AddProject<Projects.Macro_Projects_HttpApi_Host>("projectsService", profile);
 
 // Gateways
 var webPublicGateway = builder.AddProject<Projects.Macro_WebGateway>("webGateway")

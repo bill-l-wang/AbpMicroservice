@@ -10,7 +10,7 @@
     "redirectUri": "https://macro-st-web",
     "clientId": "Web",
     "responseType": "code",
-    "scope": "offline_access openid profile email phone AccountService IdentityService AdministrationService CatalogService OrderingService",
+    "scope": "offline_access openid profile email phone AccountService IdentityService AdministrationService",
     "strictDiscoveryDocumentValidation": false,
     "requireHttps": false
   },

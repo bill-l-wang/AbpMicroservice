@@ -13,7 +13,7 @@ services:
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
     depends_on:
       - macro-st-administration
-      - macro-st-authserver
+      #- macro-st-authserver
       - macro-st-identity
       - macro-st-projects
       - macro-st-web
@@ -122,43 +122,44 @@ services:
     networks: 
       - macro-network
  
-  macro-st-authserver:
-    image: macro/app-authserver:latest
-    container_name: app-authserver-container
-    build:
-      context: ../../
-      dockerfile: apps/Macro.AuthServer/Dockerfile
-    environment:
-      # - ASPNETCORE_ENVIRONMENT=Docker
-      - ASPNETCORE_URLS=http://+:80;
-      - App__SelfUrl=https://macro-st-authserver
-      - App__CorsOrigins=https://macro-st-web,https://macro-st-public-web,https://macro-st-identity,http://macro-st-administration,https://macro-st-administration
-      - App__RedirectAllowedUrls=http://macro-st-web
-      - AuthServer__Authority=http://macro-st-authserver
-      - AuthServer__RequireHttpsMetadata=false
-      - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=AdministrationService;Pooling=false;
-      - ConnectionStrings__IdentityService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=IdentityService;Pooling=false;
-      - ConnectionStrings__SaasService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=SaasService;Pooling=false;
-      - Redis__Configuration=redis
-      - RabbitMQ__Connections__Default__HostName=rabbitmq
-    depends_on:
-      redis:
-        condition: service_healthy
-      postgres-db:
-        condition: service_healthy  
-      rabbitmq:
-        condition: service_healthy
-    restart: on-failure  
-    networks: 
-      - macro-network
+  # macro-st-authserver:
+  #   image: macro/app-authserver:latest
+  #   container_name: app-authserver-container
+  #   build:
+  #     context: ../../
+  #     dockerfile: apps/Macro.AuthServer/Dockerfile
+  #   environment:
+  #     # - ASPNETCORE_ENVIRONMENT=Docker
+  #     - ASPNETCORE_URLS=http://+:80;
+  #     - App__SelfUrl=https://macro-st-authserver
+  #     - App__CorsOrigins=https://macro-st-web,https://macro-st-public-web,https://macro-st-identity,http://macro-st-administration,https://macro-st-administration
+  #     - App__RedirectAllowedUrls=http://macro-st-web
+  #     - AuthServer__Authority=http://macro-st-authserver
+  #     - AuthServer__RequireHttpsMetadata=false
+  #     - ConnectionStrings__AdministrationService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=AdministrationService;Pooling=false;
+  #     - ConnectionStrings__IdentityService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=IdentityService;Pooling=false;
+  #     - ConnectionStrings__SaasService=User ID=postgres;Password=myPassw0rd;Host=postgres-db;Port=5432;Database=SaasService;Pooling=false;
+  #     - Redis__Configuration=redis
+  #     - RabbitMQ__Connections__Default__HostName=rabbitmq
+  #   depends_on:
+  #     redis:
+  #       condition: service_healthy
+  #     postgres-db:
+  #       condition: service_healthy  
+  #     rabbitmq:
+  #       condition: service_healthy
+  #   restart: on-failure  
+  #   networks: 
+  #     - macro-network
+
   macro-st-web:
     image: macro/app-web:latest
     container_name: app-web-container
     build:
-      context: ../../
-      dockerfile: apps/angular/Dockerfile
+      context: ../../apps/angular
+      dockerfile: Dockerfile
     volumes:
-      - ./nginx/dynamic-env.json:/usr/share/nginx/html/dynamic-env.json
+      - ../../etc/docker/nginx/dynamic-env.json:/usr/share/nginx/html/dynamic-env.json
     depends_on:
       redis:
         condition: service_healthy

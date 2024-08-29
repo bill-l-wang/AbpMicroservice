@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/Tasky'),
+      dir: require('path').join(__dirname, './coverage/AbpSolution2'),
       subdir: '.',
       reporters: [
         { type: 'html' },

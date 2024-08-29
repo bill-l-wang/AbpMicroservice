@@ -69,5 +69,14 @@ services:
     - Kestrel__Certificates__Default__Path=../../etc/dev-cert/localhost.pfx
     - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49
 
+- name: app-host
+  project: aspire/AppHost/Macro.AppHost.csproj
+  bindings:
+    - protocol: https
+      port: 8001
+  env:
+    - Kestrel__Certificates__Default__Path=../../etc/dev-cert/localhost.pfx
+    - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49
+
 - name: keycloak-seeder
   project: shared/Macro.Keycloak.DbMigrator/Macro.Keycloak.DbMigrator.csproj 
