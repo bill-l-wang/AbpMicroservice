@@ -28,7 +28,7 @@ public class MacroWebPublicGatewayModule : AbpModule
                 "IdentityService",
                 "AdministrationService",
                 "ProjectsService",
-                "CmskitService"
+                "DocService"
             ],
             apiTitle: "Web Gateway API",
             discoveryEndpoint: configuration["AuthServer:MetadataAddress"]

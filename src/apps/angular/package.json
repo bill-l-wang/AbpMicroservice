@@ -15,6 +15,7 @@
     "@abp/ng.components": "~8.2.2",
     "@abp/ng.core": "~8.2.2",
     "@abp/ng.oauth": "~8.2.2",
+    "@abp/ng.theme.basic": "~8.2.2",
     "@abp/ng.setting-management": "~8.2.2",
     "@abp/ng.theme.shared": "~8.2.2",
     "@abp/ng.tenant-management": "~8.2.2",

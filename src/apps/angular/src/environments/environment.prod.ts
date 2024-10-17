@@ -10,16 +10,16 @@ export const environment = {
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'https://localhost:44394',
+    issuer: 'http://localhost:8080/realms/master',
     redirectUri: baseUrl,
     clientId: 'Web',
     responseType: 'code',
-    scope: 'offline_access openid profile email phone AccountService IdentityService AdministrationService CatalogService OrderingService',
+    scope: 'offline_access openid profile email phone AccountService IdentityService AdministrationService',
   },
   apis: {
     default: {
-      url: 'https://localhost:44394',
-      rootNamespace: 'EShopOnAbp',
+      url: 'https://localhost:7500',
+      rootNamespace: 'Macro',
     },
   },
   remoteEnv: {

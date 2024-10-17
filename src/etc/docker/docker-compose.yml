@@ -207,9 +207,10 @@ services:
       - AuthServer__Authority=http://macro-st-authserver
       - AuthServer__RequireHttpsMetadata=false
       - Redis__Configuration=redis
-      - ReverseProxy__Clusters__accountCluster__Destinations__destination1__Address=http://macro-st-authserver
-      - ReverseProxy__Clusters__identityCluster__Destinations__destination1__Address=http://macro-st-identity
-      - ReverseProxy__Clusters__administrationCluster__Destinations__destination1__Address=http://macro-st-administration
+      - ReverseProxy__Clusters__Account__Destinations__destination1__Address=http://macro-st-authserver
+      - ReverseProxy__Clusters__Identity__Destinations__destination1__Address=http://macro-st-identity
+      - ReverseProxy__Clusters__Administration__Destinations__destination1__Address=http://macro-st-administration
+      - ReverseProxy__Clusters__Projects__Destinations__destination1__Address=http://macro-st-administration
       - ReverseProxy__Clusters__feature-management-cluster__Destinations__destination1__Address=http://macro-st-administration
       - ReverseProxy__Clusters__permission-management-cluster__Destinations__destination1__Address=http://macro-st-administration
       - ReverseProxy__Clusters__setting-management-cluster__Destinations__destination1__Address=http://macro-st-administration
@@ -235,9 +236,9 @@ services:
       - AuthServer__Authority=http://macro-st-authserver
       - AuthServer__RequireHttpsMetadata=false
       - Redis__Configuration=redis
-      - ReverseProxy__Clusters__accountCluster__Destinations__destination1__Address=http://macro-st-authserver
-      - ReverseProxy__Clusters__administrationCluster__Destinations__destination1__Address=http://macro-st-administration
-      - ReverseProxy__Clusters__catalogCluster__Destinations__destination1__Address=http://macro-st-projects
+      - ReverseProxy__Clusters__Identity__Destinations__destination1__Address=http://macro-st-authserver
+      - ReverseProxy__Clusters__Administration__Destinations__destination1__Address=http://macro-st-administration
+      - ReverseProxy__Clusters__Projects__Destinations__destination1__Address=http://macro-st-projects
     depends_on:
       redis:
         condition: service_healthy

@@ -69,8 +69,8 @@ services:
     - Kestrel__Certificates__Default__Path=../../etc/dev-cert/localhost.pfx
     - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49
 
-- name: app-host
-  project: aspire/AppHost/Macro.AppHost.csproj
+- name: Blazor
+  project: apps/Macro.Blazor/Macro.Blazor.csproj
   bindings:
     - protocol: https
       port: 8001

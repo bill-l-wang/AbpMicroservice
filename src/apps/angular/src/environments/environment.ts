@@ -18,7 +18,7 @@ export const environment = {
   },
   apis: {
     default: {
-      url: 'https://localhost:7400',
+      url: 'https://localhost:7500',
       rootNamespace: 'Macro',
     },
     // Catalog: {

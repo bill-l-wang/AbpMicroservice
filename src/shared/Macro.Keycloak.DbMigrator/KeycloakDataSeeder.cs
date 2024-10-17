@@ -276,7 +276,6 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
                     "AdministrationService",
                     "IdentityService",
                     "ProjectsService",
-                    "CmskitService"
                 ]
             );
         }
