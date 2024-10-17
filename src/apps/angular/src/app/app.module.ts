@@ -36,8 +36,8 @@ import { AbpOAuthModule } from '@abp/ng.oauth';
     ThemeLeptonXModule.forRoot(),
     SideMenuLayoutModule.forRoot(),
     // AccountLayoutModule.forRoot(),
-    //CatalogConfigModule.forRoot(),
-    //OrderingConfigModule.forRoot(),
+    // CatalogConfigModule.forRoot(),
+    // OrderingConfigModule.forRoot(),
   ],
   declarations: [AppComponent],
   providers: [

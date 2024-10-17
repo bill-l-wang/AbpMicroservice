@@ -29,7 +29,7 @@ public class IdentityServiceDbContextFactory : IDesignTimeDbContextFactory<Ident
             .SetBasePath(
                 Path.Combine(
                     Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,
-                    $"host{Path.DirectorySeparatorChar}Tasky.IdentityService.HttpApi.Host"
+                    $"host{Path.DirectorySeparatorChar}Macro.IdentityService.HttpApi.Host"
                 )
             )
             .AddJsonFile("appsettings.json", false);

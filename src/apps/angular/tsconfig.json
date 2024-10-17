@@ -1,4 +1,3 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
@@ -8,25 +7,40 @@
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
+    "module": "esnext",
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "ES2022",
-    "module": "es2020",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "lib": [
       "es2018",
       "dom"
     ],
     "paths": {
-      "@proxy": [
-        "src/app/proxy/index.ts"
+      "@eshoponabp/catalog/config": [
+        "node_modules/@eshoponabp/catalog/config",
+        "projects/catalog/config/src/public-api.ts"
       ],
-      "@proxy/*": [
-        "src/app/proxy/*"
+      "@eshoponabp/catalog": [
+        "node_modules/@eshoponabp/catalog",
+        "projects/catalog/src/public-api.ts"
+      ],
+      "@eshoponabp/ordering/config": [
+        "node_modules/@eshoponabp/ordering/config",
+        "projects/ordering/config/src/public-api.ts"
+      ],
+      "@eshoponabp/ordering": [
+        "node_modules/@eshoponabp/ordering",
+        "projects/ordering/src/public-api.ts"
       ]
     },
     "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true,
+    "enableIvy": true
   }
 }

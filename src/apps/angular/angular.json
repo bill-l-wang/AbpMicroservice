@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Macro": {
+    "EShopOnAbp": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Macro",
+            "outputPath": "dist/EShopOnAbp",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -134,14 +134,6 @@
                   "maximumError": "10kb"
                 }
               ]
-            },
-            "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
             }
           },
           "defaultConfiguration": ""
@@ -149,22 +141,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "buildTarget": "Macro:build"
+            "buildTarget": "EShopOnAbp:build"
           },
           "configurations": {
             "production": {
-              "buildTarget": "Macro:build:production"
-            },
-            "development": {
-              "buildTarget": "Macro:build:development"
+              "buildTarget": "EShopOnAbp:build:production"
             }
-          },
-          "defaultConfiguration": "development"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "Macro:build"
+            "buildTarget": "EShopOnAbp:build"
           }
         },
         "test": {
@@ -191,18 +179,74 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "Macro:serve"
+            "devServerTarget": "EShopOnAbp:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "Macro:serve:production"
+              "devServerTarget": "EShopOnAbp:serve:production"
             }
           }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
+        }
+      }
+    },
+    "catalog": {
+      "projectType": "library",
+      "root": "projects/catalog",
+      "sourceRoot": "projects/catalog/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+            "project": "projects/catalog/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/catalog/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/catalog/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/catalog/src/test.ts",
+            "tsConfig": "projects/catalog/tsconfig.spec.json",
+            "karmaConfig": "projects/catalog/karma.conf.js"
+          }
+        }
+      }
+    },
+    "ordering": {
+      "projectType": "library",
+      "root": "projects/ordering",
+      "sourceRoot": "projects/ordering/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ordering/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ordering/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ordering/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ordering/src/test.ts",
+            "tsConfig": "projects/ordering/tsconfig.spec.json",
+            "karmaConfig": "projects/ordering/karma.conf.js"
           }
         }
       }
