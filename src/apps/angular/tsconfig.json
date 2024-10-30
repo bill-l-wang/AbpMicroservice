@@ -19,22 +19,22 @@
       "dom"
     ],
     "paths": {
-      "@eshoponabp/catalog/config": [
-        "node_modules/@eshoponabp/catalog/config",
-        "projects/catalog/config/src/public-api.ts"
-      ],
-      "@eshoponabp/catalog": [
-        "node_modules/@eshoponabp/catalog",
-        "projects/catalog/src/public-api.ts"
-      ],
-      "@eshoponabp/ordering/config": [
-        "node_modules/@eshoponabp/ordering/config",
-        "projects/ordering/config/src/public-api.ts"
-      ],
-      "@eshoponabp/ordering": [
-        "node_modules/@eshoponabp/ordering",
-        "projects/ordering/src/public-api.ts"
-      ]
+      // "@eshoponabp/catalog/config": [
+      //   "node_modules/@eshoponabp/catalog/config",
+      //   "projects/catalog/config/src/public-api.ts"
+      // ],
+      // "@eshoponabp/catalog": [
+      //   "node_modules/@eshoponabp/catalog",
+      //   "projects/catalog/src/public-api.ts"
+      // ],
+      // "@eshoponabp/ordering/config": [
+      //   "node_modules/@eshoponabp/ordering/config",
+      //   "projects/ordering/config/src/public-api.ts"
+      // ],
+      // "@eshoponabp/ordering": [
+      //   "node_modules/@eshoponabp/ordering",
+      //   "projects/ordering/src/public-api.ts"
+      // ]
     },
     "useDefineForClassFields": false
   },

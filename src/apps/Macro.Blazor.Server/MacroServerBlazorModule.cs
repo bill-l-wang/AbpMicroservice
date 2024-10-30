@@ -197,7 +197,7 @@ public class MacroServerBlazorModule : AbpModule
 
                 options.Scope.Add("AdministrationService");
                 options.Scope.Add("IdentityService");
-                options.Scope.Add("ProjectsService");
+                //options.Scope.Add("ProjectsService");
 
                 options.SaveTokens = true;
 

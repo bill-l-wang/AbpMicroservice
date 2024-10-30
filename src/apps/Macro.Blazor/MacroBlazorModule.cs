@@ -78,7 +78,6 @@ public class MacroBlazorModule : AbpModule
             options.ProviderOptions.DefaultScopes.Add("roles");
             options.ProviderOptions.DefaultScopes.Add("email");
             options.ProviderOptions.DefaultScopes.Add("phone");
-            options.ProviderOptions.DefaultScopes.Add("SaasService");
             options.ProviderOptions.DefaultScopes.Add("IdentityService");
             options.ProviderOptions.DefaultScopes.Add("AdministrationService");
         });

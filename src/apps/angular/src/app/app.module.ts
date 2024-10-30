@@ -1,6 +1,6 @@
 import { AccountConfigModule } from '@abp/ng.account/config';
 import { CoreModule, EnvironmentService, NAVIGATE_TO_MANAGE_PROFILE } from '@abp/ng.core';
-import { registerLocale } from '@abp/ng.core/locale';
+import { registerLocale, storeLocaleData } from '@abp/ng.core/locale';
 import { IdentityConfigModule } from '@abp/ng.identity/config';
 import { SettingManagementConfigModule } from '@abp/ng.setting-management/config';
 import { TenantManagementConfigModule } from '@abp/ng.tenant-management/config';
@@ -16,7 +16,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { APP_ROUTE_PROVIDER } from './route.provider';
 import { AbpOAuthModule } from '@abp/ng.oauth';
-
+import(
+  /* webpackChunkName: "_locale-your-locale-js"*/
+  /* webpackMode: "eager" */
+  "@angular/common/locales/zh-Hans"
+).then((m) => storeLocaleData(m.default, "zh-Hans"));
 @NgModule({
   imports: [
     BrowserModule,
@@ -24,7 +28,12 @@ import { AbpOAuthModule } from '@abp/ng.oauth';
     AppRoutingModule,
     CoreModule.forRoot({
       environment,
-      registerLocaleFn: registerLocale(),
+      registerLocaleFn: registerLocale({
+        "cultureNameLocaleFileMap":{
+          "DotnetCultureName": "AngularLocaleFileName",
+          "zh-CN": "zh-Hans"  // example
+        }
+      }),
       // localizations: [{}]
     }),
     AbpOAuthModule.forRoot(),
@@ -35,7 +44,7 @@ import { AbpOAuthModule } from '@abp/ng.oauth';
     SettingManagementConfigModule.forRoot(),
     ThemeLeptonXModule.forRoot(),
     SideMenuLayoutModule.forRoot(),
-    // AccountLayoutModule.forRoot(),
+    AccountLayoutModule.forRoot(),
     // CatalogConfigModule.forRoot(),
     // OrderingConfigModule.forRoot(),
   ],

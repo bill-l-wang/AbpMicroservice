@@ -59,7 +59,9 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
         var roleScope = (await _keycloakClient.GetClientScopesAsync(_keycloakOptions.RealmName))
             .FirstOrDefault(q => q.Name == "roles");
         if (roleScope == null)
+        {
             return;
+        }
 
         if (!roleScope.ProtocolMappers.Any(q => q.Name == "roles"))
         {
@@ -85,7 +87,6 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
     {
         await CreateScopeAsync("AdministrationService");
         await CreateScopeAsync("IdentityService");
-        await CreateScopeAsync("ProjectsService");
     }
 
     private async Task CreateScopeAsync(string scopeName)
@@ -134,15 +135,15 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
         await CreatePublicWebClientAsync();
         await CreateSwaggerClientAsync();
         await CreateWebClientAsync();
-        await CreateProjectsClientAsync();
-        await CreateAdministrationClientAsync();
+        // await CreateCmskitClientAsync();
+        // await CreateAdministrationClientAsync();
     }
 
     private async Task CreateAdministrationClientAsync()
     {
         var administrationClient =
             (await _keycloakClient.GetClientsAsync(_keycloakOptions.RealmName,
-                clientId: "Macro_AdministrationService"))
+                clientId: "EShopOnAbp_AdministrationService"))
             .FirstOrDefault();
 
         if (administrationClient == null)
@@ -178,7 +179,7 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
             );
             
             var insertedClient =
-                (await _keycloakClient.GetClientsAsync(_keycloakOptions.RealmName, clientId: "Macro_AdministrationService"))
+                (await _keycloakClient.GetClientsAsync(_keycloakOptions.RealmName, clientId: "EShopOnAbp_AdministrationService"))
                 .First();
             
             var clientIdProtocolMapper = insertedClient.ProtocolMappers.First(q => q.Name == "Client ID");
@@ -189,61 +190,11 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
                 insertedClient);
         }
     }
-
-    private async Task CreateProjectsClientAsync()
-    {
-        var cmsKitClient =
-            (await _keycloakClient.GetClientsAsync(_keycloakOptions.RealmName, clientId: "Macro_ProjectsService"))
-            .FirstOrDefault();
-
-        if (cmsKitClient == null)
-        {
-            cmsKitClient = new Client()
-            {
-                ClientId = "Macro_ProjectsService",
-                Name = "Projects microservice client",
-                Protocol = "openid-connect",
-                PublicClient = false,
-                ImplicitFlowEnabled = false,
-                AuthorizationServicesEnabled = false,
-                StandardFlowEnabled = false,
-                DirectAccessGrantsEnabled = false,
-                ServiceAccountsEnabled = true,
-                Secret = "1q2w3e*"
-            };
-            cmsKitClient.Attributes = new Dictionary<string, object>()
-            {
-                { "oauth2.device.authorization.grant.enabled", false },
-                { "oidc.ciba.grant.enabled", false },
-                { "client_credentials.use_refresh_token", false }
-            };
-
-            await _keycloakClient.CreateClientAsync(_keycloakOptions.RealmName, cmsKitClient);
-
-            await AddOptionalClientScopesAsync(
-                "Macro_ProjectsService",
-                new List<string>
-                {
-                    "IdentityService"
-                }
-            );
-            
-            var insertedClient =
-                (await _keycloakClient.GetClientsAsync(_keycloakOptions.RealmName, clientId: "Macro_ProjectsService"))
-                .First();
-            
-            var clientIdProtocolMapper = insertedClient.ProtocolMappers.First(q => q.Name == "Client ID");
-            
-            clientIdProtocolMapper.Config["claim.name"] = "client_id";
-
-            var result = await _keycloakClient.UpdateClientAsync(_keycloakOptions.RealmName, insertedClient.Id,
-                insertedClient);
-        }
-    }
-
+    
     private async Task CreateWebClientAsync()
     {
-        var webClient = (await _keycloakClient.GetClientsAsync(_keycloakOptions.RealmName, clientId: "Web"))
+        var webClient = (await _keycloakClient.GetClientsAsync(
+                _keycloakOptions.RealmName, clientId: "Web"))
             .FirstOrDefault();
 
         if (webClient == null)
@@ -272,11 +223,10 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
 
             await AddOptionalClientScopesAsync(
                 "Web",
-                [
-                    "AdministrationService",
-                    "IdentityService",
-                    "ProjectsService",
-                ]
+                new List<string>
+                {
+                    "AdministrationService", "IdentityService"
+                }
             );
         }
     }
@@ -294,7 +244,6 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
             var accountServiceRootUrl = _configuration[$"Clients:AccountService:RootUrl"].TrimEnd('/');
             var identityServiceRootUrl = _configuration[$"Clients:IdentityService:RootUrl"].TrimEnd('/');
             var administrationServiceRootUrl = _configuration[$"Clients:AdministrationService:RootUrl"].TrimEnd('/');
-            var projectsServiceRootUrl = _configuration[$"Clients:ProjectsService:RootUrl"].TrimEnd('/');
 
             swaggerClient = new Client
             {
@@ -309,7 +258,6 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
                     $"{accountServiceRootUrl}/swagger/oauth2-redirect.html", // AccountService redirect uri
                     $"{identityServiceRootUrl}/swagger/oauth2-redirect.html", // IdentityService redirect uri
                     $"{administrationServiceRootUrl}/swagger/oauth2-redirect.html", // AdministrationService redirect uri
-                    $"{projectsServiceRootUrl}/swagger/oauth2-redirect.html" // ProjectsService redirect uri
                 },
                 FrontChannelLogout = true,
                 PublicClient = true
@@ -321,9 +269,7 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
                 "SwaggerClient",
                 new List<string>
                 {
-                    "AdministrationService",
-                    "IdentityService",
-                    "ProjectsService"
+                    "AdministrationService", "IdentityService"
                 }
             );
         }
@@ -331,16 +277,18 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
 
     private async Task CreatePublicWebClientAsync()
     {
-        var publicWebClient = (await _keycloakClient.GetClientsAsync(_keycloakOptions.RealmName, clientId: "PublicWeb"))
+        var publicWebClient = (await _keycloakClient.GetClientsAsync(
+                _keycloakOptions.RealmName,
+                clientId: "Blazor.Server"))
             .FirstOrDefault();
 
         if (publicWebClient == null)
         {
-            var publicWebRootUrl = _configuration[$"Clients:PublicWeb:RootUrl"];
+            var publicWebRootUrl = _configuration[$"Clients:Blazor.Server:RootUrl"];
             publicWebClient = new Client
             {
-                ClientId = "PublicWeb",
-                Name = "Public Web Application",
+                ClientId = "Blazor.Server",
+                Name = "Macro.Blazor.Server Application",
                 Protocol = "openid-connect",
                 Enabled = true,
                 BaseUrl = publicWebRootUrl,
@@ -352,22 +300,18 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
                 PublicClient = true,
                 ImplicitFlowEnabled = true // for hybrid flow
             };
-            publicWebClient.Attributes = new Dictionary<string, object> {
-                {
-                    "post.logout.redirect.uris",
-                    $"{publicWebRootUrl.TrimEnd('/')}/signout-callback-oidc"
-                }
+            publicWebClient.Attributes = new Dictionary<string, object>
+            {
+                { "post.logout.redirect.uris", $"{publicWebRootUrl.TrimEnd('/')}/signout-callback-oidc" }
             };
 
             await _keycloakClient.CreateClientAsync(_keycloakOptions.RealmName, publicWebClient);
 
             await AddOptionalClientScopesAsync(
-                "PublicWeb",
+                "Blazor.Server",
                 new List<string>
                 {
-                    "AdministrationService",
-                    "IdentityService",
-                    "ProjectsService"
+                    "AdministrationService", "IdentityService"
                 }
             );
         }
@@ -375,7 +319,8 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
 
     private async Task AddOptionalClientScopesAsync(string clientName, List<string> scopes)
     {
-        var client = (await _keycloakClient.GetClientsAsync(_keycloakOptions.RealmName, clientId: clientName))
+        var client = (await _keycloakClient.GetClientsAsync(
+                _keycloakOptions.RealmName, clientId: clientName))
             .FirstOrDefault();
         if (client == null)
         {

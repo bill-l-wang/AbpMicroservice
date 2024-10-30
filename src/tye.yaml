@@ -18,15 +18,6 @@ services:
     - Kestrel__Certificates__Default__Path=../../../../etc/dev-cert/localhost.pfx
     - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49
 
-# - name: saas-service
-#   project: services/saas/host/Macro.Saas.HttpApi.Host/Macro.Saas.HttpApi.Host.csproj
-#   bindings:
-#     - protocol: https
-#       port: 7003
-#   env:
-#     - Kestrel__Certificates__Default__Path=../../../../etc/dev-cert/localhost.pfx
-#     - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49
-
 - name: projects-service
   project: services/projects/host/Macro.Projects.HttpApi.Host/Macro.Projects.HttpApi.Host.csproj
   bindings:
@@ -36,13 +27,13 @@ services:
     - Kestrel__Certificates__Default__Path=../../../../etc/dev-cert/localhost.pfx
     - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49
 
-- name: Macro-auth-server
+- name: auth-server
   project: apps/Macro.AuthServer/Macro.AuthServer.csproj
   bindings:
     - protocol: https
       port: 7600
 
-- name: Web-gateway
+- name: web-gateway
   project: gateways/Web/Macro.WebGateway.csproj
   bindings:
     - protocol: https
@@ -60,20 +51,20 @@ services:
     - Kestrel__Certificates__Default__Path=../../../../etc/dev-cert/localhost.pfx
     - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49  
 
-- name: public-web
+- name: blazor-server
   project: apps/Macro.Blazor.Server/Macro.Blazor.Server.csproj
   bindings:
     - protocol: https
-      port: 5001
+      port: 5002
   env:
     - Kestrel__Certificates__Default__Path=../../etc/dev-cert/localhost.pfx
     - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49
 
-- name: Blazor
+- name: blazor
   project: apps/Macro.Blazor/Macro.Blazor.csproj
   bindings:
     - protocol: https
-      port: 8001
+      port: 5001
   env:
     - Kestrel__Certificates__Default__Path=../../etc/dev-cert/localhost.pfx
     - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49
