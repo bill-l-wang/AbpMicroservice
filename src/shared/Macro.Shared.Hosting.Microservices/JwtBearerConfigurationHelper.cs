@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Volo.Abp.Modularity;
 
-namespace EShopOnAbp.Shared.Hosting.Microservices;
+namespace Macro.Shared.Hosting.Microservices;
 
 public static class JwtBearerConfigurationHelper
 {

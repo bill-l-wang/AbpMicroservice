@@ -132,9 +132,10 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
 
     private async Task CreateClientsAsync()
     {
-        await CreatePublicWebClientAsync();
+        await CreateBlazorServerClientAsync();
         await CreateSwaggerClientAsync();
         await CreateWebClientAsync();
+        await CreateBlazorClientAsync();
         // await CreateCmskitClientAsync();
         // await CreateAdministrationClientAsync();
     }
@@ -275,7 +276,7 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
         }
     }
 
-    private async Task CreatePublicWebClientAsync()
+    private async Task CreateBlazorServerClientAsync()
     {
         var publicWebClient = (await _keycloakClient.GetClientsAsync(
                 _keycloakOptions.RealmName,
@@ -284,31 +285,74 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
 
         if (publicWebClient == null)
         {
-            var publicWebRootUrl = _configuration[$"Clients:Blazor.Server:RootUrl"];
-            publicWebClient = new Client
-            {
+            var webRootUrl = _configuration[$"Clients:Blazor.Server:RootUrl"];
+            publicWebClient = new Client {
                 ClientId = "Blazor.Server",
                 Name = "Macro.Blazor.Server Application",
                 Protocol = "openid-connect",
                 Enabled = true,
-                BaseUrl = publicWebRootUrl,
-                RedirectUris = new List<string>
-                {
-                    $"{publicWebRootUrl.TrimEnd('/')}/signin-oidc"
+                BaseUrl = webRootUrl,
+                RedirectUris = new List<string> {
+                    $"{webRootUrl.TrimEnd('/')}/signin-oidc"
                 },
                 FrontChannelLogout = true,
                 PublicClient = true,
-                ImplicitFlowEnabled = true // for hybrid flow
-            };
-            publicWebClient.Attributes = new Dictionary<string, object>
-            {
-                { "post.logout.redirect.uris", $"{publicWebRootUrl.TrimEnd('/')}/signout-callback-oidc" }
+                ImplicitFlowEnabled = true, // for hybrid flow
+                Attributes = new Dictionary<string, object> {
+                    {
+                        "post.logout.redirect.uris",
+                        $"{webRootUrl.TrimEnd('/')}/signout-callback-oidc"
+
+                    }
+                }
             };
 
             await _keycloakClient.CreateClientAsync(_keycloakOptions.RealmName, publicWebClient);
 
             await AddOptionalClientScopesAsync(
                 "Blazor.Server",
+                new List<string>
+                {
+                    "AdministrationService", "IdentityService"
+                }
+            );
+        }
+    }
+
+    private async Task CreateBlazorClientAsync()
+    {
+        var blazorWebClient = (await _keycloakClient.GetClientsAsync(
+                _keycloakOptions.RealmName,
+                clientId: "Blazor.Client"))
+            .FirstOrDefault();
+
+        if (blazorWebClient == null)
+        {
+            var publicWebRootUrl = _configuration[$"Clients:Blazor.Client:RootUrl"];
+            blazorWebClient = new Client
+            {
+                ClientId = "Blazor.Client",
+                Name = "Macro.Blazor.Client Application",
+                Protocol = "openid-connect",
+                Enabled = true,
+                BaseUrl = publicWebRootUrl,
+                RedirectUris = new List<string>
+                {
+                    $"{publicWebRootUrl.TrimEnd('/')}/authentication/login-callback"
+                },
+                FrontChannelLogout = true,
+                PublicClient = true,
+                ImplicitFlowEnabled = true // for hybrid flow
+            };
+            blazorWebClient.Attributes = new Dictionary<string, object>
+            {
+                { "post.logout.redirect.uris", $"{publicWebRootUrl.TrimEnd('/')}/authentication/logout-callback" }
+            };
+
+            await _keycloakClient.CreateClientAsync(_keycloakOptions.RealmName, blazorWebClient);
+
+            await AddOptionalClientScopesAsync(
+                "Blazor.Client",
                 new List<string>
                 {
                     "AdministrationService", "IdentityService"

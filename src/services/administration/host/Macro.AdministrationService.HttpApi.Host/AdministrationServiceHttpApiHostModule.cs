@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EShopOnAbp.Shared.Hosting.Microservices;
 using Macro.AdministrationService.DbMigrations;
 using Macro.AdministrationService.EntityFrameworkCore;
 using Macro.Shared.Hosting.AspNetCore;

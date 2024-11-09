@@ -55,7 +55,7 @@ services:
   project: apps/Macro.Blazor.Server/Macro.Blazor.Server.csproj
   bindings:
     - protocol: https
-      port: 5002
+      port: 5001
   env:
     - Kestrel__Certificates__Default__Path=../../etc/dev-cert/localhost.pfx
     - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49
@@ -64,7 +64,16 @@ services:
   project: apps/Macro.Blazor/Macro.Blazor.csproj
   bindings:
     - protocol: https
-      port: 5001
+      port: 5003
+  env:
+    - Kestrel__Certificates__Default__Path=../../etc/dev-cert/localhost.pfx
+    - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49
+
+- name: blazor-client
+  project: apps/Macro.Blazor.Client/Macro.Blazor.Client.csproj
+  bindings:
+    - protocol: https
+      port: 5002
   env:
     - Kestrel__Certificates__Default__Path=../../etc/dev-cert/localhost.pfx
     - Kestrel__Certificates__Default__Password=8b6039b6-c67a-448b-977b-0ce6d3fcfd49

@@ -37,6 +37,7 @@ public class MacroMenuContributor : IMenuContributor
     {
         var administration = context.Menu.GetAdministration();
 
+        administration.Order = 5;
         context.Menu.Items.Insert(
             0,
             new ApplicationMenuItem(
@@ -51,7 +52,7 @@ public class MacroMenuContributor : IMenuContributor
         administration.SetSubItemOrder(TenantManagementMenuNames.GroupName, 1);
         administration.SetSubItemOrder(IdentityMenuNames.GroupName, 2);
         administration.SetSubItemOrder(SettingManagementMenus.GroupName, 3);
-
+        Console.WriteLine(administration);
         return Task.CompletedTask;
     }
 

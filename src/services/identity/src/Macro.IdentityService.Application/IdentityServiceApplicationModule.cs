@@ -1,7 +1,6 @@
 using Macro.IdentityService.Keycloak.Service;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Account;
-using Volo.Abp.Application;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Identity;
 using Volo.Abp.Modularity;
@@ -11,7 +10,6 @@ namespace Macro.IdentityService;
 [DependsOn(
     typeof(IdentityServiceDomainModule),
     typeof(IdentityServiceApplicationContractsModule),
-    typeof(AbpDddApplicationModule),
     typeof(AbpAutoMapperModule),
     typeof(AbpIdentityApplicationModule),
     typeof(AbpAccountApplicationModule))]

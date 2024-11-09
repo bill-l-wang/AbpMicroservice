@@ -33,6 +33,9 @@ public class MacroMenuContributor : IMenuContributor
     private Task ConfigureMainMenuAsync(MenuConfigurationContext context)
     {
 
+        var administration = context.Menu.GetAdministration();
+        administration.Order = 5;
+
         context.Menu.Items.Insert(
             0,
             new ApplicationMenuItem(
@@ -42,8 +45,7 @@ public class MacroMenuContributor : IMenuContributor
                 icon: "fas fa-home"
             )
         );
-     
-        var administration = context.Menu.GetAdministration();
+             
         Console.WriteLine(administration);
         administration.SetSubItemOrder(TenantManagementMenuNames.GroupName, 1);
 
