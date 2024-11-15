@@ -3,46 +3,41 @@ using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
-using Volo.Abp.OpenIddict.Applications;
-using Volo.Abp.OpenIddict.Authorizations;
-using Volo.Abp.OpenIddict.EntityFrameworkCore;
-using Volo.Abp.OpenIddict.Scopes;
-using Volo.Abp.OpenIddict.Tokens;
 
-namespace Macro.IdentityService.EntityFrameworkCore;
-
-[ConnectionStringName(IdentityServiceDbProperties.ConnectionStringName)]
-public class IdentityServiceDbContext : AbpDbContext<IdentityServiceDbContext>, IIdentityDbContext,
-    IOpenIddictDbContext, IIdentityServiceDbContext
+namespace Macro.IdentityService.EntityFrameworkCore
 {
-    /* Add DbSet for each Aggregate Root here. Example:
-     * public DbSet<Question> Questions { get; set; }
+    /* This is your actual DbContext used on runtime.
+     * It includes only your entities.
+     * It does not include entities of the used modules, because each module has already
+     * its own DbContext class. If you want to share some database tables with the used modules,
+     * just create a structure like done for AppUser.
+     *
+     * Don't use this DbContext for database migrations since it does not contain tables of the
+     * used modules (as explained above). See IdentityServiceMigrationsDbContext for migrations.
      */
-
-    public IdentityServiceDbContext(DbContextOptions<IdentityServiceDbContext> options)
-        : base(options)
+    [ConnectionStringName(IdentityServiceDbProperties.ConnectionStringName)]
+    public class IdentityServiceDbContext : AbpDbContext<IdentityServiceDbContext>, IIdentityDbContext
     {
-    }
+        public DbSet<IdentityUser> Users { get; set; }
+        public DbSet<IdentityRole> Roles { get; set; }
+        public DbSet<IdentityClaimType> ClaimTypes { get; set; }
+        public DbSet<OrganizationUnit> OrganizationUnits { get; set; }
+        public DbSet<IdentitySecurityLog> SecurityLogs { get; set; }
+        public DbSet<IdentityLinkUser> LinkUsers { get; set; }
+        public DbSet<IdentityUserDelegation> UserDelegations { get; }
 
-    public DbSet<IdentityUser> Users { get; set; }
-    public DbSet<IdentityRole> Roles { get; set; }
-    public DbSet<IdentityClaimType> ClaimTypes { get; set; }
-    public DbSet<OrganizationUnit> OrganizationUnits { get; set; }
-    public DbSet<IdentitySecurityLog> SecurityLogs { get; set; }
-    public DbSet<IdentityLinkUser> LinkUsers { get; set; }
-    public DbSet<OpenIddictApplication> Applications { get; set; }
-    public DbSet<OpenIddictAuthorization> Authorizations { get; set; }
-    public DbSet<OpenIddictScope> Scopes { get; set; }
-    public DbSet<OpenIddictToken> Tokens { get; set; }
-    public DbSet<IdentityUserDelegation> UserDelegations { get; set; }
-    public DbSet<IdentitySession> Sessions { get; set; }
+        public DbSet<IdentitySession> Sessions { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder builder)
-    {
-        base.OnModelCreating(builder);
+        public IdentityServiceDbContext(DbContextOptions<IdentityServiceDbContext> options)
+            : base(options)
+        {
+        }
 
-        builder.ConfigureIdentityService();
-        builder.ConfigureIdentity();
-        builder.ConfigureOpenIddict();
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.ConfigureIdentity();
+        }
     }
 }

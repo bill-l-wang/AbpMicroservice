@@ -1,22 +1,22 @@
 using Macro.IdentityService.Localization;
 using Volo.Abp.Identity;
 using Volo.Abp.Localization;
-using Volo.Abp.Localization.ExceptionHandling;
 using Volo.Abp.Modularity;
-using Volo.Abp.OpenIddict;
-using Volo.Abp.Validation;
 using Volo.Abp.Validation.Localization;
 using Volo.Abp.VirtualFileSystem;
 
 namespace Macro.IdentityService;
 
 [DependsOn(
-    typeof(AbpValidationModule)
+    typeof(AbpIdentityDomainSharedModule)
 )]
-[DependsOn(typeof(AbpIdentityDomainSharedModule))]
-[DependsOn(typeof(AbpOpenIddictDomainSharedModule))]
 public class IdentityServiceDomainSharedModule : AbpModule
 {
+    public override void PreConfigureServices(ServiceConfigurationContext context)
+    {
+        IdentityServiceModuleExtensionConfigurator.Configure();
+    }
+
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         Configure<AbpVirtualFileSystemOptions>(options =>
@@ -30,11 +30,8 @@ public class IdentityServiceDomainSharedModule : AbpModule
                 .Add<IdentityServiceResource>("en")
                 .AddBaseTypes(typeof(AbpValidationResource))
                 .AddVirtualJson("/Localization/IdentityService");
-        });
 
-        Configure<AbpExceptionLocalizationOptions>(options =>
-        {
-            options.MapCodeNamespace("IdentityService", typeof(IdentityServiceResource));
+            options.DefaultResourceType = typeof(IdentityServiceResource);
         });
     }
 }

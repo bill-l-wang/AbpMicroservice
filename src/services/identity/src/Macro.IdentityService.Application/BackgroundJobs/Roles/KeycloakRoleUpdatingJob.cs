@@ -8,7 +8,7 @@ using Volo.Abp.BackgroundJobs;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.ObjectMapping;
 
-namespace EShopOnAbp.IdentityService.BackgroundJobs.Roles;
+namespace Macro.IdentityService.BackgroundJobs.Roles;
 
 public class KeycloakRoleUpdatingJob : AsyncBackgroundJob<IdentityRoleUpdatingArgs>, ITransientDependency
 {

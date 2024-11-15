@@ -21,7 +21,9 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
     private readonly ILogger<KeyCloakDataSeeder> _logger;
     private readonly IConfiguration _configuration;
 
-    public KeyCloakDataSeeder(IOptions<KeycloakClientOptions> keycloakClientOptions, ILogger<KeyCloakDataSeeder> logger,
+    public KeyCloakDataSeeder(
+        IOptions<KeycloakClientOptions> keycloakClientOptions,
+        ILogger<KeyCloakDataSeeder> logger,
         IConfiguration configuration)
     {
         _logger = logger;
@@ -87,6 +89,8 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
     {
         await CreateScopeAsync("AdministrationService");
         await CreateScopeAsync("IdentityService");
+        await CreateScopeAsync("ProjectsService");
+        await CreateScopeAsync("DocService");
     }
 
     private async Task CreateScopeAsync(string scopeName)
@@ -226,7 +230,7 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
                 "Web",
                 new List<string>
                 {
-                    "AdministrationService", "IdentityService"
+                    "AdministrationService", "IdentityService", "ProjectsService", "DocService"
                 }
             );
         }
@@ -311,9 +315,8 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
 
             await AddOptionalClientScopesAsync(
                 "Blazor.Server",
-                new List<string>
-                {
-                    "AdministrationService", "IdentityService"
+                new List<string> {
+                    "AdministrationService", "IdentityService", "ProjectsService", "DocService"
                 }
             );
         }
@@ -355,7 +358,7 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
                 "Blazor.Client",
                 new List<string>
                 {
-                    "AdministrationService", "IdentityService"
+                    "AdministrationService", "IdentityService", "ProjectsService", "DocService"
                 }
             );
         }

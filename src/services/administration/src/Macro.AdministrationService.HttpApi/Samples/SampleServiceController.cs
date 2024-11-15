@@ -5,7 +5,7 @@ using Volo.Abp;
 
 namespace Macro.AdministrationService.Samples;
 
-[Area(AdministrationServiceRemoteServiceConsts.ModuleName)]
+[Area(AdministrationServiceRemoteServiceConsts.RemoteServiceName)]
 [RemoteService(Name = AdministrationServiceRemoteServiceConsts.RemoteServiceName)]
 [Route("api/Administration/sample")]
 public class SampleServiceController : AdministrationServiceController, ISampleAppService

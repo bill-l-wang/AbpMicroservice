@@ -1,7 +1,7 @@
 using Macro.IdentityService.Keycloak.Service;
 using Microsoft.Extensions.DependencyInjection;
-using Volo.Abp.Account;
 using Volo.Abp.AutoMapper;
+using Volo.Abp.BackgroundJobs;
 using Volo.Abp.Identity;
 using Volo.Abp.Modularity;
 
@@ -10,18 +10,19 @@ namespace Macro.IdentityService;
 [DependsOn(
     typeof(IdentityServiceDomainModule),
     typeof(IdentityServiceApplicationContractsModule),
-    typeof(AbpAutoMapperModule),
     typeof(AbpIdentityApplicationModule),
-    typeof(AbpAccountApplicationModule))]
+    typeof(AbpBackgroundJobsModule)
+)]
 public class IdentityServiceApplicationModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         var configuration = context.Services.GetConfiguration();
+
         context.Services.AddAutoMapperObjectMapper<IdentityServiceApplicationModule>();
         Configure<AbpAutoMapperOptions>(options =>
         {
-            options.AddMaps<IdentityServiceApplicationModule>(true);
+            options.AddMaps<IdentityServiceApplicationModule>(validate: true);
         });
 
         Configure<KeycloakClientOptions>(options =>

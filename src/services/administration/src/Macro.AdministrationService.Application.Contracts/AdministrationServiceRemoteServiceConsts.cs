@@ -2,7 +2,5 @@
 
 public class AdministrationServiceRemoteServiceConsts
 {
-    public const string RemoteServiceName = "Administration";
-
-    public const string ModuleName = "administration";
+    public const string RemoteServiceName = "AdministrationService";
 }

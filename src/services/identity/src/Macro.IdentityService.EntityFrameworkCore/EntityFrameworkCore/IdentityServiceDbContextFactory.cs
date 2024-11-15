@@ -1,39 +1,50 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
-namespace Macro.IdentityService.EntityFrameworkCore;
-
-public class IdentityServiceDbContextFactory : IDesignTimeDbContextFactory<IdentityServiceDbContext>
+namespace Macro.IdentityService.EntityFrameworkCore
 {
-    public IdentityServiceDbContext CreateDbContext(string[] args)
+    /* This class is needed for EF Core console commands
+     * (like Add-Migration and Update-Database commands)
+     * */
+    public class IdentityServiceDbContextFactory : IDesignTimeDbContextFactory<IdentityServiceDbContext>
     {
-        var configuration = BuildConfiguration();
+        public IdentityServiceDbContext CreateDbContext(string[] args)
+        {
+            IdentityServiceEfCoreEntityExtensionMappings.Configure();
 
-        var builder = new DbContextOptionsBuilder<IdentityServiceDbContext>()
-            .UseNpgsql(GetConnectionStringFromConfiguration());
+            var builder = new DbContextOptionsBuilder<IdentityServiceDbContext>()
+                .UseNpgsql(GetConnectionStringFromConfiguration(), b =>
+                {
+                    b.MigrationsHistoryTable("__IdentityService_Migrations");
+                });
 
-        return new IdentityServiceDbContext(builder.Options);
-    }
+            // https://www.npgsql.org/efcore/release-notes/6.0.html#opting-out-of-the-new-timestamp-mapping-logic
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
-    private static string GetConnectionStringFromConfiguration()
-    {
-        return BuildConfiguration()
-            .GetConnectionString(IdentityServiceDbProperties.ConnectionStringName);
-    }
+            return new IdentityServiceDbContext(builder.Options);
+        }
 
-    private static IConfigurationRoot BuildConfiguration()
-    {
-        var builder = new ConfigurationBuilder()
-            .SetBasePath(
-                Path.Combine(
-                    Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,
-                    $"host{Path.DirectorySeparatorChar}Macro.IdentityService.HttpApi.Host"
+        private static string GetConnectionStringFromConfiguration()
+        {
+            return BuildConfiguration()
+                .GetConnectionString(IdentityServiceDbProperties.ConnectionStringName);
+        }
+
+        private static IConfigurationRoot BuildConfiguration()
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(
+                    Path.Combine(
+                        Directory.GetCurrentDirectory(),
+                        $"..{Path.DirectorySeparatorChar}EShopOnAbp.IdentityService.HttpApi.Host"
+                    )
                 )
-            )
-            .AddJsonFile("appsettings.json", false);
+                .AddJsonFile("appsettings.json", optional: false);
 
-        return builder.Build();
+            return builder.Build();
+        }
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.DependencyInjection;
 
-namespace EShopOnAbp.IdentityService.BackgroundJobs.Roles;
+namespace Macro.IdentityService.BackgroundJobs.Roles;
 
 public class KeycloakRoleDeletionJob : AsyncBackgroundJob<IdentityRoleDeletionArgs>, ITransientDependency
 {

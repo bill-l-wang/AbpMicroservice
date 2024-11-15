@@ -5,17 +5,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using Macro.IdentityService.DbMigrations;
 using Macro.IdentityService.EntityFrameworkCore;
+using Macro.Shared.Hosting.AspNetCore;
 using Macro.Shared.Hosting.Microservices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
 using Volo.Abp;
+using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Caching;
 using Volo.Abp.Modularity;
 using Volo.Abp.VirtualFileSystem;
@@ -23,73 +27,26 @@ using Volo.Abp.VirtualFileSystem;
 namespace Macro.IdentityService;
 
 [DependsOn(
-    typeof(IdentityServiceApplicationModule),
-    typeof(IdentityServiceApplicationModule),
-    typeof(IdentityServiceEntityFrameworkCoreModule),
+    typeof(MacroSharedHostingMicroservicesModule),
     typeof(IdentityServiceHttpApiModule),
-    typeof(MacroSharedHostingMicroservicesModule)
+    typeof(IdentityServiceApplicationModule),
+    typeof(IdentityServiceEntityFrameworkCoreModule)
 )]
 public class IdentityServiceHttpApiHostModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
-        var hostingEnvironment = context.Services.GetHostingEnvironment();
         var configuration = context.Services.GetConfiguration();
 
-        if (hostingEnvironment.IsDevelopment())
-        {
-            Configure<AbpVirtualFileSystemOptions>(options =>
-            {
-                options.FileSets.ReplaceEmbeddedByPhysical<IdentityServiceDomainSharedModule>(
-                    Path.Combine(hostingEnvironment.ContentRootPath,
-                        string.Format("..{0}..{0}src{0}Macro.IdentityService.Domain.Shared",
-                            Path.DirectorySeparatorChar)));
-                options.FileSets.ReplaceEmbeddedByPhysical<IdentityServiceDomainModule>(
-                    Path.Combine(hostingEnvironment.ContentRootPath,
-                        string.Format("..{0}..{0}src{0}Macro.IdentityService.Domain", Path.DirectorySeparatorChar)));
-                options.FileSets.ReplaceEmbeddedByPhysical<IdentityServiceApplicationContractsModule>(
-                    Path.Combine(hostingEnvironment.ContentRootPath,
-                        string.Format("..{0}..{0}src{0}Macro.IdentityService.Application.Contracts",
-                            Path.DirectorySeparatorChar)));
-                options.FileSets.ReplaceEmbeddedByPhysical<IdentityServiceApplicationModule>(
-                    Path.Combine(hostingEnvironment.ContentRootPath,
-                        string.Format("..{0}..{0}src{0}Macro.IdentityService.Application",
-                            Path.DirectorySeparatorChar)));
-            });
-        }
+        JwtBearerConfigurationHelper.Configure(context, "IdentityService");
 
-        context.Services.AddAbpSwaggerGenWithOAuth(
-            configuration["AuthServer:Authority"],
-            new Dictionary<string, string> {
-                {"IdentityService", "IdentityService API"}
-            },
-            options =>
-            {
-                options.SwaggerDoc("v1", new OpenApiInfo {Title = "IdentityService API", Version = "v1"});
-                options.DocInclusionPredicate((docName, description) => true);
-                options.CustomSchemaIds(type => type.FullName);
-            });
-
-
-        context.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options =>
-            {
-                options.Authority = configuration["AuthServer:Authority"];
-                options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
-                options.Audience = "IdentityService";
-            });
-
-        Configure<AbpDistributedCacheOptions>(options =>
-        {
-            options.KeyPrefix = "IdentityService:";
-        });
-
-        var dataProtectionBuilder = context.Services.AddDataProtection().SetApplicationName("IdentityService");
-        if (!hostingEnvironment.IsDevelopment())
-        {
-            var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
-            dataProtectionBuilder.PersistKeysToStackExchangeRedis(redis, "IdentityService-Protection-Keys");
-        }
+        SwaggerConfigurationHelper.ConfigureWithOidc(
+            context: context,
+            authority: configuration["AuthServer:Authority"]!,
+            scopes: ["IdentityService"],
+            discoveryEndpoint: configuration["AuthServer:MetadataAddress"],
+            apiTitle: "Identity Service API"
+        );
 
         context.Services.AddCors(options =>
         {
@@ -97,9 +54,9 @@ public class IdentityServiceHttpApiHostModule : AbpModule
             {
                 builder
                     .WithOrigins(
-                        configuration["App:CorsOrigins"]
+                        configuration["App:CorsOrigins"]!
                             .Split(",", StringSplitOptions.RemoveEmptyEntries)
-                            .Select(o => o.RemovePostFix("/"))
+                            .Select(o => o.Trim().RemovePostFix("/"))
                             .ToArray()
                     )
                     .WithAbpExposedHeaders()
@@ -109,11 +66,21 @@ public class IdentityServiceHttpApiHostModule : AbpModule
                     .AllowCredentials();
             });
         });
+
+        // Keycloak handles the user creation that a user name can be multiple words
+        Configure<IdentityOptions>(options =>
+        {
+            options.User.AllowedUserNameCharacters = null;
+        });
+
+        Configure<AbpAspNetCoreMvcOptions>(options =>
+        {
+            options.ExposeIntegrationServices = true;
+        });
     }
 
     public override void OnApplicationInitialization(ApplicationInitializationContext context)
     {
-        IdentityModelEventSource.ShowPII = true;
         var app = context.GetApplicationBuilder();
         var env = context.GetEnvironment();
 
@@ -121,32 +88,25 @@ public class IdentityServiceHttpApiHostModule : AbpModule
         {
             app.UseDeveloperExceptionPage();
         }
-        else
-        {
-            app.UseHsts();
-        }
 
-        app.UseHttpsRedirection();
         app.UseCorrelationId();
+        app.UseCors();
+        app.UseAbpRequestLocalization();
         app.UseStaticFiles();
         app.UseRouting();
-        app.UseCors();
         app.UseAuthentication();
-
-        app.UseAbpRequestLocalization();
+        app.UseAbpClaimsMap();
         app.UseAuthorization();
         app.UseSwagger();
-        app.UseAbpSwaggerUI(options =>
+        app.UseAbpSwaggerWithCustomScriptUI(options =>
         {
-            options.SwaggerEndpoint("/swagger/v1/swagger.json", "Support APP API");
-
-            var configuration = context.GetConfiguration();
+            var configuration = context.ServiceProvider.GetRequiredService<IConfiguration>();
+            options.SwaggerEndpoint("/swagger/v1/swagger.json", "Identity Service API");
             options.OAuthClientId(configuration["AuthServer:SwaggerClientId"]);
-            options.OAuthClientSecret(configuration["AuthServer:SwaggerClientSecret"]);
-            options.OAuthScopes("IdentityService");
         });
-        app.UseAuditing();
         app.UseAbpSerilogEnrichers();
+        app.UseAuditing();
+        app.UseUnitOfWork();
         app.UseConfiguredEndpoints();
     }
 

@@ -9,9 +9,8 @@ namespace Macro.IdentityService;
 
 [DependsOn(
     typeof(IdentityServiceApplicationContractsModule),
-    typeof(AbpHttpClientModule))]
-[DependsOn(typeof(AbpIdentityHttpApiClientModule))]
-[DependsOn(typeof(AbpAccountHttpApiClientModule))]
+    typeof(AbpIdentityHttpApiClientModule)
+)]
 public class IdentityServiceHttpApiClientModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
@@ -20,10 +19,5 @@ public class IdentityServiceHttpApiClientModule : AbpModule
             typeof(IdentityServiceApplicationContractsModule).Assembly,
             IdentityServiceRemoteServiceConsts.RemoteServiceName
         );
-
-        Configure<AbpVirtualFileSystemOptions>(options =>
-        {
-            options.FileSets.AddEmbedded<IdentityServiceHttpApiClientModule>();
-        });
     }
 }

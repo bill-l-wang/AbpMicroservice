@@ -91,6 +91,8 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
         await CreateScopeAsync("OrderingService");
         await CreateScopeAsync("PaymentService");
         await CreateScopeAsync("CmskitService");
+        await CreateScopeAsync("ProjectsService");
+        await CreateScopeAsync("DocService");
     }
 
     private async Task CreateScopeAsync(string scopeName)
@@ -367,8 +369,7 @@ public class KeyCloakDataSeeder : IDataSeedContributor, ITransientDependency
                 "PublicWeb",
                 new List<string>
                 {
-                    "AdministrationService", "IdentityService", "BasketService", "CatalogService",
-                    "OrderingService", "PaymentService", "CmskitService"
+                    "AdministrationService", "IdentityService", "ProjectsService", "DocService"
                 }
             );
         }

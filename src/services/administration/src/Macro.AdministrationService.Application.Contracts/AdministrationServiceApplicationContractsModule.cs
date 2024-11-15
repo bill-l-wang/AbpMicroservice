@@ -9,12 +9,9 @@ namespace Macro.AdministrationService;
 
 [DependsOn(
     typeof(AdministrationServiceDomainSharedModule),
-    typeof(AbpDddApplicationContractsModule),
-    typeof(AbpAuthorizationModule)
+    typeof(AbpPermissionManagementApplicationContractsModule),
+    typeof(AbpSettingManagementApplicationContractsModule)
 )]
-[DependsOn(typeof(AbpPermissionManagementApplicationContractsModule))]
-[DependsOn(typeof(AbpSettingManagementApplicationContractsModule))]
-[DependsOn(typeof(AbpFeatureManagementApplicationContractsModule))]
 public class AdministrationServiceApplicationContractsModule : AbpModule
 {
 }

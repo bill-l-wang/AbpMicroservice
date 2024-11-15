@@ -92,6 +92,11 @@ public class KeycloakUserUpdatingJob : AsyncBackgroundJob<IdentityUserUpdatingAr
                     _logger.LogInformation($"Keycloak user with the username:{args.UserName} has been updated.");
                 }
             }
+
+            if (!args.Password.IsNullOrEmpty() && keycloakUser != null)
+            {
+                await _keycloakService.SetNewPassword(keycloakUser.UserName, args.Password);
+            }
         }
         catch (Exception e)
         {
@@ -116,6 +121,7 @@ public class IdentityUserUpdatingArgs
     public bool OldIsActive { get; init; }
     public string[] RoleNames { get; init; }
     public string[] OldRoleNames { get; init; }
+    public string Password { get; init; }
 
     public IEnumerable<FieldChange> GetDifferentFields()
     {
@@ -126,23 +132,23 @@ public class IdentityUserUpdatingArgs
 
         if ((UserName, OldUserName) is not (null, null) && UserName != OldUserName)
             fieldChanges.Add(new FieldChange
-                { FieldName = nameof(UserName), NewValue = UserName, OldValue = OldUserName });
+            { FieldName = nameof(UserName), NewValue = UserName, OldValue = OldUserName });
 
         if ((Name, OldName) is not (null, null) && Name != OldName)
             fieldChanges.Add(new FieldChange { FieldName = nameof(Name), NewValue = Name, OldValue = OldName });
 
         if ((Surname, OldSurname) is not (null, null) && Surname != OldSurname)
             fieldChanges.Add(new FieldChange
-                { FieldName = nameof(Surname), NewValue = Surname, OldValue = OldSurname });
+            { FieldName = nameof(Surname), NewValue = Surname, OldValue = OldSurname });
 
         if (IsActive != OldIsActive)
             fieldChanges.Add(new FieldChange
-                { FieldName = nameof(IsActive), NewValue = IsActive, OldValue = OldIsActive });
+            { FieldName = nameof(IsActive), NewValue = IsActive, OldValue = OldIsActive });
 
         if (!Enumerable.SequenceEqual(RoleNames ?? Enumerable.Empty<string>(),
                 OldRoleNames ?? Enumerable.Empty<string>()))
             fieldChanges.Add(new FieldChange
-                { FieldName = nameof(RoleNames), NewValue = RoleNames, OldValue = OldRoleNames });
+            { FieldName = nameof(RoleNames), NewValue = RoleNames, OldValue = OldRoleNames });
 
         return fieldChanges;
     }

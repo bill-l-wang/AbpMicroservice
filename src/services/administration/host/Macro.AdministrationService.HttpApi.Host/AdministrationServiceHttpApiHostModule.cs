@@ -27,9 +27,9 @@ using Volo.Abp.SettingManagement;
 namespace Macro.AdministrationService;
 
 [DependsOn(
+    typeof(AdministrationServiceHttpApiModule),
     typeof(AdministrationServiceApplicationModule),
     typeof(AdministrationServiceEntityFrameworkCoreModule),
-    typeof(AdministrationServiceHttpApiModule),
     typeof(MacroSharedHostingMicroservicesModule),
     typeof(AbpIdentityHttpApiClientModule)
 )]
