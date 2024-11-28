@@ -1,23 +1,16 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Macro.AdministrationService.DbMigrations;
 using Macro.AdministrationService.EntityFrameworkCore;
 using Macro.Shared.Hosting.AspNetCore;
 using Macro.Shared.Hosting.Microservices;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Logging;
-using Microsoft.OpenApi.Models;
-using StackExchange.Redis;
 using Volo.Abp;
-using Volo.Abp.Caching;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
 using Volo.Abp.Modularity;
@@ -112,7 +105,7 @@ public class AdministrationServiceHttpApiHostModule : AbpModule
         app.UseConfiguredEndpoints();
     }
 
-    public override async Task OnPostApplicationInitializationAsync(ApplicationInitializationContext context)
+    public async override Task OnPostApplicationInitializationAsync(ApplicationInitializationContext context)
     {
         await context.ServiceProvider
             .GetRequiredService<AdministrationServiceDatabaseMigrationChecker>()
